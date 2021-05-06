@@ -10,5 +10,6 @@ import ComputerShop1.DTO.ProductsDTO;
 @Service
 public interface IProductService {
 	@Autowired
-	public List<ProductsDTO> GetProductByID(long id);
+	public ProductsDTO GetProductByID(long id);
+	public List<ProductsDTO> GetProductByIDCategory(long id);
 }

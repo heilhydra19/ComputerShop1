@@ -37,8 +37,8 @@ public class HomeServiceImpl implements IHomeService{
 		return menuDAO.GetDataMenu();
 	}
 	
-	public List<ProductsDTO> GetDataProducts(){
-		return productDAO.GetDataProducts();
+	public List<ProductsDTO> GetDataHomeProducts(){
+		return productDAO.GetDataHomeProducts();
 	}
 
 	public List<ProductsDTO> GetDataNewProducts() {
