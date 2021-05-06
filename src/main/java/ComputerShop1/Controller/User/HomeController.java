@@ -10,13 +10,9 @@ public class HomeController extends BaseController{
 	public ModelAndView Index() {
 		_mvShare.addObject("slides", _homeService.GetDataSlide());
 		_mvShare.addObject("categories", _homeService.GetDataCategories());
+		_mvShare.addObject("newproducts", _homeService.GetDataNewProducts());
+		_mvShare.addObject("products", _homeService.GetDataProducts());
 		_mvShare.setViewName("user/index");
 		return _mvShare;
-	}
-
-	@RequestMapping(value = "/product")
-	public ModelAndView Product() {
-		ModelAndView mv = new ModelAndView("user/product");
-		return mv;
 	}
 }

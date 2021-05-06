@@ -11,22 +11,22 @@ Clients
 	<hr class="soften" />
 	<div class="row">
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/1.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/1.png"></a>
 		</div>
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/2.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/2.png"></a>
 		</div>
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/3.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/3.png"></a>
 		</div>
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/4.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/4.png"></a>
 		</div>
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/5.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/5.png"></a>
 		</div>
 		<div class="span2">
-			<a href="#"><img alt="" src="assets/img/6.png"></a>
+			<a href="#"><img alt="" src="assets/user/img/6.png"></a>
 		</div>
 	</div>
 </section>

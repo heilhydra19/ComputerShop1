@@ -14,5 +14,4 @@ public class MapperMenu implements RowMapper<Menu>{
 		menu.setUrl(rs.getString("url"));
 		return menu;
 	}
-
 }
