@@ -11,6 +11,7 @@ Body Section
 		<div id="sidebar" class="span3">
 			<div class="well well-small">
 				<ul class="nav nav-list">
+
 					<c:forEach var="item" items="${ categories }">
 						<li><a href='<c:url value="/san-pham/${ item.id }"/>'><span
 								class="icon-circle-blank"></span> ${ item.name }</a></li>
@@ -127,7 +128,7 @@ New Products
 					<c:if test="${ products.size() > 0 }">
 						<div class="item active">
 							<ul class="thumbnails">
-							<c:forEach var="item" items="${ newproducts }" varStatus="loop">
+							<c:forEach var="item" items="${ products }" varStatus="loop">
 								<li class="span3">
 									<div class="thumbnail">
 										<a class="zoomTool" href="product_details.html"
@@ -161,7 +162,7 @@ New Products
 		<div class="well well-small">
 			<h3>
 				<a class="btn btn-mini pull-right" href="products.html"
-					title="View more">VIew More<span class="icon-plus"></span></a>
+					title="View more">View More<span class="icon-plus"></span></a>
 				Sản phẩm nổi bật
 			</h3>
 			<hr class="soften" />

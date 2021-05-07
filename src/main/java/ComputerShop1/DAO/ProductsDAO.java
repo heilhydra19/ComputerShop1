@@ -67,4 +67,10 @@ public class ProductsDAO extends BaseDAO{
 		}
 		return listProducts;
 	}
+	
+	public ProductsDTO FindProductByID(long id) {
+		StringBuffer sql = SqlString();
+		sql.append(" and a.id = " + id);
+		return _jdbcTemplate.queryForObject(sql.toString(), new ProductsDTOMapper());
+	}
 }
