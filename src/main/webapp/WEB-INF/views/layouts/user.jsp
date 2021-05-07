@@ -2,25 +2,30 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><decorator:title default="Master-layout"/></title>
+<title><decorator:title default="Master-layout" /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap styles -->
-<link href="<c:url value="/assets/user/css/bootstrap.css" />" rel="stylesheet" />
+<link href="<c:url value="/assets/user/css/bootstrap.css" />"
+	rel="stylesheet" />
 <!-- Customize styles -->
 <link href="<c:url value="/assets/user/style.css" />" rel="stylesheet" />
 <!-- font awesome styles -->
-<link href="<c:url value="/assets/user/font-awesome/css/font-awesome.css" />" rel="stylesheet">
+<link
+	href="<c:url value="/assets/user/font-awesome/css/font-awesome.css" />"
+	rel="stylesheet">
 
 <!-- Favicons -->
-<link rel="shortcut icon" href="<c:url value="/assets/user/ico/favicon.ico" />">
+<link rel="shortcut icon"
+	href="<c:url value="/assets/user/ico/favicon.ico" />">
+<decorator:head />
 </head>
 <body>
 	<!-- 

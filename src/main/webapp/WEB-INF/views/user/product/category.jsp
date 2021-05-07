@@ -68,7 +68,6 @@
 								</div>
 							</div>
 						</li>
-
 						<c:if
 							test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == productsPaginate.size() }"></ul>
 							</div>
@@ -77,13 +76,9 @@
 					<ul class="thumbnails">
 			</c:if>
 		</c:if>
-
 		</c:forEach>
-
 		</c:if>
-
 	</div>
-
 	<div class="pagination">
 		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }" varStatus="loop">
 			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
