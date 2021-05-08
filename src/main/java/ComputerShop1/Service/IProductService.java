@@ -1,4 +1,4 @@
-package ComputerShop1.Service.User;
+package ComputerShop1.Service;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ public interface IProductService {
 	@Autowired
 	public ProductsDTO GetProductByID(long id);
 	public List<ProductsDTO> GetProductByIDCategory(long id);
+	public List<ProductsDTO> GetDataProducts();
+	public int AddProduct(ProductsDTO productsDTO);
 }

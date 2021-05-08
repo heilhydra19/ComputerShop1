@@ -1,4 +1,4 @@
-package ComputerShop1.Service.User;
+package ComputerShop1.Service;
 
 import java.util.List;
 
@@ -19,5 +19,13 @@ public class ProductServiceImpl implements IProductService{
 
 	public List<ProductsDTO> GetProductByIDCategory(long id) {
 		return productsDAO.GetProductByIDCategory(id);
+	}
+	
+	public List<ProductsDTO> GetDataProducts() {
+		return productsDAO.GetDataProducts();
+	}
+
+	public int AddProduct(ProductsDTO productsDTO) {
+		return productsDAO.AddProduct(productsDTO);
 	}
 }

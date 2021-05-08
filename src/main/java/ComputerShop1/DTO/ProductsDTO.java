@@ -11,10 +11,23 @@ public class ProductsDTO {
 	private String name;
 	private int amount;
 	private double price;
-	private int sale;
 	private String detail;
 	private Date created_at;
 	private Date updated_at;
+	private String category;
+	private String brand;
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 	public ProductsDTO() {
 		super();
 	}
@@ -65,12 +78,6 @@ public class ProductsDTO {
 	}
 	public void setPrice(double price) {
 		this.price = price;
-	}
-	public int getSale() {
-		return sale;
-	}
-	public void setSale(int sale) {
-		this.sale = sale;
 	}
 	public String getDetail() {
 		return detail;

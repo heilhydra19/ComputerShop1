@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
-import ComputerShop1.Service.User.HomeServiceImpl;
+import ComputerShop1.Service.HomeServiceImpl;
 
 @Controller
 public class BaseController {

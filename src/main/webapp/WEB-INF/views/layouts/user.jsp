@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
-<%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
+<%@include file="/WEB-INF/views/layouts/taglib.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">

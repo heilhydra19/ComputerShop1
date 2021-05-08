@@ -1,4 +1,4 @@
-package ComputerShop1.Service.User;
+package ComputerShop1.Service;
 
 import java.util.List;
 

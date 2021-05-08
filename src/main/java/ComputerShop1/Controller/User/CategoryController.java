@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.PaginatesDTO;
-import ComputerShop1.Service.User.CategoryServiceImpl;
-import ComputerShop1.Service.User.PaginateServiceImpl;
+import ComputerShop1.Service.CategoryServiceImpl;
+import ComputerShop1.Service.PaginateServiceImpl;
 
 @Controller
 public class CategoryController extends BaseController{
