@@ -82,4 +82,17 @@ public class ProductsDAO extends BaseDAO{
 		sql.append("VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','0' ,'"+product.getPrice()+"','"+product.getDetail()+"')");
 		return _jdbcTemplate.update(sql.toString());
 	}
+	
+	public int UpdateProduct(ProductsDTO product) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE `products` SET `id_category`='"+product.getId_category()+"',`id_brand`='"+product.getId_brand()+"',`name`='"+product.getName()+"',`img`='"+product.getImg()+"',`amount`=amount,`price`='"+product.getPrice()+"',`detail`='"+product.getDetail()+"', ");
+		sql.append("`created_at`=created_at, `updated_at`=CURRENT_TIMESTAMP WHERE id = " + product.getId());
+		return _jdbcTemplate.update(sql.toString());
+	}
+	
+	public int DeleteProduct(ProductsDTO product) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("DELETE FROM `products` WHERE id = "+ product.getId());
+		return _jdbcTemplate.update(sql.toString());
+	}
 }

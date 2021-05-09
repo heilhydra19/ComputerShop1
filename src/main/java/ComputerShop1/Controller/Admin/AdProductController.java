@@ -18,28 +18,39 @@ public class AdProductController extends AdBaseController {
 	@Autowired
 	private BrandServiceImpl _brandService;
 	
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.GET)
-	public ModelAndView AddProduct() {
+	private ModelAndView View() {
 		_mvShare.addObject("products", _productService.GetDataProducts());
 		_mvShare.addObject("categories", _categoryService.GetDataCategories());
 		_mvShare.addObject("brands", _brandService.GetDataBrands());
 		_mvShare.setViewName("admin/product/product");
+		return _mvShare;
+	}
+	
+	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.GET)
+	public ModelAndView Product() {
+		View();
 		_mvShare.addObject("product", new ProductsDTO());
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST)
-	public ModelAndView AddProductSave(@ModelAttribute("product") ProductsDTO product) {
-		int count = _productService.AddProduct(product);
-		if (count > 0) {
-			_mvShare.addObject("status", "Đăng ký tài khoản thành công");
-		} else {
-			_mvShare.addObject("status", "Đăng ký tài khoản thất bại");
-		}
-		_mvShare.addObject("products", _productService.GetDataProducts());
-		_mvShare.addObject("categories", _categoryService.GetDataCategories());
-		_mvShare.addObject("brands", _brandService.GetDataBrands());
-		_mvShare.setViewName("admin/product/product");
+	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "add")
+	public ModelAndView AddProduct(@ModelAttribute("product") ProductsDTO product) {
+		_productService.AddProduct(product);
+		View();
+		return _mvShare;
+	}
+	
+	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "update")
+	public ModelAndView UpdateProduct(@ModelAttribute("product") ProductsDTO product) {
+		_productService.UpdateProduct(product);
+		View();
+		return _mvShare;
+	}
+	
+	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "delete")
+	public ModelAndView DeleteProduct(@ModelAttribute("product") ProductsDTO product) {
+		_productService.DeleteProduct(product);
+		View();
 		return _mvShare;
 	}
 }

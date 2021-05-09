@@ -38,6 +38,7 @@
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
+								<th>ID</th>
 								<th>Sản Phẩm</th>
 								<th>Hình Ảnh</th>
 								<th>Loại</th>
@@ -48,7 +49,13 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:input type="text" placeholder="Nhập tên sp"
+								<td><form:select name="id" path="id"
+										style="max-width: 40px">
+										<c:forEach var="item" items="${ products }">
+											<form:option value="${ item.id }">${ item.name }</form:option>
+										</c:forEach>
+									</form:select></td>
+								<td><form:input placeholder="Nhập tên sp"
 										style="max-width: 170px" path="name" /></td>
 								<td><form:input type="text" placeholder="Nhập link"
 										style="max-width: 100px" path="img" /></td>
@@ -65,19 +72,22 @@
 										</c:forEach>
 									</form:select></td>
 								<td><form:input type="text" placeholder="Giá Bán"
-										style="max-width: 140px" path="price" /></td>
+										style="max-width: 130px" path="price" /></td>
 								<td><form:input type="text" placeholder="Chi Tiết SP"
-										style="max-width: 150px" path="detail" /></td>
+										style="max-width: 140px" path="detail" /></td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="controls">
-						<button type="submit" class="shopBtn">Thêm Sản Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" class="shopBtn">Sửa Sản Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" class="shopBtn">Xóa Sản Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
+						&emsp;&emsp;
+						<button type="submit" name="add" class="shopBtn">Thêm Sản
+							Phẩm</button>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						<button type="submit" name="update" class="shopBtn">Sửa Sản Phẩm</button>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						<button type="submit" name="delete" class="shopBtn">Xóa Sản Phẩm</button>
 					</div>
 				</form:form>
 				<hr class="soften" />
@@ -114,11 +124,19 @@
 			</div>
 		</div>
 	</div>
-	<!--  <content tag="script"> <script>
-		$(".edit-cart").on("click", function() {
-			var id = $(this).data("id");
-			var quanty = $("#quanty-cart-" + id).val();
-			window.location = "EditCart/" + id + "/" + quanty;
+	<script>
+		$(function() {
+			var availableTags = [ "ActionScript", "AppleScript", "Asp",
+					"BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion",
+					"Erlang", "Fortran", "Groovy", "Haskell", "Java",
+					"JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby",
+					"Scala", "Scheme" ];
+			$("#tags").autocomplete({
+				source : availableTags,
+				minLength : 0
+			}).focus(function() {
+				$(this).trigger('keydown.autocomplete');
+			});
 		});
-	</script></content>-->
+	</script>
 </body>

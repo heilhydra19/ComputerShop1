@@ -28,4 +28,12 @@ public class ProductServiceImpl implements IProductService{
 	public int AddProduct(ProductsDTO product) {
 		return productsDAO.AddProduct(product);
 	}
+	
+	public int UpdateProduct(ProductsDTO product) {
+		return productsDAO.UpdateProduct(product);
+	}
+
+	public int DeleteProduct(ProductsDTO product) {
+		return productsDAO.DeleteProduct(product);
+	}
 }
