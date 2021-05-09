@@ -34,7 +34,7 @@
 						<c:forEach var="item" items="${ Cart }">
 							<tr>
 								<td><img width="100"
-									src="<c:url value="/assets/user/img/${ item.value.product.url_img }"/>"
+									src="<c:url value="/assets/user/img/${ item.value.product.img }"/>"
 									alt=""></td>
 								<td><fmt:formatNumber type="number" groupingUsed="true"
 										value="${ item.value.product.price }" /> ₫</td>
@@ -61,20 +61,6 @@
 					</tbody>
 				</table>
 				<br />
-				<table class="table table-bordered">
-					<tbody>
-						<tr>
-							<td>
-								<form class="form-inline">
-									<label style="min-width: 159px"> VOUCHERS Code: </label> <input
-										type="text" class="input-medium" placeholder="CODE">
-									<button type="submit" class="shopBtn">ADD</button>
-								</form>
-							</td>
-						</tr>
-
-					</tbody>
-				</table>
 
 				<a href="products.html" class="shopBtn btn-large"><span
 					class="icon-arrow-left"></span> Tiếp tục mua sắm </a> <a

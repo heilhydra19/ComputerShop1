@@ -12,9 +12,9 @@ import ComputerShop1.DTO.ProductsDTOMapper;
 public class ProductsDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT a.*, b.name category, c.name brand , d.url url_img ");
-		sql.append(" FROM `products` a, `categories` b, `brands` c, `img` d");
-		sql.append(" WHERE a.id_category = b.id AND a.id_brand = c.id AND a.id_img = d.id ORDER BY id ");
+		sql.append(" SELECT a.*, b.name category, c.name brand ");
+		sql.append(" FROM `products` a, `categories` b, `brands` c ");
+		sql.append(" WHERE a.id_category = b.id AND a.id_brand = c.id ");
 		return sql;
 	}
 	
@@ -32,6 +32,7 @@ public class ProductsDAO extends BaseDAO{
 	
 	public List<ProductsDTO> GetDataProducts() {
 		StringBuffer sql = SqlString();
+		sql.append(" order by a.id");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
 	
@@ -77,8 +78,8 @@ public class ProductsDAO extends BaseDAO{
 	
 	public int AddProduct(ProductsDTO product) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("INSERT INTO `products`(`id_category`, `id_brand`, `id_img`, `name`, `amount`, `price`, `detail`) ");
-		sql.append("VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getId_img()+"','"+product.getName()+"',0 ,"+product.getPrice()+",'"+product.getDetail()+"')");
+		sql.append("INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `amount`, `price`, `detail`) ");
+		sql.append("VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','0' ,'"+product.getPrice()+"','"+product.getDetail()+"')");
 		return _jdbcTemplate.update(sql.toString());
 	}
 }

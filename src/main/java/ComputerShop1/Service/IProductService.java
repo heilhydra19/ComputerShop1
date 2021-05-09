@@ -13,5 +13,5 @@ public interface IProductService {
 	public ProductsDTO GetProductByID(long id);
 	public List<ProductsDTO> GetProductByIDCategory(long id);
 	public List<ProductsDTO> GetDataProducts();
-	public int AddProduct(ProductsDTO productsDTO);
+	public int AddProduct(ProductsDTO product);
 }

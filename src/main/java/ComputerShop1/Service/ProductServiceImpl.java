@@ -25,7 +25,7 @@ public class ProductServiceImpl implements IProductService{
 		return productsDAO.GetDataProducts();
 	}
 
-	public int AddProduct(ProductsDTO productsDTO) {
-		return productsDAO.AddProduct(productsDTO);
+	public int AddProduct(ProductsDTO product) {
+		return productsDAO.AddProduct(product);
 	}
 }

@@ -12,7 +12,6 @@ public class ProductsDTOMapper implements RowMapper<ProductsDTO>{
 		productsDTO.setId(rs.getLong("id"));
 		productsDTO.setId_category(rs.getLong("id_category"));
 		productsDTO.setId_brand(rs.getLong("id_brand"));
-		productsDTO.setId_img(rs.getLong("id_img"));
 		productsDTO.setName(rs.getString("name"));
 		productsDTO.setCategory(rs.getString("category"));
 		productsDTO.setBrand(rs.getString("brand"));
@@ -21,7 +20,7 @@ public class ProductsDTOMapper implements RowMapper<ProductsDTO>{
 		productsDTO.setDetail(rs.getString("detail"));
 		productsDTO.setCreated_at(rs.getDate("created_at"));
 		productsDTO.setUpdated_at(rs.getDate("updated_at"));
-		productsDTO.setUrl_img(rs.getString("url_img"));
+		productsDTO.setImg(rs.getString("img"));
 		return productsDTO;
 	}
 

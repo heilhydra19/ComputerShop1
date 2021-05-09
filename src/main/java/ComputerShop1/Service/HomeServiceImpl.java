@@ -47,7 +47,7 @@ public class HomeServiceImpl implements IHomeService{
 
 	public List<ProductsDTO> GetDataProducts() {
 		List<ProductsDTO> listProducts = productDAO.GetDataProducts();
-		listProducts.get(0).getId_img();
+		listProducts.get(0).getImg();
 		return listProducts;
 	}
 }

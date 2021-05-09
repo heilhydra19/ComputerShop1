@@ -6,8 +6,7 @@ public class ProductsDTO {
 	private long id;
 	private long id_category;
 	private long id_brand;
-	private long id_img;
-	private String url_img;
+	private String img;
 	private String name;
 	private int amount;
 	private double price;
@@ -49,17 +48,11 @@ public class ProductsDTO {
 	public void setId_brand(long id_brand) {
 		this.id_brand = id_brand;
 	}
-	public long getId_img() {
-		return id_img;
+	public String getImg() {
+		return img;
 	}
-	public void setId_img(long id_img) {
-		this.id_img = id_img;
-	}
-	public String getUrl_img() {
-		return url_img;
-	}
-	public void setUrl_img(String url_img) {
-		this.url_img = url_img;
+	public void setImg(String img) {
+		this.img = img;
 	}
 	public String getName() {
 		return name;

@@ -26,7 +26,7 @@ Body Section
 			<div id="myCarousel" class="carousel slide cntr">
                 <div class="carousel-inner">
                   <div class="item active">
-                   <a href="#"> <img src="<c:url value="/assets/user/img/${ product.url_img }"/>" alt="" style="width:100%"></a>
+                   <a href="#"> <img src="<c:url value="/assets/user/img/${ product.img }"/>" alt="" style="width:100%"></a>
                   </div>
                 </div>
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
@@ -83,7 +83,7 @@ Body Section
 			<c:forEach var="item" items="${ productByIdCategory }" begin="1" end="${ countList }" varStatus="loop">
 				<div class="row-fluid">	  
 			<div class="span2">
-				<img src="<c:url value="/assets/user/img/${ item.url_img }"/>" alt="">
+				<img src="<c:url value="/assets/user/img/${ item.img }"/>" alt="">
 			</div>
 			<div class="span6">
 				<h5>${ item.name } </h5>
@@ -107,5 +107,4 @@ Body Section
 
 </div>
 </div>
-</div> <!-- Body wrapper -->
 </body>

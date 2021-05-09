@@ -50,7 +50,7 @@
 									class="zoomTool" href="product_details.html"
 									title="add to cart"><span class="icon-search"></span> QUICK
 									VIEW</a> <a href="<c:url value="/chi-tiet-san-pham/${ item.id }"/>"><img
-									src="<c:url value="/assets/user/img/${ item.url_img }"/>" alt=""></a>
+									src="<c:url value="/assets/user/img/${ item.img }"/>" alt=""></a>
 								<div class="caption cntr">
 									<p>${ item.name }</p>
 									<p>

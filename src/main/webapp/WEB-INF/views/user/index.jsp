@@ -134,7 +134,7 @@ New Products
 										<a class="zoomTool" href="product_details.html"
 											title="add to cart"><span class="icon-search"></span>
 											QUICK VIEW</a> <a href="product_details.html"><img
-											src="<c:url value="/assets/user/img/${ item.url_img }"/>" alt=""></a>
+											src="<c:url value="/assets/user/img/${ item.img }"/>" alt=""></a>
 									</div>
 								</li>
 								<c:if test="${ (loop.index + 1) % 4 == 0 || (loop.index + 1)  == products.size() }">
@@ -177,7 +177,7 @@ New Products
 								<a class="zoomTool" href="#"
 									title="add to cart"><span class="icon-search"></span> QUICK
 									VIEW</a> <a href="chi-tiet-san-pham/${ item.id }"><img
-									src="<c:url value="/assets/user/img/${ item.url_img }"/>"
+									src="<c:url value="/assets/user/img/${ item.img }"/>"
 									alt=""></a>
 								<div class="caption">
 									<h5>${ item.name }</h5>
