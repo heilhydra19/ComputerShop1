@@ -19,15 +19,14 @@
 				</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class=""><a href="<c:url value="san-pham"/>">Sản
-								Phẩm </a></li>
+						<li class=""><a href="<c:url value="san-pham"/>">Sản Phẩm </a></li>
 						<li class=""><a href="<c:url value="hang"/>">Hãng </a></li>
-						<li class=""><a href="index.html">Loại </a></li>
-						<li class=""><a href="index.html">Nhà CC </a></li>
-						<li class=""><a href="index.html">Nhập </a></li>
-						<li class=""><a href="index.html">Hóa Đơn </a></li>
+						<li class=""><a href="<c:url value="loai"/>">Loại </a></li>
+						<li class=""><a href="<c:url value="nha-cung-cap"/>">Nhà CC </a></li>
+						<li class=""><a href="<c:url value="nhap-hang"/>">Nhập </a></li>
+						<li class=""><a href="<c:url value="hoa-don"/>">Hóa Đơn </a></li>
 						<c:if test="${ not empty LoginInfo }">
-							<li class=""><a href="index.html">Nhân Viên </a></li>
+							<li class=""><a href="quan-ly-nhan-vien">Nhân Viên </a></li>
 						</c:if>
 					</ul>
 					<ul class="nav pull-right">
