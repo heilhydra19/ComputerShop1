@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/layouts/taglib.jsp"%>
+<style>
+.aligncenter {
+	text-align: center;
+}
+</style>
 <head>
 <title>Quản Lý</title>
 </head>
@@ -14,17 +19,28 @@
 				</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><a href="index.html">Sản Phẩm </a></li>
+						<li class="active"><a href="<c:url value="san-pham"/>">Sản Phẩm </a></li>
 						<li class=""><a href="index.html">Hãng </a></li>
 						<li class=""><a href="index.html">Loại </a></li>
-						<li class=""><a href="index.html">Nhập Hàng </a></li>
+						<li class=""><a href="index.html">Nhà CC </a></li>
+						<li class=""><a href="index.html">Nhập </a></li>
 						<li class=""><a href="index.html">Hóa Đơn </a></li>
+						<c:if test="${ not empty LoginInfo }">
+							<li class=""><a href="index.html">Nhân Viên </a></li>
+						</c:if>
 					</ul>
-					<form action="#" class="navbar-search pull-left">
-						<input type="text" placeholder="Search" class="search-query span2">
-					</form>
 					<ul class="nav pull-right">
-						<li class=""><a href="index.html">Đăng Xuất </a></li>
+						<c:if test="${ empty LoginInfo and empty LoginEmplInfo}">
+							<c:redirect url="/quan-tri/"></c:redirect>
+						</c:if>
+						<c:if test="${ not empty LoginInfo }">
+							<li><a href="">${ LoginInfo.name }</a></li>
+							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
+						</c:if>
+						<c:if test="${ not empty LoginEmplInfo }">
+							<li><a href="">${ LoginEmplInfo.name }</a></li>
+							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
+						</c:if>
 					</ul>
 
 				</div>
@@ -33,8 +49,11 @@
 	</div>
 	<div class="row">
 		<div class="span12">
+			<form class="aligncenter" action="#" class="navbar-search pull-left">
+				<input type="text" placeholder="Search" class="search-query span2">
+			</form>
 			<div class="well well-small">
-				<form:form action="quan-ly" method="POST" modelAttribute="product">
+				<form:form action="san-pham" method="POST" modelAttribute="product">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -84,10 +103,12 @@
 							Phẩm</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="update" class="shopBtn">Sửa Sản Phẩm</button>
+						<button type="submit" name="update" class="shopBtn">Sửa
+							Sản Phẩm</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="delete" class="shopBtn">Xóa Sản Phẩm</button>
+						<button type="submit" name="delete" class="shopBtn">Xóa
+							Sản Phẩm</button>
 					</div>
 				</form:form>
 				<hr class="soften" />

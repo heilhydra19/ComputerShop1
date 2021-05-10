@@ -26,28 +26,28 @@ public class AdProductController extends AdBaseController {
 		return _mvShare;
 	}
 	
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.GET)
+	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.GET)
 	public ModelAndView Product() {
 		View();
 		_mvShare.addObject("product", new ProductsDTO());
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.POST, params = "add")
 	public ModelAndView AddProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.AddProduct(product);
 		View();
 		return _mvShare;
 	}
 	
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "update")
+	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.POST, params = "update")
 	public ModelAndView UpdateProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.UpdateProduct(product);
 		View();
 		return _mvShare;
 	}
 	
-	@RequestMapping(value = "quan-tri/quan-ly", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.POST, params = "delete")
 	public ModelAndView DeleteProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.DeleteProduct(product);
 		View();

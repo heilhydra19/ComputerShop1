@@ -53,7 +53,7 @@ Navigation Bar Section
 				</form>
 				<ul class="nav pull-right">
 					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"><span class="icon-lock"></span>
+						class="dropdown-toggle" href=""><span class="icon-lock"></span>
 							Login <b class="caret"></b></a>
 						<div class="dropdown-menu">
 							<form class="form-horizontal loginFrm">

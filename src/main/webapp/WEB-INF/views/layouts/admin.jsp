@@ -35,12 +35,9 @@
 		<div class="topNav">
 			<div class="container">
 				<div class="alignR">
-					<div class="pull-left socialNw">
-						<a href="#"><span class="icon-twitter"></span></a> <a href="#"><span
-							class="icon-facebook"></span></a> <a href="#"><span
-							class="icon-youtube"></span></a> <a href="#"><span
-							class="icon-tumblr"></span></a>
-					</div>
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -56,38 +53,10 @@ Lower Header Section
 
 		<decorator:body />
 
-		<%@include file="/WEB-INF/views/layouts/admin/footer.jsp"%>
 
 	</div>
 	<!-- /container -->
 
-	<div class="copyright">
-		<div class="container">
-			<p class="pull-right">
-				<a href="#"><img
-					src="<c:url value="/assets/user/img/maestro.png"/>" alt="payment"></a>
-				<a href="#"><img src="<c:url value="/assets/user/img/mc.png"/>"
-					alt="payment"></a> <a href="#"><img
-					src="<c:url value="/assets/user/img/pp.png"/>" alt="payment"></a>
-				<a href="#"><img
-					src="<c:url value="/assets/user/img/visa.png"/>" alt="payment"></a>
-				<a href="#"><img
-					src="<c:url value="/assets/user/img/disc.png"/>" alt="payment"></a>
-			</p>
-			<span>Copyright &copy; 2013<br> bootstrap ecommerce
-				shopping template
-			</span>
-		</div>
-	</div>
-	<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src=" <c:url value="/assets/user/js/jquery.js" />"></script>
-	<script src="<c:url value="/assets/user/js/bootstrap.min.js" />"></script>
-	<script
-		src="<c:url value="/assets/user/js/jquery.easing-1.3.min.js" />"></script>
-	<script
-		src="<c:url value="/assets/user/js/jquery.scrollTo-1.4.3.1-min.js" />"></script>
-	<script src="<c:url value="/assets/user/js/shop.js" /> "></script>
-	<decorator:getProperty property="page.script"></decorator:getProperty>
+	
 </body>
 </html>
