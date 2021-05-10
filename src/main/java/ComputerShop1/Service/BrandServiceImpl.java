@@ -16,4 +16,16 @@ public class BrandServiceImpl implements IBrandService{
 	public List<Brands> GetDataBrands() {
 		return brandsDAO.GetDataBrands();
 	}
+
+	public int AddBrand(Brands brand) {
+		return brandsDAO.AddBrand(brand);
+	}
+
+	public int UpdateBrand(Brands brand) {
+		return brandsDAO.UpdateBrand(brand);
+	}
+
+	public int DeleteBrand(Brands brand) {
+		return brandsDAO.DeleteBrand(brand);
+	}
 }

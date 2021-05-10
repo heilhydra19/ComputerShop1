@@ -10,9 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ComputerShop1.DTO.ProductsDTO;
 import ComputerShop1.Service.BrandServiceImpl;
 import ComputerShop1.Service.CategoryServiceImpl;
+import ComputerShop1.Service.ProductServiceImpl;
 
 @Controller
 public class AdProductController extends AdBaseController {
+	@Autowired
+	private ProductServiceImpl _productService;
 	@Autowired
 	private CategoryServiceImpl _categoryService;
 	@Autowired

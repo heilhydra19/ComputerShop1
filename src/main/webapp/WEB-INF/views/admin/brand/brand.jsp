@@ -7,7 +7,7 @@
 }
 </style>
 <head>
-<title>Quản Lý</title>
+<title>Sản Phẩm</title>
 </head>
 <body>
 	<div class="navbar">
@@ -19,7 +19,8 @@
 				</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class=""><a href="<c:url value="san-pham"/>">Sản Phẩm </a></li>
+						<li class=""><a href="<c:url value="san-pham"/>">Sản
+								Phẩm </a></li>
 						<li class=""><a href="<c:url value="hang"/>">Hãng </a></li>
 						<li class=""><a href="index.html">Loại </a></li>
 						<li class=""><a href="index.html">Nhà CC </a></li>
@@ -53,62 +54,42 @@
 				<input type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<div class="well well-small">
-				<form:form action="san-pham" method="POST" modelAttribute="product">
+				<form:form action="san-pham" method="POST" modelAttribute="brand">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Sản Phẩm</th>
-								<th>Hình Ảnh</th>
-								<th>Loại</th>
-								<th>Hãng</th>
-								<th>Đơn Giá</th>
-								<th>Chi Tiết</th>
+								<th>Tên Hãng</th>
+								<th>Mô tả</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td><form:select name="id" path="id"
-										style="max-width: 40px">
-										<c:forEach var="item" items="${ products }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
-								<td><form:input placeholder="Nhập tên sp"
-										style="max-width: 170px" path="name" /></td>
-								<td><form:input type="text" placeholder="Nhập link"
-										style="max-width: 100px" path="img" /></td>
-								<td><form:select name="categories" path="id_category"
-										style="max-width: 100px">
-										<c:forEach var="item" items="${ categories }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
-								<td><form:select name="brands" path="id_brand"
 										style="max-width: 100px">
 										<c:forEach var="item" items="${ brands }">
 											<form:option value="${ item.id }">${ item.name }</form:option>
 										</c:forEach>
 									</form:select></td>
-								<td><form:input type="text" placeholder="Giá Bán"
-										style="max-width: 130px" path="price" /></td>
-								<td><form:input type="text" placeholder="Chi Tiết SP"
-										style="max-width: 140px" path="detail" /></td>
+								<td><form:input placeholder="Nhập tên hãng"
+										style="max-width: 200px" path="name" /></td>
+								<td><form:input type="text" placeholder="Mô tả"
+										style="max-width: 300px" path="description" /></td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="add" class="shopBtn">Thêm Sản
-							Phẩm</button>
+						<button type="submit" name="add" class="shopBtn">Thêm
+							Hãng</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
-							Sản Phẩm</button>
+							Hãng</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						<button type="submit" name="delete" class="shopBtn">Xóa
-							Sản Phẩm</button>
+							Hãng</button>
 					</div>
 				</form:form>
 				<hr class="soften" />
@@ -116,28 +97,17 @@
 					<thead>
 						<tr>
 							<th>Mã</th>
-							<th>Sản Phẩm</th>
-							<th>Hình Ảnh</th>
-							<th>Loại</th>
-							<th>Hãng</th>
-							<th>Số Lượng</th>
-							<th>Đơn Giá</th>
+							<th>Tên Hãng</th>
 							<th>Chi Tiết</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${ products }">
+						<c:forEach var="item" items="${ brands }">
 							<tr>
 								<td>${ item.id }</td>
 								<td>${ item.name }</td>
-								<td><img width="60" src="<c:url value="${ item.img }"/>"
-									alt=""></td>
-								<td>${ item.category }</td>
-								<td>${ item.brand }</td>
-								<td>${ item.amount }</td>
-								<td>${ item.price }</td>
-								<td><input style="max-width: 100px" size="16" type="text"
-									value="${ item.detail }"></td>
+								<td><input style="max-width: 300px" size="16" type="text"
+									value="${ item.description }"></td>
 							</tr>
 						</c:forEach>
 					</tbody>

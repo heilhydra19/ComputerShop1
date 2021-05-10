@@ -13,7 +13,7 @@
 <body>
 	<div class="well aligncenter">
 		<h5>Đăng Nhập</h5>
-		<form:form action="quan-ly" method="POST" modelAttribute="account">
+		<form:form action="san-pham" method="POST" modelAttribute="account">
 			<div class="control-group">
 				<label class="control-label" for="inputEmail">Tên đăng nhập</label>
 				<div class="controls">
