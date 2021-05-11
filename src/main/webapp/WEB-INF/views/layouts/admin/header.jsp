@@ -41,19 +41,6 @@ Navigation Bar Section
 							<li class=""><a href="quan-ly-nhan-vien">Nhân Viên </a></li>
 						</c:if>
 					</ul>
-					<ul class="nav pull-right">
-						<c:if test="${ empty LoginInfo and empty LoginEmplInfo}">
-							<c:redirect url="/quan-tri/"></c:redirect>
-						</c:if>
-						<c:if test="${ not empty LoginInfo }">
-							<li><a href="">${ LoginInfo.name }</a></li>
-							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
-						</c:if>
-						<c:if test="${ not empty LoginEmplInfo }">
-							<li><a href="">${ LoginEmplInfo.name }</a></li>
-							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
-						</c:if>
-					</ul>
 				</div>
 			</div>
 		</div>
