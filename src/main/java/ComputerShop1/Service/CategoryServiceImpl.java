@@ -28,4 +28,16 @@ public class CategoryServiceImpl implements ICategoryService {
 	public List<Categories> GetDataCategories() {
 		return categoriesDAO.GetDataCategories();
 	}
+
+	public int AddCategory(Categories category) {
+		return categoriesDAO.AddCategory(category);
+	}
+
+	public int UpdateCategory(Categories category) {
+		return categoriesDAO.UpdateCategory(category);
+	}
+
+	public int DeleteCategory(Categories category) {
+		return categoriesDAO.DeleteCategory(category);
+	}
 }

@@ -22,7 +22,7 @@ public class AdBrandController extends AdBaseController{
 	}
 	
 	@RequestMapping(value = "quan-tri/hang", method = RequestMethod.GET)
-	public ModelAndView Product() {
+	public ModelAndView Brand() {
 		View();
 		_mvShare.addObject("brand", new Brands());
 		return _mvShare;

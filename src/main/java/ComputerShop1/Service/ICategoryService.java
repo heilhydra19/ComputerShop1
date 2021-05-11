@@ -11,4 +11,7 @@ import ComputerShop1.Entity.Categories;
 public interface ICategoryService {
 	public List<ProductsDTO> GetProductByIDCategory(long id);
 	public List<Categories> GetDataCategories();
+	public int AddCategory(Categories category);
+	public int UpdateCategory(Categories category);
+	public int DeleteCategory(Categories category);
 }

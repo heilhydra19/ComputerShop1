@@ -1,6 +1,6 @@
 package ComputerShop1.DTO;
 
-public class AccountsDTO {
+public class UsersDTO {
 	private long id;
 	private String username;
 	private String password;
@@ -10,7 +10,7 @@ public class AccountsDTO {
 	private String email;
 	private long id_role;
 	private String role_name;
-	public AccountsDTO() {
+	public UsersDTO() {
 		super();
 	}
 	public long getId() {

@@ -2,11 +2,11 @@ package ComputerShop1.DAO;
 
 import org.springframework.stereotype.Repository;
 
-import ComputerShop1.DTO.AccountsDTO;
-import ComputerShop1.DTO.AccountsDTOMapper;
+import ComputerShop1.DTO.UsersDTO;
+import ComputerShop1.DTO.UsersDTOMapper;
 
 @Repository
-public class AccountDAO extends BaseDAO{
+public class UsersDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.*, b.name, b.phone, b.email, b.id_role, c.name as role_name ");
@@ -15,9 +15,14 @@ public class AccountDAO extends BaseDAO{
 		return sql;
 	}
 	
-	public AccountsDTO FindAccountByUsername(AccountsDTO account) {
+	public UsersDTO FindAccountByUsername(UsersDTO account) {
 		StringBuffer sql = SqlString();
 		sql.append("AND BINARY a.username = '"+account.getUsername()+"' AND BINARY a.password='"+account.getPassword()+"' ");
-		return _jdbcTemplate.queryForObject(sql.toString(), new AccountsDTOMapper());
+		return _jdbcTemplate.queryForObject(sql.toString(), new UsersDTOMapper());
+	}
+	
+	public int AddUser(UsersDTO user) {
+		StringBuffer sql = SqlString();
+		
 	}
 }

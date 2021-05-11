@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class AccountsDTOMapper implements RowMapper<AccountsDTO>{
-	public AccountsDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		AccountsDTO account = new AccountsDTO();
+public class UsersDTOMapper implements RowMapper<UsersDTO>{
+	public UsersDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		UsersDTO account = new UsersDTO();
 		account.setId(rs.getLong("id"));
 		account.setUsername(rs.getString("username"));
 		account.setPassword(rs.getString("password"));

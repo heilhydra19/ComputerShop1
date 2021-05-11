@@ -4,14 +4,14 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ComputerShop1.DAO.AccountDAO;
-import ComputerShop1.DTO.AccountsDTO;
+import ComputerShop1.DAO.UsersDAO;
+import ComputerShop1.DTO.UsersDTO;
 
 @Service
-public class AccountServiceImpl implements IAccountService{
+public class UserServiceImpl implements IUserService{
 	@Autowired
-	private AccountDAO accountDAO;
-	public AccountsDTO FindAccountByUsername(AccountsDTO account) {
+	private UsersDAO accountDAO;
+	public UsersDTO FindAccountByUsername(UsersDTO account) {
 		return accountDAO.FindAccountByUsername(account);
 //		String pass = account.getPassword();
 //		account = accountDAO.FindAccountByUsername(account);

@@ -34,11 +34,22 @@ Navigation Bar Section
 						<li class=""><a href="<c:url value="hang"/>">Hãng </a></li>
 						<li class=""><a href="<c:url value="loai"/>">Loại </a></li>
 						<li class=""><a href="<c:url value="nha-cung-cap"/>">Nhà
-								CC </a></li>
+								Cung Cấp </a></li>
+						<li class=""><a href="<c:url value="khach-hang"/>">Khách Hàng </a></li>
 						<li class=""><a href="<c:url value="nhap-hang"/>">Nhập </a></li>
 						<li class=""><a href="<c:url value="hoa-don"/>">Hóa Đơn </a></li>
 						<c:if test="${ not empty LoginInfo }">
-							<li class=""><a href="quan-ly-nhan-vien">Nhân Viên </a></li>
+							<li class=""><a href="nguoi-dung">Người Dùng </a></li>
+						</c:if>
+					</ul>
+					<ul class="nav pull-right">
+						<c:if test="${ not empty LoginInfo }">
+							<li><a href="">${ LoginInfo.name }</a></li>
+							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
+						</c:if>
+						<c:if test="${ not empty LoginEmplInfo }">
+							<li><a href="">${ LoginEmplInfo.name }</a></li>
+							<li><a href="<c:url value="/quan-tri/"/>">Đăng Xuất </a></li>
 						</c:if>
 					</ul>
 				</div>

@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ComputerShop1.DTO.AccountsDTO;
-import ComputerShop1.Service.AccountServiceImpl;
+import ComputerShop1.DTO.UsersDTO;
+import ComputerShop1.Service.UserServiceImpl;
 
 @Controller
-public class AdController extends AdBaseController {
+public class AdLoginController extends AdBaseController {
 	@Autowired
-	private AccountServiceImpl accountService;
+	private UserServiceImpl accountService;
 
 	@RequestMapping(value = "/quan-tri/", method = RequestMethod.GET)
 	public ModelAndView Index(HttpSession session) {
-		_mvShare.addObject("account", new AccountsDTO());
+		_mvShare.addObject("account", new UsersDTO());
 		_mvShare.setViewName("admin/index");
 		session.removeAttribute("LoginInfo");
 		session.removeAttribute("LoginEmplInfo");
@@ -27,7 +27,7 @@ public class AdController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.POST)
-	public ModelAndView Login(HttpSession session, @ModelAttribute("account") AccountsDTO account) {
+	public ModelAndView Login(HttpSession session, @ModelAttribute("account") UsersDTO account) {
 		account = accountService.FindAccountByUsername(account);
 		if (account != null) {
 			if (account.getId_role() == 1) {

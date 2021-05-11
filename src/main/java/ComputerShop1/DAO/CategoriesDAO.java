@@ -16,4 +16,24 @@ public class CategoriesDAO extends BaseDAO{
 		list = _jdbcTemplate.query(sql, new MapperCategories());
 		return list;
 	} 
+	
+	public int AddCategory(Categories category) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("INSERT INTO `categories`(`name`, `description`) ");
+		sql.append("VALUES ('"+category.getName()+"','"+category.getDescription()+"')");
+		return _jdbcTemplate.update(sql.toString());
+	}
+	
+	public int UpdateCategory(Categories category) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE `categories` SET `name`='"+category.getName()+"',`description`='"+category.getDescription()+"'"
+				+ " WHERE `id`= '"+category.getId()+"'");
+		return _jdbcTemplate.update(sql.toString());
+	}
+	
+	public int DeleteCategory(Categories category) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("DELETE FROM `categories` WHERE `id` = '"+category.getId()+"'");
+		return _jdbcTemplate.update(sql.toString());
+	}
 }
