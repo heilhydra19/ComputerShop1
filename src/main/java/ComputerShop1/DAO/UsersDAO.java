@@ -9,7 +9,7 @@ import ComputerShop1.DTO.UsersDTOMapper;
 public class UsersDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT a.*, b.name, b.phone, b.email, b.id_role, c.name as role_name ");
+		sql.append("SELECT a.*, b.name, b.img, b.phone, b.email, b.id_role, c.name as role_name ");
 		sql.append("FROM `accounts` a, `users` b, `roles` c ");
 		sql.append("WHERE a.id_user = b.id AND c.id = b.id_role ");
 		return sql;
@@ -22,7 +22,13 @@ public class UsersDAO extends BaseDAO{
 	}
 	
 	public int AddUser(UsersDTO user) {
-		StringBuffer sql = SqlString();
-		
+		StringBuffer sqlUser = new StringBuffer();
+		sqlUser.append("INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
+				+ "VALUES ('"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','"+user.getId_role()+"')");
+		_jdbcTemplate.update(sqlUser.toString());
+		StringBuffer sqlAccount = new StringBuffer();
+		sqlAccount.append("INSERT INTO `accounts`(`username`, `password`, `id_user`) "
+				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+user.getId()+"')");
+		return _jdbcTemplate.update(sqlAccount.toString());
 	}
 }

@@ -6,6 +6,7 @@ public class UsersDTO {
 	private String password;
 	private long id_user;
 	private String name;
+	private String img;
 	private String phone;
 	private String email;
 	private long id_role;
@@ -42,6 +43,12 @@ public class UsersDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	public String getPhone() {
 		return phone;

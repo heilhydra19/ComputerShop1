@@ -13,7 +13,7 @@ import ComputerShop1.DTO.UsersDTO;
 import ComputerShop1.Service.UserServiceImpl;
 
 @Controller
-public class AdLoginController extends AdBaseController {
+public class AdController extends AdBaseController {
 	@Autowired
 	private UserServiceImpl accountService;
 

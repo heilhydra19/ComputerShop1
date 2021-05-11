@@ -13,6 +13,7 @@ public class UsersDTOMapper implements RowMapper<UsersDTO>{
 		account.setPassword(rs.getString("password"));
 		account.setId_user(rs.getLong("id_user"));
 		account.setName(rs.getString("name"));
+		account.setImg(rs.getString("img"));
 		account.setPhone(rs.getString("phone"));
 		account.setEmail(rs.getString("email"));
 		account.setId_role(rs.getLong("id_role"));
