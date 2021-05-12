@@ -1,5 +1,7 @@
 package ComputerShop1.DAO;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import ComputerShop1.DTO.UsersDTO;
@@ -15,6 +17,12 @@ public class UsersDAO extends BaseDAO{
 		return sql;
 	}
 	
+	public List<UsersDTO> GetDataUsers() {
+		StringBuffer sql = SqlString();
+		sql.append("GROUP BY a.id ");
+		return _jdbcTemplate.query(sql.toString(), new UsersDTOMapper());
+	}
+	
 	public UsersDTO FindAccountByUsername(UsersDTO account) {
 		StringBuffer sql = SqlString();
 		sql.append("AND BINARY a.username = '"+account.getUsername()+"' AND BINARY a.password='"+account.getPassword()+"' ");
@@ -22,13 +30,43 @@ public class UsersDAO extends BaseDAO{
 	}
 	
 	public int AddUser(UsersDTO user) {
-		StringBuffer sqlUser = new StringBuffer();
-		sqlUser.append("INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
-				+ "VALUES ('"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','"+user.getId_role()+"')");
-		_jdbcTemplate.update(sqlUser.toString());
-		StringBuffer sqlAccount = new StringBuffer();
-		sqlAccount.append("INSERT INTO `accounts`(`username`, `password`, `id_user`) "
-				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+user.getId()+"')");
-		return _jdbcTemplate.update(sqlAccount.toString());
+		String sqlUser = "INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
+				+ "VALUES ('"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','"+user.getId_role()+"')";
+		return _jdbcTemplate.update(sqlUser);
+	}
+
+	public int UpdateUser(UsersDTO user) {
+		String sqlUser = "UPDATE `users` SET `name`=CASE WHEN BINARY '"+user.getName()+"'= BINARY '' THEN `name` ELSE '"+user.getName()+"' END,\r\n"
+				+ "				   `img`=CASE WHEN BINARY '"+user.getImg()+"'= BINARY '' THEN `img` ELSE '"+user.getImg()+"' END,\r\n"
+				+ "                   `phone`=CASE WHEN BINARY '"+user.getPhone()+"'= BINARY '' THEN `phone` ELSE '"+user.getPhone()+"' END,\r\n"
+				+ "                   `email`=CASE WHEN BINARY '"+user.getEmail()+"'= BINARY '' THEN `email` ELSE '"+user.getEmail()+"' END,\r\n"
+				+ "                   `id_role`=CASE WHEN BINARY '"+user.getId_role()+"'= BINARY '' THEN `id_role` ELSE '"+user.getId_role()+"' END \r\n"
+				+ "                   WHERE `id`='"+user.getId()+"'";
+		return _jdbcTemplate.update(sqlUser);
+	}
+	
+	public int DeleteUser(UsersDTO user) {
+		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+user.getId()+"'";
+		_jdbcTemplate.update(sqlAccount);
+		String sqlUser = "DELETE FROM `users` WHERE `id` = '"+user.getId()+"'";
+		return _jdbcTemplate.update(sqlUser);
+	}
+	
+	public int AddAccount(UsersDTO user) {
+		String sqlAccount = "INSERT INTO `accounts`(`username`, `password`, `id_user`) "
+				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+user.getId()+"')";
+		return _jdbcTemplate.update(sqlAccount);
+	}
+	
+	public int UpdateAccount(UsersDTO user) {
+		String sqlAccount = "UPDATE `accounts` SET `username`=CASE WHEN BINARY '"+user.getUsername()+"' = BINARY '' THEN `username` ELSE '"+user.getUsername()+"' END,\r\n"
+				+ "					  `password`=CASE WHEN BINARY '"+user.getPassword()+"' = BINARY '' THEN `password` ELSE '"+user.getPassword()+"' END \r\n"
+				+ "                      WHERE `id_user`='"+user.getId_user()+"'";
+		return _jdbcTemplate.update(sqlAccount);
+	}
+	
+	public int DeleteAccount(UsersDTO user) {
+		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+user.getId_role()+"'";
+		return _jdbcTemplate.update(sqlAccount);
 	}
 }
