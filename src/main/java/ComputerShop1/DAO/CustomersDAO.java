@@ -21,22 +21,22 @@ public class CustomersDAO extends BaseDAO{
 	}
 	
 	public int AddCustomer(CustomersDTO customer) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
-				+ "VALUES ('"+customer.getName()+"','"+customer.getImg()+"','"+customer.getPhone()+"','"+customer.getEmail()+"','3')");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
+				+ "VALUES ('"+customer.getName()+"','"+customer.getImg()+"','"+customer.getPhone()+"','"+customer.getEmail()+"','3')";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateCustomer(CustomersDTO customer) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("UPDATE `users` SET `name`='"+customer.getName()+"',`img`='"+customer.getImg()+"',"
-				+ "`phone`='"+customer.getPhone()+"',`email`='"+customer.getEmail()+"' WHERE `id` = '"+customer.getId()+"'");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "UPDATE `users` SET `name`=CASE WHEN '"+customer.getName()+"' = '' THEN `name` ELSE '"+customer.getName()+"' END,\r\n"
+				+ "		`img`=CASE WHEN '"+customer.getImg()+"' = '' THEN `img` ELSE '"+customer.getImg()+"' END,\r\n"
+				+ "		`phone`=CASE WHEN '"+customer.getPhone()+"' = '' THEN `phone` ELSE '"+customer.getPhone()+"' END,\r\n"
+				+ "        `email`=CASE WHEN '"+customer.getEmail()+"' = '' THEN `email` ELSE '"+customer.getEmail()+"' END \r\n"
+				+ "        WHERE `id` = '"+customer.getId()+"'";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int DeleteCustomer(CustomersDTO customer) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("DELETE FROM `users` WHERE `id` = '"+customer.getId()+"'");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "DELETE FROM `users` WHERE `id` = '"+customer.getId()+"'";
+		return _jdbcTemplate.update(sql);
 	}
 }

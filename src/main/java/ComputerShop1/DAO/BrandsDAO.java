@@ -1,6 +1,5 @@
 package ComputerShop1.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -10,29 +9,32 @@ import ComputerShop1.Entity.MapperBrands;
 
 @Repository
 public class BrandsDAO extends BaseDAO{
+	private StringBuffer SqlString() {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT * FROM brands ");
+		return sql;
+	}
+	
 	public List<Brands> GetDataBrands(){
-		List<Brands> list = new ArrayList<Brands>();
-		String sql = "SELECT * FROM brands";
-		list = _jdbcTemplate.query(sql, new MapperBrands());
-		return list;
+		StringBuffer sql = SqlString();
+		return _jdbcTemplate.query(sql.toString(), new MapperBrands());
 	} 
 	
 	public int AddBrand(Brands brand) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("INSERT INTO `brands`(`name`, `description`) ");
-		sql.append("VALUES ('"+brand.getName()+"','"+brand.getDescription()+"')");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "INSERT INTO `brands`(`name`, `description`) "
+				+ "VALUES ('"+brand.getName()+"','"+brand.getDescription()+"')";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateBrand(Brands brand) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("UPDATE `brands` SET `name`='"+brand.getName()+"',`description`='"+brand.getDescription()+"' WHERE `id`= '"+brand.getId()+"'");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "UPDATE `brands` SET `name`= CASE WHEN '"+brand.getName()+"' = '' THEN `name` ELSE '"+brand.getName()+"' END,\r\n"
+				+ "        `description`=CASE WHEN '"+brand.getDescription()+"' = '' THEN `description` ELSE '"+brand.getDescription()+"' END \r\n"
+				+ "        WHERE `id`='"+brand.getId()+"'";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int DeleteBrand(Brands brand) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("DELETE FROM `brands` WHERE `id` = '"+brand.getId()+"'");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "DELETE FROM `brands` WHERE `id` = '"+brand.getId()+"'";
+		return _jdbcTemplate.update(sql);
 	}
 }

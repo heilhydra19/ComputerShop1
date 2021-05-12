@@ -77,22 +77,26 @@ public class ProductsDAO extends BaseDAO{
 	}
 	
 	public int AddProduct(ProductsDTO product) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `amount`, `price`, `detail`) ");
-		sql.append("VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','0' ,'"+product.getPrice()+"','"+product.getDetail()+"')");
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `amount`, `price`, `detail`) "
+				+ "VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','0' ,'"+product.getPrice()+"','"+product.getDetail()+"')";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateProduct(ProductsDTO product) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("UPDATE `products` SET `id_category`='"+product.getId_category()+"',`id_brand`='"+product.getId_brand()+"',`name`='"+product.getName()+"',`img`='"+product.getImg()+"',`amount`=amount,`price`='"+product.getPrice()+"',`detail`='"+product.getDetail()+"', ");
-		sql.append("`created_at`=created_at, `updated_at`=CURRENT_TIMESTAMP WHERE id = " + product.getId());
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "UPDATE `products` SET `id_category`=CASE WHEN '"+product.getId_category()+"' = '' THEN `id_category` ELSE '"+product.getId_category()+"' END,\r\n"
+				+ "		`id_brand`=CASE WHEN '"+product.getId_brand()+"' = '' THEN `id_brand` ELSE '"+product.getId_brand()+"' END,\r\n"
+				+ "        `name`=CASE WHEN '"+product.getName()+"' = '' THEN `name` ELSE '"+product.getName()+"' END,\r\n"
+				+ "        `img`=CASE WHEN '"+product.getImg()+"' = '' THEN `img` ELSE '"+product.getImg()+"' END,\r\n"
+				+ "        `amount`=CASE WHEN '"+product.getAmount()+"' = '' THEN `amount` ELSE '"+product.getAmount()+"' END,\r\n"
+				+ "        `price`=CASE WHEN '"+product.getPrice()+"' = '' THEN `price` ELSE '"+product.getPrice()+"' END,\r\n"
+				+ "        `detail`=CASE WHEN '"+product.getDetail()+"' = '' THEN `detail` ELSE '"+product.getDetail()+"' END,\r\n"
+				+ "        `created_at`=created_at,`updated_at`=CURRENT_TIMESTAMP \r\n"
+				+ "        WHERE `id`='"+product.getId()+"'";
+		return _jdbcTemplate.update(sql);
 	}
 	
 	public int DeleteProduct(ProductsDTO product) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("DELETE FROM `products` WHERE id = "+ product.getId());
-		return _jdbcTemplate.update(sql.toString());
+		String sql = "DELETE FROM `products` WHERE id = "+ product.getId();
+		return _jdbcTemplate.update(sql);
 	}
 }
