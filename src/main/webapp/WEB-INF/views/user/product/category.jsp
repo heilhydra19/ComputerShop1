@@ -32,11 +32,7 @@
 <body>
 	<div class="well well-small">
 		<div class="row">
-			<span style="margin-left: 25px;">Danh sách sản phẩm</span> <select
-				class="pull-right">
-				<option>A - Z</option>
-				<option>Cao - Thấp</option>
-			</select>
+			<span style="margin-left: 25px;">Danh sách sản phẩm</span> 
 		</div>
 
 		<c:if test="${ productsPaginate.size() > 0 }">

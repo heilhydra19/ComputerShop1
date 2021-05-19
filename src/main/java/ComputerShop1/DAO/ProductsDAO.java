@@ -12,9 +12,16 @@ import ComputerShop1.DTO.ProductsDTOMapper;
 public class ProductsDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT a.*, b.name category, c.name brand ");
-		sql.append(" FROM `products` a, `categories` b, `brands` c ");
-		sql.append(" WHERE a.id_category = b.id AND a.id_brand = c.id ");
+		sql.append("SELECT c.*, (SUM(c.nhap) - SUM(c.xuat)) amount, d.name category, e.name brand FROM ");
+		sql.append("(SELECT b.*, 0 nhap, SUM(a.amount) xuat FROM `billdetails` a, `products` b WHERE a.id_product = b.id ");
+		sql.append("GROUP BY b.id ");
+		sql.append("UNION ");
+		sql.append("SELECT b.*, SUM(a.amount) nhap, 0 xuat FROM `importdetails` a, `products` b WHERE a.id_product = b.id ");
+		sql.append("GROUP BY b.id ");
+		sql.append("UNION ");
+		sql.append("SELECT *, 0 nhap, 0 xuat FROM `products`) c, `categories` d, `brands` e ");
+		sql.append("WHERE c.id_category = d.id AND c.id_brand = e.id ");
+		sql.append("GROUP BY c.id ");
 		return sql;
 	}
 	
@@ -32,25 +39,25 @@ public class ProductsDAO extends BaseDAO{
 	
 	public List<ProductsDTO> GetDataProducts() {
 		StringBuffer sql = SqlString();
-		sql.append(" order by a.id");
+		sql.append(" order by c.id");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
 	
 	public ProductsDTO GetProductByID(long id) {
 		StringBuffer sql = SqlString();
-		sql.append(" and a.id = "+ id);
+		sql.append(" and c.id = "+ id);
 		return _jdbcTemplate.queryForObject(sql.toString(), new ProductsDTOMapper());
+	}
+
+	private StringBuffer SqlProductsByIDCategory(long id) {
+		StringBuffer sql = SqlString();
+		sql.append(" AND c.id_category = " + id);
+		return sql;
 	}
 
 	public List<ProductsDTO> GetProductByIDCategory(long id) {
 		StringBuffer sql = SqlProductsByIDCategory(id);
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
-	}
-
-	private StringBuffer SqlProductsByIDCategory(long id) {
-		StringBuffer sql = SqlString();
-		sql.append(" AND id_category = " + id);
-		return sql;
 	}
 	
 	private String SqlProductsPaginate(long id, int start, int totalPage) {
@@ -72,7 +79,7 @@ public class ProductsDAO extends BaseDAO{
 	
 	public ProductsDTO FindProductByID(long id) {
 		StringBuffer sql = SqlString();
-		sql.append(" and a.id = " + id);
+		sql.append(" and c.id = " + id);
 		return _jdbcTemplate.queryForObject(sql.toString(), new ProductsDTOMapper());
 	}
 	

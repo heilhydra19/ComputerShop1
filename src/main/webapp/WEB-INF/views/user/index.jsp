@@ -182,7 +182,7 @@ New Products
 								<div class="caption">
 									<h5>${ item.name }</h5>
 									<h4>
-										<a class="defaultBtn" href="product_details.html"
+										<a class="defaultBtn" href="chi-tiet-san-pham/${ item.id }"
 											title="Click to view"><span class="icon-zoom-in"></span></a> <a
 											class="shopBtn" href="<c:url value="/AddCart/${ item.id }"/>" title="add to cart"><span
 											class="icon-plus"></span></a> <span class="pull-right"><fmt:formatNumber type="number" groupingUsed="true" value="${ item.price }" />	 ₫</span>

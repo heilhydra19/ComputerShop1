@@ -35,7 +35,7 @@ public class CategoryController extends BaseController{
 	@RequestMapping(value = "/san-pham/{id}/{currentPage}")
 	public ModelAndView Product(@PathVariable String id, @PathVariable String currentPage) {
 		_mvShare.setViewName("user/product/category");
-		int totalData = categoryService.GetProductByIDCategory(Integer.parseInt(id)).size();
+		int totalData = categoryService.GetProductByIDCategory(Long.parseLong(id)).size();
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, Integer.parseInt(currentPage));
 		_mvShare.addObject("idCategory", id);
 		_mvShare.addObject("paginateInfo", paginateInfo);
