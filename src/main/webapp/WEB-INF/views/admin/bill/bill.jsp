@@ -58,7 +58,7 @@
 				<thead>
 					<tr>
 						<th>Mã</th>
-						<th>Tên User</th>
+						<th>Tên Khách Hàng</th>
 						<th>Địa Chỉ</th>
 						<th>Ngày lập</th>
 						<th>Chi Tiết</th>
