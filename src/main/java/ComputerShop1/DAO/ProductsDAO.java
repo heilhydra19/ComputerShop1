@@ -39,7 +39,7 @@ public class ProductsDAO extends BaseDAO{
 	
 	public List<ProductsDTO> GetDataProducts() {
 		StringBuffer sql = SqlString();
-		sql.append(" order by c.id");
+		sql.append(" order by c.id DESC");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
 	
@@ -84,8 +84,8 @@ public class ProductsDAO extends BaseDAO{
 	}
 	
 	public int AddProduct(ProductsDTO product) {
-		String sql = "INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `amount`, `price`, `detail`) "
-				+ "VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','0' ,'"+product.getPrice()+"','"+product.getDetail()+"')";
+		String sql = "INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `price`, `detail`) "
+				+ "VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','"+product.getPrice()+"','"+product.getDetail()+"')";
 		return _jdbcTemplate.update(sql);
 	}
 	
@@ -94,7 +94,6 @@ public class ProductsDAO extends BaseDAO{
 				+ "		`id_brand`=CASE WHEN '"+product.getId_brand()+"' = '' THEN `id_brand` ELSE '"+product.getId_brand()+"' END,\r\n"
 				+ "        `name`=CASE WHEN '"+product.getName()+"' = '' THEN `name` ELSE '"+product.getName()+"' END,\r\n"
 				+ "        `img`=CASE WHEN '"+product.getImg()+"' = '' THEN `img` ELSE '"+product.getImg()+"' END,\r\n"
-				+ "        `amount`=CASE WHEN '"+product.getAmount()+"' = '' THEN `amount` ELSE '"+product.getAmount()+"' END,\r\n"
 				+ "        `price`=CASE WHEN '"+product.getPrice()+"' = '' THEN `price` ELSE '"+product.getPrice()+"' END,\r\n"
 				+ "        `detail`=CASE WHEN '"+product.getDetail()+"' = '' THEN `detail` ELSE '"+product.getDetail()+"' END,\r\n"
 				+ "        `created_at`=created_at,`updated_at`=CURRENT_TIMESTAMP \r\n"

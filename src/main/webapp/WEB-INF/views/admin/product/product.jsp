@@ -23,7 +23,6 @@
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>Sản Phẩm</th>
 								<th>Hình Ảnh</th>
 								<th>Loại</th>
@@ -34,12 +33,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:select name="id" path="id"
-										style="max-width: 40px">
-										<c:forEach var="item" items="${ products }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
 								<td><form:input placeholder="Nhập tên sp"
 										style="max-width: 170px" path="name" /></td>
 								<td><form:input type="text" placeholder="Nhập link"
@@ -67,11 +60,15 @@
 						&emsp;&emsp;
 						<button type="submit" name="add" class="shopBtn">Thêm Sản
 							Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
+										style="max-width: 130px">
+										<c:forEach var="item" items="${ products }">
+											<form:option value="${ item.id }">${ item.name }</form:option>
+										</c:forEach>
+									</form:select>&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
 							Sản Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						<button type="submit" name="delete" class="shopBtn">Xóa
 							Sản Phẩm</button>

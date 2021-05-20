@@ -23,7 +23,6 @@
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>Tên khách hàng</th>
 								<th>Hình ảnh</th>
 								<th>Điện Thoại</th>
@@ -32,12 +31,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:select name="id" path="id"
-										style="max-width: 70px">
-										<c:forEach var="item" items="${ customers }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
 								<td><form:input placeholder="Nhập tên khách hàng"
 										style="max-width: 250px" path="name" /></td>
 								<td><form:input type="text" placeholder="Hình ảnh"
@@ -53,12 +46,16 @@
 						&emsp;&emsp;
 						<button type="submit" name="add" class="shopBtn">Thêm
 							Khách Hàng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp;
+						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
+										style="max-width: 100px">
+										<c:forEach var="item" items="${ customers }">
+											<form:option value="${ item.id }">${ item.name }</form:option>
+										</c:forEach>
+									</form:select>&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
 							Khách Hàng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp;
 						<button type="submit" name="delete" class="shopBtn">Xóa
 							Khách Hàng</button>
 					</div>

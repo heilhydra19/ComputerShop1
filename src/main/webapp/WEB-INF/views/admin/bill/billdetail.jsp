@@ -43,7 +43,7 @@
 						&emsp;&emsp;
 						<button type="submit" name="addDetail" class="shopBtn">Thêm</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						Dòng Cần Sửa&emsp;<form:select name="id" path="id"
+						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
 										style="max-width: 170px">
 										<c:forEach var="item" items="${ billDetails }">
 											<form:option value="${ item.id }">${ item.product }</form:option>
