@@ -85,6 +85,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<div class="pull-right">Tổng Tiền: ${ totalPrice }</div>
 		</div>
 	</div>
 </body>

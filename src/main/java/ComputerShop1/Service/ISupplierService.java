@@ -11,5 +11,5 @@ public interface ISupplierService {
 	public List<Suppliers> GetDataSuppliers();
 	public int AddSupplier(Suppliers supplier);
 	public int UpdateSupplier(Suppliers supplier);
-	public int DeleteSupplier(Suppliers supplier);
+	public int DeleteSupplier(long id);
 }

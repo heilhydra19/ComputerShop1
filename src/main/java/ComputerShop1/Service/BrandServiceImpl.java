@@ -25,7 +25,7 @@ public class BrandServiceImpl implements IBrandService{
 		return brandsDAO.UpdateBrand(brand);
 	}
 
-	public int DeleteBrand(Brands brand) {
-		return brandsDAO.DeleteBrand(brand);
+	public int DeleteBrand(long id) {
+		return brandsDAO.DeleteBrand(id);
 	}
 }

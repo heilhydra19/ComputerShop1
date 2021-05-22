@@ -101,8 +101,8 @@ public class ProductsDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteProduct(ProductsDTO product) {
-		String sql = "DELETE FROM `products` WHERE id = "+ product.getId();
+	public int DeleteProduct(long id) {
+		String sql = "DELETE FROM `products` WHERE id = "+ id;
 		return _jdbcTemplate.update(sql);
 	}
 }

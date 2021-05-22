@@ -20,6 +20,10 @@ public class BillServiceImpl implements IBillService{
 	public List<BillsDTO> GetDataBills() {
 		return billsDAO.GetDataBills();
 	}
+	
+	public double GetTotalPrice(long id) {
+		return billDetailsDAO.GetTotalPrice(id);
+	}
 
 	public int AddBill(BillsDTO bill) {
 		return billsDAO.AddBill(bill);

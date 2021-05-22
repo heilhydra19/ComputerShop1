@@ -23,9 +23,9 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new UsersDTOMapper());
 	}
 	
-	public UsersDTO FindAccountByUsername(UsersDTO account) {
+	public UsersDTO CheckAccount(UsersDTO account) {
 		StringBuffer sql = SqlString();
-		sql.append("AND a.username = '"+account.getUsername()+"' AND a.password='"+account.getPassword()+"' ");
+		sql.append("AND BINARY a.username = BINARY '"+account.getUsername()+"' ");
 		return _jdbcTemplate.queryForObject(sql.toString(), new UsersDTOMapper());
 	}
 	
@@ -45,10 +45,8 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.update(sqlUser);
 	}
 	
-	public int DeleteUser(UsersDTO user) {
-		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+user.getId()+"'";
-		_jdbcTemplate.update(sqlAccount);
-		String sqlUser = "DELETE FROM `users` WHERE `id` = '"+user.getId()+"'";
+	public int DeleteUser(long id) {
+		String sqlUser = "DELETE FROM `users` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sqlUser);
 	}
 	
@@ -65,8 +63,8 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.update(sqlAccount);
 	}
 	
-	public int DeleteAccount(UsersDTO user) {
-		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+user.getId_user()+"'";
+	public int DeleteAccount(long id) {
+		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+id+"'";
 		return _jdbcTemplate.update(sqlAccount);
 	}
 }

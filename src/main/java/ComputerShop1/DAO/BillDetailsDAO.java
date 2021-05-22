@@ -21,6 +21,11 @@ public class BillDetailsDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new BillDetailsDTOMapper());
 	}
 	
+	public double GetTotalPrice(long id) {
+		String sql = "SELECT COALESCE(SUM(amount * price),0) TotalPrice FROM `billdetails` WHERE id_bill = '"+id+"'";
+		return _jdbcTemplate.queryForObject(sql, Double.class);
+	}
+	
 	public int AddBillDetail(BillDetailsDTO billDetail) {
 		String sql = "INSERT INTO `billdetails`(`id_product`, `id_bill`, `amount`, `price`) "
 				+ "VALUES ('"+billDetail.getId_product()+"','"+billDetail.getId_bill()+"','"+billDetail.getAmount()+"','"+billDetail.getPrice()+"')";

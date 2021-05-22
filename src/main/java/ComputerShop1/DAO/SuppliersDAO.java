@@ -35,8 +35,8 @@ public class SuppliersDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteSupplier(Suppliers supplier) {
-		String sql = "DELETE FROM `suppliers` WHERE `id` = '"+supplier.getId()+"'";
+	public int DeleteSupplier(long id) {
+		String sql = "DELETE FROM `suppliers` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

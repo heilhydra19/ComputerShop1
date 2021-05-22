@@ -35,8 +35,8 @@ public class CustomersDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteCustomer(CustomersDTO customer) {
-		String sql = "DELETE FROM `users` WHERE `id` = '"+customer.getId()+"'";
+	public int DeleteCustomer(long id) {
+		String sql = "DELETE FROM `users` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

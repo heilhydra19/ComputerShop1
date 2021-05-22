@@ -33,8 +33,8 @@ public class BrandsDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteBrand(Brands brand) {
-		String sql = "DELETE FROM `brands` WHERE `id` = '"+brand.getId()+"'";
+	public int DeleteBrand(long id) {
+		String sql = "DELETE FROM `brands` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

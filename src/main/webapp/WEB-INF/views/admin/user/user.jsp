@@ -19,11 +19,11 @@
 				<input type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<div class="well well-small">
-				<form:form action="nguoi-dung" method="POST" modelAttribute="user">
+				<form:form action="nguoi-dung/addorupdate" method="POST"
+					modelAttribute="user">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>Tên người dùng</th>
 								<th>Hình ảnh</th>
 								<th>Điện Thoại</th>
@@ -33,12 +33,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:select name="id" path="id"
-										style="max-width: 70px">
-										<c:forEach var="item" items="${ users }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
 								<td><form:input placeholder="Nhập tên người dùng"
 										style="max-width: 250px" path="name" /></td>
 								<td><form:input type="text" placeholder="Hình ảnh"
@@ -56,38 +50,16 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="controls">
-						&emsp;&emsp;
-						<button type="submit" name="adduser" class="shopBtn">Thêm
-							Người Dùng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="updateuser" class="shopBtn">Sửa
-							Người Dùng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="deleteuser" class="shopBtn">Xóa
-							Người Dùng</button>
-					</div>
-				</form:form>
-				<hr class="soften" />
-				<form:form action="nguoi-dung" method="POST" modelAttribute="account">
+					<hr class="soften" />
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>Tên Đăng Nhập</th>
 								<th>Mật Khẩu</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:select name="id_user" path="id_user"
-										style="max-width: 100px">
-										<c:forEach var="item" items="${ users }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
 								<td><form:input placeholder="Nhập Đăng Nhập"
 										style="max-width: 400px" path="username" /></td>
 								<td><form:input type="text" placeholder="Nhập Mật Khẩu"
@@ -97,15 +69,16 @@
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="addaccount" class="shopBtn">Thêm
+						<button type="submit" name="add" class="shopBtn">Thêm
 							Tài Khoản</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="updateaccount" class="shopBtn">Sửa
-							Tài Khoản</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="deleteaccount" class="shopBtn">Xóa
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
+						<form:select name="id" path="id" style="max-width: 130px">
+							<c:forEach var="item" items="${ users }">
+								<form:option value="${ item.id }">${ item.name }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
+						<button type="submit" name="update" class="shopBtn">Sửa
 							Tài Khoản</button>
 					</div>
 				</form:form>
@@ -120,6 +93,7 @@
 							<th>Email</th>
 							<th>Tên Đăng Nhập</th>
 							<th>Quyền</th>
+							<th>Xóa</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -133,6 +107,11 @@
 								<td>${ item.email }</td>
 								<td>${ item.username }</td>
 								<td>${ item.role_name }</td>
+								<td><a
+									href="<c:url value="nguoi-dung/deleteUser/${ item.id }"/>"
+									class="btn btn-mini btn-danger" type="button"> <span
+										class="icon-remove"></span>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

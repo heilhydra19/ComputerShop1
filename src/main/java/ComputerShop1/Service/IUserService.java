@@ -11,11 +11,11 @@ import ComputerShop1.Entity.Roles;
 public interface IUserService {
 	public List<Roles> GetDataRoles();
 	public List<UsersDTO> GetDataUsers();
-	public UsersDTO FindAccountByUsername(UsersDTO account);
+	public UsersDTO CheckAccount(UsersDTO account);
 	public int AddUser(UsersDTO user);
 	public int UpdateUser(UsersDTO user);
-	public int DeleteUser(UsersDTO user);
+	public int DeleteUser(long id);
 	public int AddAccount(UsersDTO user);
 	public int UpdateAccount(UsersDTO user);
-	public int DeleteAccount(UsersDTO user);
+	public int DeleteAccount(long id);
 }

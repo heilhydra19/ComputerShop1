@@ -28,7 +28,7 @@ public class AdController extends AdBaseController {
 
 	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.POST)
 	public ModelAndView Login(HttpSession session, @ModelAttribute("account") UsersDTO account) {
-		account = accountService.FindAccountByUsername(account);
+		account = accountService.CheckAccount(account);
 		if (account != null) {
 			if (account.getId_role() == 1) {
 				_mvShare.setViewName("redirect:san-pham");

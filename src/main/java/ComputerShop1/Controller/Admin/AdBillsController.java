@@ -58,6 +58,7 @@ public class AdBillsController extends AdBaseController {
 	public ModelAndView BillDetail(@PathVariable String id) {
 		_mvShare.addObject("billDetails", _billService.GetDataBillDetailById(Long.parseLong(id)));
 		_mvShare.addObject("products", _productService.GetDataProducts());
+		_mvShare.addObject("totalPrice", _billService.GetTotalPrice(Long.parseLong(id)));
 		_mvShare.setViewName("admin/bill/billdetail");
 		_mvShare.addObject("id", id);
 		_mvShare.addObject("billDetail", new BillDetailsDTO());

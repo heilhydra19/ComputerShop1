@@ -19,7 +19,8 @@
 				<input type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<div class="well well-small">
-				<form:form action="san-pham" method="POST" modelAttribute="product">
+				<form:form action="san-pham/addorupdate" method="POST"
+					modelAttribute="product">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -58,19 +59,16 @@
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="add" class="shopBtn">Thêm Sản
-							Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
-										style="max-width: 130px">
-										<c:forEach var="item" items="${ products }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select>&emsp;&emsp;
-						<button type="submit" name="update" class="shopBtn">Sửa
+						<button type="submit" name="add" value="" class="shopBtn">Thêm
 							Sản Phẩm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="delete" class="shopBtn">Xóa
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
+						<form:select name="id" path="id" style="max-width: 130px">
+							<c:forEach var="item" items="${ products }">
+								<form:option value="${ item.id }">${ item.name }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
+						<button type="submit" name="update" class="shopBtn">Sửa
 							Sản Phẩm</button>
 					</div>
 				</form:form>
@@ -86,6 +84,7 @@
 							<th>Số Lượng</th>
 							<th>Đơn Giá</th>
 							<th>Chi Tiết</th>
+							<th>Xóa</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -101,6 +100,10 @@
 								<td>${ item.price }</td>
 								<td><input style="max-width: 100px" size="16" type="text"
 									value="${ item.detail }"></td>
+								<td><a href="<c:url value="san-pham/delete/${ item.id }"/>"
+									class="btn btn-mini btn-danger" type="button"> <span
+										class="icon-remove"></span>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

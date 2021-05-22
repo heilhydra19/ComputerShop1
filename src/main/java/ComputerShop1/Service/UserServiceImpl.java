@@ -17,19 +17,18 @@ public class UserServiceImpl implements IUserService{
 	private UsersDAO usersDAO;
 	@Autowired
 	private RolesDAO rolesDAO;
-	public UsersDTO FindAccountByUsername(UsersDTO account) {
-		return usersDAO.FindAccountByUsername(account);
-//		String pass = account.getPassword();
-//		account = accountDAO.FindAccountByUsername(account);
-//		if(account != null) {
-//			if(BCrypt.checkpw(pass, account.getPassword())) {
-//				return account;
-//			}
-//			else {
-//				return null;
-//			}
-//		}
-//		return null;
+	public UsersDTO CheckAccount(UsersDTO account) {
+		String pass = account.getPassword();
+		account = usersDAO.CheckAccount(account);
+		if(account != null) {
+			if(BCrypt.checkpw(pass, account.getPassword())) {
+				return account;
+			}
+			else {
+				return null;
+			}
+		}
+		return null;
 	}
 	public List<Roles> GetDataRoles() {
 		return rolesDAO.GetDataRoles();
@@ -43,16 +42,17 @@ public class UserServiceImpl implements IUserService{
 	public int UpdateUser(UsersDTO user) {
 		return usersDAO.UpdateUser(user);
 	}
-	public int DeleteUser(UsersDTO user) {
-		return usersDAO.DeleteUser(user);
+	public int DeleteUser(long id) {
+		return usersDAO.DeleteUser(id);
 	}
 	public int AddAccount(UsersDTO user) {
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
 		return usersDAO.AddAccount(user);
 	}
 	public int UpdateAccount(UsersDTO user) {
 		return usersDAO.UpdateAccount(user);
 	}
-	public int DeleteAccount(UsersDTO user) {
-		return usersDAO.DeleteAccount(user);
+	public int DeleteAccount(long id) {
+		return usersDAO.DeleteAccount(id);
 	}
 }

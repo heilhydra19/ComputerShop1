@@ -19,7 +19,8 @@
 				<input type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<div class="well well-small">
-				<form:form action="khach-hang" method="POST" modelAttribute="customer">
+				<form:form action="khach-hang/addorupdate" method="POST"
+					modelAttribute="customer">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -46,17 +47,14 @@
 						&emsp;&emsp;
 						<button type="submit" name="add" class="shopBtn">Thêm
 							Khách Hàng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
-						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
-										style="max-width: 100px">
-										<c:forEach var="item" items="${ customers }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select>&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
+						<form:select name="id" path="id" style="max-width: 100px">
+							<c:forEach var="item" items="${ customers }">
+								<form:option value="${ item.id }">${ item.name }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
-							Khách Hàng</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="delete" class="shopBtn">Xóa
 							Khách Hàng</button>
 					</div>
 				</form:form>
@@ -64,11 +62,12 @@
 				<table class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-								<th>ID</th>
-								<th>Tên khách hàng</th>
-								<th>Hình ảnh</th>
-								<th>Điện Thoại</th>
-								<th>Email</th>
+							<th>ID</th>
+							<th>Tên khách hàng</th>
+							<th>Hình ảnh</th>
+							<th>Điện Thoại</th>
+							<th>Email</th>
+							<th>Xóa</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,6 +79,10 @@
 									alt=""></td>
 								<td>${ item.phone }</td>
 								<td>${ item.email }</td>
+								<td><a href="<c:url value="khach-hang/delete/${ item.id }"/>"
+									class="btn btn-mini btn-danger" type="button"> <span
+										class="icon-remove"></span>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

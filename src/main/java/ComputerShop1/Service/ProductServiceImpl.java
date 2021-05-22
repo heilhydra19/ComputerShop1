@@ -33,7 +33,7 @@ public class ProductServiceImpl implements IProductService{
 		return productsDAO.UpdateProduct(product);
 	}
 
-	public int DeleteProduct(ProductsDTO product) {
-		return productsDAO.DeleteProduct(product);
+	public int DeleteProduct(long id) {
+		return productsDAO.DeleteProduct(id);
 	}
 }

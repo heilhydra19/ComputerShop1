@@ -15,5 +15,5 @@ public interface IProductService {
 	public List<ProductsDTO> GetDataProducts();
 	public int AddProduct(ProductsDTO product);
 	public int UpdateProduct(ProductsDTO product);
-	public int DeleteProduct(ProductsDTO product);
+	public int DeleteProduct(long id);
 }

@@ -25,8 +25,8 @@ public class CustomerServiceImpl implements ICustomerService{
 		return customersDAO.UpdateCustomer(customer);
 	}
 
-	public int DeleteCustomer(CustomersDTO customer) {
-		return customersDAO.DeleteCustomer(customer);
+	public int DeleteCustomer(long id) {
+		return customersDAO.DeleteCustomer(id);
 	}
 
 }

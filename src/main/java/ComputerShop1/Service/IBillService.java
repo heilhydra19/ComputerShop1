@@ -12,6 +12,7 @@ import ComputerShop1.DTO.BillsDTO;
 public interface IBillService {
 	@Autowired
 	public List<BillsDTO> GetDataBills();
+	public double GetTotalPrice(long id);
 	public int AddBill(BillsDTO bill);
 	public int UpdateBill(BillsDTO bill);
 	public int DeleteBill(BillsDTO bill);

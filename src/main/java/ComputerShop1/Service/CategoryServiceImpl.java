@@ -37,7 +37,7 @@ public class CategoryServiceImpl implements ICategoryService {
 		return categoriesDAO.UpdateCategory(category);
 	}
 
-	public int DeleteCategory(Categories category) {
-		return categoriesDAO.DeleteCategory(category);
+	public int DeleteCategory(long id) {
+		return categoriesDAO.DeleteCategory(id);
 	}
 }

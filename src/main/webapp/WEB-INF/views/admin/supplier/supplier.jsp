@@ -19,11 +19,11 @@
 				<input type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<div class="well well-small">
-				<form:form action="nha-cung-cap" method="POST" modelAttribute="supplier">
+				<form:form action="nha-cung-cap/addorupdate" method="POST"
+					modelAttribute="supplier">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th>ID</th>
 								<th>Tên nhà cung cấp</th>
 								<th>Hình ảnh</th>
 								<th>Điện Thoại</th>
@@ -32,12 +32,6 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><form:select name="id" path="id"
-										style="max-width: 70px">
-										<c:forEach var="item" items="${ suppliers }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
-										</c:forEach>
-									</form:select></td>
 								<td><form:input placeholder="Nhập tên nhà cung cấp"
 										style="max-width: 250px" path="name" /></td>
 								<td><form:input type="text" placeholder="Hình ảnh"
@@ -51,15 +45,16 @@
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="add" class="shopBtn">Thêm
-							Nhà Cung Cấp</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
+						<button type="submit" name="add" class="shopBtn">Thêm Nhà
+							Cung Cấp</button>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
+						<form:select name="id" path="id" style="max-width: 130px">
+							<c:forEach var="item" items="${ suppliers }">
+								<form:option value="${ item.id }">${ item.name }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
-							Nhà Cung Cấp</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="delete" class="shopBtn">Xóa
 							Nhà Cung Cấp</button>
 					</div>
 				</form:form>
@@ -72,6 +67,7 @@
 							<th>Hình ảnh</th>
 							<th>Điện Thoại</th>
 							<th>Email</th>
+							<th>Xóa</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,6 +79,11 @@
 									alt=""></td>
 								<td>${ item.phone }</td>
 								<td>${ item.email }</td>
+								<td><a
+									href="<c:url value="nha-cung-cap/delete/${ item.id }"/>"
+									class="btn btn-mini btn-danger" type="button"> <span
+										class="icon-remove"></span>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

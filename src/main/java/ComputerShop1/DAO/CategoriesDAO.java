@@ -32,8 +32,8 @@ public class CategoriesDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteCategory(Categories category) {
-		String sql = "DELETE FROM `categories` WHERE `id` = '"+category.getId()+"'";
+	public int DeleteCategory(long id) {
+		String sql = "DELETE FROM `categories` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

@@ -25,8 +25,8 @@ public class SupplierServiceImpl implements ISupplierService{
 		return suppliersDAO.UpdateSupplier(supplier);
 	}
 
-	public int DeleteSupplier(Suppliers supplier) {
-		return suppliersDAO.DeleteSupplier(supplier);
+	public int DeleteSupplier(long id) {
+		return suppliersDAO.DeleteSupplier(id);
 	}
 	
 }
