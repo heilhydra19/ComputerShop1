@@ -21,6 +21,11 @@ public class BillDetailsDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new BillDetailsDTOMapper());
 	}
 	
+	public double GetDefaultPrice(long id) {
+		String sql = "SELECT price FROM `products`WHERE id = '"+id+"'";
+		return _jdbcTemplate.queryForObject(sql, Double.class);
+	}
+	
 	public double GetTotalPrice(long id) {
 		String sql = "SELECT COALESCE(SUM(amount * price),0) TotalPrice FROM `billdetails` WHERE id_bill = '"+id+"'";
 		return _jdbcTemplate.queryForObject(sql, Double.class);
@@ -28,7 +33,8 @@ public class BillDetailsDAO extends BaseDAO{
 	
 	public int AddBillDetail(BillDetailsDTO billDetail) {
 		String sql = "INSERT INTO `billdetails`(`id_product`, `id_bill`, `amount`, `price`) "
-				+ "VALUES ('"+billDetail.getId_product()+"','"+billDetail.getId_bill()+"','"+billDetail.getAmount()+"','"+billDetail.getPrice()+"')";
+				+ "VALUES ('"+billDetail.getId_product()+"','"+billDetail.getId_bill()+"','"+billDetail.getAmount()+"',"
+				+ "CASE WHEN "+billDetail.getPrice()+" = 0 THEN '"+GetDefaultPrice(billDetail.getId_product())+"' ELSE '"+billDetail.getPrice()+"' END)";
 		return _jdbcTemplate.update(sql);
 	}
 	
@@ -38,8 +44,8 @@ public class BillDetailsDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteBillDetail(BillDetailsDTO billDetail) {
-		String sql = "DELETE FROM `billdetails` WHERE `id_bill`='"+billDetail.getId_bill()+"' AND `id` = '"+billDetail.getId()+"'";
+	public int DeleteBillDetail(long id_bill, long id) {
+		String sql = "DELETE FROM `billdetails` WHERE `id_bill`='"+id_bill+"' AND `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

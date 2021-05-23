@@ -55,8 +55,8 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<th colspan="7" class="alignR">Tổng tiền:</td>
-							<th>${ TotalPriceCart }</td>
+							<td colspan="7" class="alignR">Tổng tiền:</td>
+							<td>${ TotalPriceCart }</td>
 						</tr>
 					</tbody>
 				</table>

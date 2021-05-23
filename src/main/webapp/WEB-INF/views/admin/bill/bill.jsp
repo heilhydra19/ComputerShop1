@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="span12">
 			<div class="well well-small">
-				<form:form action="hoa-don" method="POST" modelAttribute="bill">
+				<form:form action="hoa-don/addorupdate" method="POST" modelAttribute="bill">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -25,7 +25,7 @@
 								<td><form:select name="id" path="id_user"
 										style="max-width: 170px">
 										<c:forEach var="item" items="${ users }">
-											<form:option value="${ item.id }">${ item.name }</form:option>
+											<form:option value="${ item.id_user }">${ item.name }</form:option>
 										</c:forEach>
 									</form:select></td>
 								<td><form:input placeholder="Địa Chỉ"
@@ -37,17 +37,14 @@
 						&emsp;&emsp;
 						<button type="submit" name="add" class="shopBtn">Thêm Hoá
 							Đơn</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						Số hóa đơn Cần Sửa&emsp;<form:select name="id" path="id"
-										style="max-width: 170px">
-										<c:forEach var="item" items="${ bills }">
-											<form:option value="${ item.id }">${ item.id }</form:option>
-										</c:forEach>
-									</form:select>&emsp;&emsp;
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Số hóa đơn Cần Sửa&emsp;
+						<form:select name="id" path="id" style="max-width: 170px">
+							<c:forEach var="item" items="${ bills }">
+								<form:option value="${ item.id }">${ item.id }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
 						<button type="submit" name="update" class="shopBtn">Sửa
-							Hoá Đơn</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="delete" class="shopBtn">Xóa
 							Hoá Đơn</button>
 					</div>
 				</form:form>
@@ -62,6 +59,7 @@
 						<th>Địa Chỉ</th>
 						<th>Ngày lập</th>
 						<th>Chi Tiết</th>
+						<th>Xóa</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -71,8 +69,13 @@
 							<td>${ item.user }</td>
 							<td>${ item.address }</td>
 							<td>${ item.created_at }</td>
-							<td><a class="btn btn-mini pull-right" href="<c:url value="hoa-don/${ item.id }"/>">Xem thêm
-									<span class="icon-plus"></span>
+							<td><a class="btn btn-mini pull-right"
+								href="<c:url value="hoa-don/${ item.id }"/>">Xem thêm <span
+									class="icon-plus"></span>
+							</a></td>
+							<td><a href="<c:url value="hoa-don/delete/${ item.id }"/>"
+								class="btn btn-mini btn-danger" type="button"> <span
+									class="icon-remove"></span>
 							</a></td>
 						</tr>
 					</c:forEach>

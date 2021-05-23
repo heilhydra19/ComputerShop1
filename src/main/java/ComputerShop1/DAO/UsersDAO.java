@@ -19,7 +19,7 @@ public class UsersDAO extends BaseDAO{
 	
 	public List<UsersDTO> GetDataUsers() {
 		StringBuffer sql = SqlString();
-		sql.append("GROUP BY a.id ");
+		sql.append("GROUP BY a.id DESC");
 		return _jdbcTemplate.query(sql.toString(), new UsersDTOMapper());
 	}
 	

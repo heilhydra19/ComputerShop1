@@ -33,8 +33,8 @@ public class BillServiceImpl implements IBillService{
 		return billsDAO.UpdateBill(bill);
 	}
 
-	public int DeleteBill(BillsDTO bill) {
-		return billsDAO.DeleteBill(bill);
+	public int DeleteBill(long id) {
+		return billsDAO.DeleteBill(id);
 	}
 
 	public List<BillDetailsDTO> GetDataBillDetailById(long id) {
@@ -49,7 +49,7 @@ public class BillServiceImpl implements IBillService{
 		return billDetailsDAO.UpdateBillDetail(billDetail);
 	}
 
-	public int DeleteBillDetail(BillDetailsDTO billDetail) {
-		return billDetailsDAO.DeleteBillDetail(billDetail);
+	public int DeleteBillDetail(long id_bill, long id) {
+		return billDetailsDAO.DeleteBillDetail(id_bill,id);
 	}
 }

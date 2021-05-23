@@ -41,17 +41,15 @@
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="addDetail" class="shopBtn">Thêm</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-						Dòng Cần Tương Tác&emsp;<form:select name="id" path="id"
-										style="max-width: 170px">
-										<c:forEach var="item" items="${ billDetails }">
-											<form:option value="${ item.id }">${ item.product }</form:option>
-										</c:forEach>
-									</form:select>&emsp;&emsp;
-						<button type="submit" name="updateDetail" class="shopBtn">Sửa</button>
-						&emsp;&emsp;&emsp;&emsp;&emsp;
-						<button type="submit" name="deleteDetail" class="shopBtn">Xóa</button>
+						<button type="submit" name="add" class="shopBtn">Thêm</button>
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Tương Tác&emsp;
+						<form:select name="id" path="id" style="max-width: 170px">
+							<c:forEach var="item" items="${ billDetails }">
+								<form:option value="${ item.id }">${ item.product }</form:option>
+							</c:forEach>
+						</form:select>
+						&emsp;&emsp;
+						<button type="submit" name="update" class="shopBtn">Sửa</button>
 					</div>
 				</form:form>
 			</div>
@@ -73,14 +71,12 @@
 							<td>${ item.id_product }</td>
 							<td>${ item.product }</td>
 							<td>${ item.amount }</td>
-							<c:if test="${ item.price <= 0}">
-								<td>${ item.sellprice }</td>
-								<td>${ item.sellprice * item.amount}</td>
-							</c:if>
-							<c:if test="${ item.price > 0}">
-								<td>${ item.price }</td>
-								<td>${ item.price * item.amount}</td>
-							</c:if>
+							<td>${ item.price }</td>
+							<td>${ item.price * item.amount}</td>
+							<td><a href="<c:url value="${ id }/delete/${ item.id }"/>"
+								class="btn btn-mini btn-danger" type="button"> <span
+									class="icon-remove"></span>
+							</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

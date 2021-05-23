@@ -32,8 +32,8 @@ public class BillsDAO extends BaseDAO{
 		return _jdbcTemplate.update(sql);
 	}
 	
-	public int DeleteBill(BillsDTO bill) {
-		String sql = "DELETE FROM `bills` WHERE `id` = '"+bill.getId()+"'";
+	public int DeleteBill(long id) {
+		String sql = "DELETE FROM `bills` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sql);
 	}
 }

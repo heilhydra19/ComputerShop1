@@ -8,25 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ComputerShop1.DTO.BillDetailsDTO;
 import ComputerShop1.DTO.BillsDTO;
 import ComputerShop1.Service.BillServiceImpl;
-import ComputerShop1.Service.ProductServiceImpl;
 import ComputerShop1.Service.UserServiceImpl;
 
 @Controller
+@RequestMapping(value = "quan-tri/hoa-don")
 public class AdBillsController extends AdBaseController {
 	@Autowired
 	private BillServiceImpl _billService;
-	
-	@Autowired
-	private ProductServiceImpl _productService;
 
 	@Autowired
 	private UserServiceImpl _userService;
 
-	//Bill
-	@RequestMapping(value = "quan-tri/hoa-don")
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView Bill() {
 		_mvShare.addObject("bills", _billService.GetDataBills());
 		_mvShare.addObject("users", _userService.GetDataUsers());
@@ -35,56 +30,19 @@ public class AdBillsController extends AdBaseController {
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "quan-tri/hoa-don", method = RequestMethod.POST, params = "add")
-	public ModelAndView AddBill(@ModelAttribute("bill") BillsDTO bill) {
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
+	public String AddBill(@ModelAttribute("bill") BillsDTO bill) {
 		_billService.AddBill(bill);
-		Bill();
-		return _mvShare;
+		return "redirect:/quan-tri/hoa-don";
 	}
-	@RequestMapping(value = "quan-tri/hoa-don", method = RequestMethod.POST, params = "update")
-	public ModelAndView UpdateBill(@ModelAttribute("bill") BillsDTO bill) {
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
+	public String UpdateBill(@ModelAttribute("bill") BillsDTO bill) {
 		_billService.UpdateBill(bill);
-		Bill();
-		return _mvShare;
+		return "redirect:/quan-tri/hoa-don";
 	}
-	@RequestMapping(value = "quan-tri/hoa-don", method = RequestMethod.POST, params = "delete")
-	public ModelAndView DeleteBill(@ModelAttribute("bill") BillsDTO bill) {
-		_billService.DeleteBill(bill);
-		Bill();
-		return _mvShare;
-	}
-	//BillDetail
-	@RequestMapping(value = "quan-tri/hoa-don/{id}")
-	public ModelAndView BillDetail(@PathVariable String id) {
-		_mvShare.addObject("billDetails", _billService.GetDataBillDetailById(Long.parseLong(id)));
-		_mvShare.addObject("products", _productService.GetDataProducts());
-		_mvShare.addObject("totalPrice", _billService.GetTotalPrice(Long.parseLong(id)));
-		_mvShare.setViewName("admin/bill/billdetail");
-		_mvShare.addObject("id", id);
-		_mvShare.addObject("billDetail", new BillDetailsDTO());
-		return _mvShare;
-	}
-
-	@RequestMapping(value = "quan-tri/hoa-don/{id}", method = RequestMethod.POST, params = "addDetail")
-	public ModelAndView AddBillDetail(@PathVariable String id,
-			@ModelAttribute("billDetail") BillDetailsDTO billDetail) {
-		_billService.AddBillDetail(billDetail);
-		BillDetail(id);
-		return _mvShare;
-	}
-
-	@RequestMapping(value = "quan-tri/hoa-don/{id}", method = RequestMethod.POST, params = "updateDetail")
-	public ModelAndView UpdateBillDetail(@PathVariable String id,
-			@ModelAttribute("billDetail") BillDetailsDTO billDetail) {
-		_billService.UpdateBillDetail(billDetail);
-		BillDetail(id);
-		return _mvShare;
-	}
-	@RequestMapping(value = "quan-tri/hoa-don/{id}", method = RequestMethod.POST, params = "deleteDetail")
-	public ModelAndView DeleteBillDetail(@PathVariable String id,
-			@ModelAttribute("billDetail") BillDetailsDTO billDetail) {
-		_billService.DeleteBillDetail(billDetail);
-		BillDetail(id);
-		return _mvShare;
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	public String DeleteBill(@PathVariable("id") long id) {
+		_billService.DeleteBill(id);
+		return "redirect:/quan-tri/hoa-don";
 	}
 }

@@ -15,9 +15,9 @@ public interface IBillService {
 	public double GetTotalPrice(long id);
 	public int AddBill(BillsDTO bill);
 	public int UpdateBill(BillsDTO bill);
-	public int DeleteBill(BillsDTO bill);
+	public int DeleteBill(long id);
 	public List<BillDetailsDTO> GetDataBillDetailById(long id);
 	public int AddBillDetail(BillDetailsDTO billDetail);
 	public int UpdateBillDetail(BillDetailsDTO billDetail);
-	public int DeleteBillDetail(BillDetailsDTO billDetail);
+	public int DeleteBillDetail(long id_bill, long id);
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 20, 2021 lúc 03:58 PM
+-- Thời gian đã tạo: Th5 22, 2021 lúc 05:20 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -44,7 +44,9 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `id_user`) VALUES
 (3, 'trang', '1', 3),
 (4, 'chuong', '1', 5),
 (5, 'hao', '1', 4),
-(6, 'bin', '1', 6);
+(6, 'bin', '1', 6),
+(8, 'mercer', '1', 1),
+(9, 'clone', '$2a$12$Vqeq2284OhBd7iDdvFjr7O5tDrmn/msa6AiDtpB1fJcZGWwCLRdva', 1);
 
 -- --------------------------------------------------------
 
@@ -369,7 +371,9 @@ INSERT INTO `users` (`id`, `name`, `img`, `phone`, `email`, `id_role`) VALUES
 (3, 'Trang', '', '', '', 3),
 (4, 'Hào', '', '', '', 2),
 (5, 'Chương', '', '', '', 3),
-(6, 'Bin', '', '', '', 1);
+(6, 'Bin', '', '', '', 1),
+(7, 'Äáº·ng Anh Khoa', '', '0828613520', 'khoaanhdang11@gmail.com', 1),
+(8, 'Äáº·ng Anh Khoa', '', '0828613520', 'khoaanhdang11@gmail.com', 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -472,7 +476,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `billdetails`
@@ -544,7 +548,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -554,7 +558,7 @@ ALTER TABLE `users`
 -- Các ràng buộc cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  ADD CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `billdetails`

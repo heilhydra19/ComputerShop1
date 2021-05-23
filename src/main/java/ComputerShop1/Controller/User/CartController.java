@@ -25,7 +25,6 @@ public class CartController extends BaseController{
 	
 	@RequestMapping(value = "gio-hang")
 	public ModelAndView Index() {
-		_mvShare.addObject("slides", _homeService.GetDataSlide());
 		_mvShare.addObject("categories", _homeService.GetDataCategories());
 		_mvShare.addObject("products", _homeService.GetDataProducts());
 		_mvShare.setViewName("user/cart/list_cart");
