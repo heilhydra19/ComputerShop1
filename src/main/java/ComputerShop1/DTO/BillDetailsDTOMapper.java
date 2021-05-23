@@ -12,10 +12,9 @@ public class BillDetailsDTOMapper implements RowMapper<BillDetailsDTO>{
 		billDetails.setId(rs.getLong("id"));
 		billDetails.setId_bill(rs.getLong("id_bill"));
 		billDetails.setId_product(rs.getLong("id_product"));
-		billDetails.setProduct(rs.getString("product"));
+		billDetails.setProduct(rs.getNString("product"));
 		billDetails.setAmount(rs.getInt("amount"));
 		billDetails.setPrice(rs.getDouble("price"));
-		billDetails.setSellprice(rs.getDouble("sellprice"));
 		return billDetails;
 	}
 	

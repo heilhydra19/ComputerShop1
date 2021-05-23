@@ -1,14 +1,14 @@
 package ComputerShop1.DTO;
 
-public class BillDetailsDTO {
+public class ImportDetailsDTO {
 	private long id;
-	private long id_bill;
+	private long id_import;
 	private long id_product;
 	private String product;
 	private int amount;
 	private double price;
 
-	public BillDetailsDTO() {
+	public ImportDetailsDTO() {
 		super();
 	}
 
@@ -20,20 +20,20 @@ public class BillDetailsDTO {
 		this.id = id;
 	}
 
+	public long getId_import() {
+		return id_import;
+	}
+
+	public void setId_import(long id_import) {
+		this.id_import = id_import;
+	}
+
 	public long getId_product() {
 		return id_product;
 	}
 
 	public void setId_product(long id_product) {
 		this.id_product = id_product;
-	}
-
-	public long getId_bill() {
-		return id_bill;
-	}
-
-	public void setId_bill(long id_bill) {
-		this.id_bill = id_bill;
 	}
 
 	public String getProduct() {

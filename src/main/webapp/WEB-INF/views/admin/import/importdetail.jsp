@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/layouts/taglib.jsp"%>
 <head>
-<title>Hóa - đơn</title>
+<title>Nhập - hàng</title>
 
 </head>
 <c:if test="${ empty LoginInfo and empty LoginEmplInfo}">
@@ -13,8 +13,8 @@
 		<div class="span12">
 			<div class="well well-small">
 				<form:form action="${ id }/addorupdate" method="POST"
-					modelAttribute="billDetail">
-					Mã Hóa Đơn&emsp;<form:input path="id_bill" value="${ id }"
+					modelAttribute="importDetail">
+					Mã Phiếu Nhập&emsp;<form:input path="id_import" value="${ id }"
 						style="max-width: 150px" />
 					<table class="table table-bordered table-condensed">
 						<thead>
@@ -44,7 +44,7 @@
 						<button type="submit" name="add" class="shopBtn">Thêm</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Tương Tác&emsp;
 						<form:select name="id" path="id" style="max-width: 170px">
-							<c:forEach var="item" items="${ billDetails }">
+							<c:forEach var="item" items="${ importDetails }">
 								<form:option value="${ item.id }">${ item.product }</form:option>
 							</c:forEach>
 						</form:select>
@@ -66,7 +66,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${ billDetails }">
+					<c:forEach var="item" items="${ importDetails }">
 						<tr>
 							<td>${ item.id_product }</td>
 							<td>${ item.product }</td>

@@ -31,7 +31,7 @@ public class UsersDAO extends BaseDAO{
 	
 	public int AddUser(UsersDTO user) {
 		String sqlUser = "INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
-				+ "VALUES ('"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','"+user.getId_role()+"')";
+				+ "VALUES (N'"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','"+user.getId_role()+"')";
 		return _jdbcTemplate.update(sqlUser);
 	}
 
@@ -50,9 +50,14 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.update(sqlUser);
 	}
 	
+	private long GetLastestIDUser() {
+		String sql = "SELECT `id` FROM `users` ORDER BY `id` DESC LIMIT 1";
+		return _jdbcTemplate.queryForObject(sql, Long.class);
+	}
+	
 	public int AddAccount(UsersDTO user) {
 		String sqlAccount = "INSERT INTO `accounts`(`username`, `password`, `id_user`) "
-				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+user.getId()+"')";
+				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+GetLastestIDUser()+"')";
 		return _jdbcTemplate.update(sqlAccount);
 	}
 	
@@ -64,7 +69,7 @@ public class UsersDAO extends BaseDAO{
 	}
 	
 	public int DeleteAccount(long id) {
-		String sqlAccount = "DELETE FROM `accounts` WHERE `id_user` = '"+id+"'";
+		String sqlAccount = "DELETE FROM `accounts` WHERE `id` = '"+id+"'";
 		return _jdbcTemplate.update(sqlAccount);
 	}
 }

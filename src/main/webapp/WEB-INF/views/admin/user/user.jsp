@@ -74,7 +74,7 @@
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
 						<form:select name="id" path="id" style="max-width: 130px">
 							<c:forEach var="item" items="${ users }">
-								<form:option value="${ item.id }">${ item.name }</form:option>
+								<form:option value="${ item.id_user }">${ item.name }</form:option>
 							</c:forEach>
 						</form:select>
 						&emsp;&emsp;
@@ -108,7 +108,7 @@
 								<td>${ item.username }</td>
 								<td>${ item.role_name }</td>
 								<td><a
-									href="<c:url value="nguoi-dung/deleteUser/${ item.id }"/>"
+									href="<c:url value="nguoi-dung/deleteAccount/${ item.id }"/>"
 									class="btn btn-mini btn-danger" type="button"> <span
 										class="icon-remove"></span>
 								</a></td>

@@ -11,7 +11,7 @@ import ComputerShop1.DTO.BillDetailsDTOMapper;
 public class BillDetailsDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer  sql = new StringBuffer();
-		sql.append("SELECT a.*, c.name product, c.price sellprice FROM `billdetails` a, `bills` b, `products` c WHERE a.id_product=c.id AND a.id_bill = b.id ");
+		sql.append("SELECT a.*, c.name product FROM `billdetails` a, `bills` b, `products` c WHERE a.id_product=c.id AND a.id_bill = b.id ");
 		return sql;
 	}
 	

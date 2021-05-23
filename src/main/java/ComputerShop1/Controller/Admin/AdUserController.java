@@ -41,9 +41,9 @@ public class AdUserController extends AdBaseController{
 		return "redirect:/quan-tri/nguoi-dung";
 	}
 	
-	@RequestMapping(value = "deleteUser/{id}", method = RequestMethod.GET)
-	public String DeleteUser(@PathVariable("id") long id) {
-		_userService.DeleteUser(id);
+	@RequestMapping(value = "deleteAccount/{id}", method = RequestMethod.GET)
+	public String DeleteAccount(@PathVariable("id") long id) {
+		_userService.DeleteAccount(id);
 		return "redirect:/quan-tri/nguoi-dung";
 	}
 }
