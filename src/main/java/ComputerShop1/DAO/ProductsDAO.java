@@ -21,18 +21,19 @@ public class ProductsDAO extends BaseDAO{
 		sql.append("UNION ");
 		sql.append("SELECT *, 0 nhap, 0 xuat FROM `products`) c, `categories` d, `brands` e ");
 		sql.append("WHERE c.id_category = d.id AND c.id_brand = e.id ");
-		sql.append("GROUP BY c.id ");
 		return sql;
 	}
 	
 	public List<ProductsDTO> GetDataNewProducts() {
 		StringBuffer sql = SqlString();
+		sql.append("GROUP BY c.id ");
 		sql.append(" LIMIT 12");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
 	
 	public List<ProductsDTO> GetDataHomeProducts() {
 		StringBuffer sql = SqlString();
+		sql.append("GROUP BY c.id ");
 		sql.append(" LIMIT 12");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
@@ -45,13 +46,14 @@ public class ProductsDAO extends BaseDAO{
 	
 	public ProductsDTO GetProductByID(long id) {
 		StringBuffer sql = SqlString();
-		sql.append(" and c.id = "+ id);
+		sql.append(" and c.id = '"+ id);
 		return _jdbcTemplate.queryForObject(sql.toString(), new ProductsDTOMapper());
 	}
 
 	private StringBuffer SqlProductsByIDCategory(long id) {
 		StringBuffer sql = SqlString();
-		sql.append(" AND c.id_category = " + id);
+		sql.append(" AND c.id_category = " + id +" ");
+		sql.append("GROUP BY c.id ");
 		return sql;
 	}
 
