@@ -32,13 +32,13 @@ public class AdBillDetailsController extends AdBaseController{
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "quan-tri/hoa-don/{id}", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddBillDetail(@ModelAttribute("billDetail") BillDetailsDTO billDetail) {
 		_billService.AddBillDetail(billDetail);
 		return "redirect:/quan-tri/hoa-don/{id}";
 	}
 
-	@RequestMapping(value = "quan-tri/hoa-don/{id}", method = RequestMethod.POST, params = "update")
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateBillDetail(@ModelAttribute("billDetail") BillDetailsDTO billDetail) {
 		_billService.UpdateBillDetail(billDetail);
 		return "redirect:/quan-tri/hoa-don/{id}";

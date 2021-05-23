@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="span12">
 			<div class="well well-small">
-				<form:form action="${ id }" method="POST"
+				<form:form action="${ id }/addorupdate" method="POST"
 					modelAttribute="billDetail">
 					Mã Hóa Đơn&emsp;<form:input path="id_bill" value="${ id }"
 						style="max-width: 150px" />
