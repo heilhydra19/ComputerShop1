@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.ProductsDTO;
@@ -22,7 +23,7 @@ public class AdProductController extends AdBaseController {
 	private CategoryServiceImpl _categoryService;
 	@Autowired
 	private BrandServiceImpl _brandService;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView Product() {
 		_mvShare.addObject("products", _productService.GetDataProducts());
@@ -30,24 +31,39 @@ public class AdProductController extends AdBaseController {
 		_mvShare.addObject("brands", _brandService.GetDataBrands());
 		_mvShare.setViewName("admin/product/product");
 		_mvShare.addObject("product", new ProductsDTO());
+		_mvShare.addObject("keyword", new String());
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "/addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.AddProduct(product);
 		return "redirect:/quan-tri/san-pham";
 	}
-	
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
+
+	@RequestMapping(value = "/addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.UpdateProduct(product);
 		return "redirect:/quan-tri/san-pham";
 	}
-	
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String DeleteProduct(@PathVariable("id") long id) {
 		_productService.DeleteProduct(id);
 		return "redirect:/quan-tri/san-pham";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchProduct(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("products", _productService.SearchProduct(keyword));
+		}
+		else {
+			_mvShare.addObject("products", _productService.GetDataProducts());
+		}
+		_mvShare.addObject("categories", _categoryService.GetDataCategories());
+		_mvShare.addObject("brands", _brandService.GetDataBrands());
+		_mvShare.setViewName("admin/product/product");
+		return _mvShare;
 	}
 }

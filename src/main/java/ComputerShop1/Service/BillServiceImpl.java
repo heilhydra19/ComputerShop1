@@ -1,6 +1,8 @@
 package ComputerShop1.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,18 +11,19 @@ import ComputerShop1.DAO.BillDetailsDAO;
 import ComputerShop1.DAO.BillsDAO;
 import ComputerShop1.DTO.BillDetailsDTO;
 import ComputerShop1.DTO.BillsDTO;
+import ComputerShop1.DTO.CartDTO;
 
 @Service
-public class BillServiceImpl implements IBillService{
+public class BillServiceImpl implements IBillService {
 	@Autowired
 	private BillsDAO billsDAO;
 	@Autowired
 	private BillDetailsDAO billDetailsDAO;
-	
+
 	public List<BillsDTO> GetDataBills() {
 		return billsDAO.GetDataBills();
 	}
-	
+
 	public double GetTotalPrice(long id) {
 		return billDetailsDAO.GetTotalPrice(id);
 	}
@@ -50,6 +53,16 @@ public class BillServiceImpl implements IBillService{
 	}
 
 	public int DeleteBillDetail(long id_bill, long id) {
-		return billDetailsDAO.DeleteBillDetail(id_bill,id);
+		return billDetailsDAO.DeleteBillDetail(id_bill, id);
+	}
+
+	public void AddBillDetailByCart(HashMap<Long, CartDTO> carts) {
+		long idBill = billsDAO.GetIDLastBills();
+		for (Map.Entry<Long, CartDTO> itemCart : carts.entrySet()) {
+			BillDetailsDTO billDetail = new BillDetailsDTO();
+			billDetail.setId_bill(idBill);
+			billDetail.setId_product(itemCart.getValue().getProduct().getId());
+			billDetailsDAO.AddBillDetail(billDetail);
+		}
 	}
 }

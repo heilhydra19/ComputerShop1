@@ -18,4 +18,5 @@ public interface IUserService {
 	public int AddAccount(UsersDTO user);
 	public int UpdateAccount(UsersDTO user);
 	public int DeleteAccount(long id);
+	public int AddCustomer(UsersDTO user);
 }

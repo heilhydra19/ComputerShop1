@@ -55,6 +55,11 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.queryForObject(sql, Long.class);
 	}
 	
+	private String GetLastestEmail() {
+		String sql = "SELECT `email` FROM `users` ORDER BY `id` DESC LIMIT 1";
+		return _jdbcTemplate.queryForObject(sql, String.class);
+	}
+	
 	public int AddAccount(UsersDTO user) {
 		String sqlAccount = "INSERT INTO `accounts`(`username`, `password`, `id_user`) "
 				+ "VALUES ('"+user.getUsername()+"','"+user.getPassword()+"','"+GetLastestIDUser()+"')";
@@ -70,6 +75,15 @@ public class UsersDAO extends BaseDAO{
 	
 	public int DeleteAccount(long id) {
 		String sqlAccount = "DELETE FROM `accounts` WHERE `id` = '"+id+"'";
+		return _jdbcTemplate.update(sqlAccount);
+	}
+	
+	public int AddCustomer(UsersDTO user) {
+		String sqlUser = "INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
+				+ "VALUES (N'"+user.getName()+"','"+user.getImg()+"','"+user.getPhone()+"','"+user.getEmail()+"','3')";
+		_jdbcTemplate.update(sqlUser);
+		String sqlAccount = "INSERT INTO `accounts`(`username`, `password`, `id_user`) "
+				+ "VALUES ('"+GetLastestEmail()+"','"+user.getPassword()+"','"+GetLastestIDUser()+"')";
 		return _jdbcTemplate.update(sqlAccount);
 	}
 }

@@ -115,9 +115,9 @@
 						<br />
 						<form:form action="dang-ky" method="POST" modelAttribute="user">
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">E-mail</label>
+								<label class="control-label" for="inputEmail">Email</label>
 								<div class="controls">
-									<form:input type="email" class="span3" placeholder="Nhập địa chỉ Email" path="user" />  
+									<form:input type="email" class="span3" placeholder="Nhập địa chỉ Email" path="email" />  
 									
 								</div>
 							</div>
@@ -130,17 +130,17 @@
 							<div class="control-group">
 								<label class="control-label" for="inputEmail">Họ và Tên</label>
 								<div class="controls">
-									<form:input type="text" class="span3" placeholder="Nhập họ và tên" path="display_name" />  
+									<form:input type="text" class="span3" placeholder="Nhập họ và tên" path="name" />  
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">Địa chỉ</label>
+								<label class="control-label" for="inputEmail">Số Điện Thoại</label>
 								<div class="controls">
-									<form:input type="text" class="span3" placeholder="Nhập địa chỉ" path="address" />  
+									<form:input type="text" class="span3" placeholder="Nhập địa chỉ" path="phone" />  
 								</div>
 							</div>
 							<div class="controls">
-								<button type="submit" class="btn block">Đăng Ký</button>
+								<button type="submit" class="defaultBtn">Đăng Ký</button>
 							</div>
 						</form:form>
 					</div>
@@ -151,9 +151,9 @@
 						<h5>Đăng Nhập</h5>
 						<form:form action="dang-nhap" method="POST" modelAttribute="user">
 							<div class="control-group">
-								<label class="control-label" for="inputEmail">Email</label>
+								<label class="control-label" for="inputEmail">Tên Đăng Nhập</label>
 								<div class="controls">
-									<form:input type="email" class="span3" placeholder="Nhập địa chỉ Email" path="user" />  
+									<form:input type="email" class="span3" placeholder="Nhập địa chỉ Email" path="username" />  
 								</div>
 							</div>
 							<div class="control-group">

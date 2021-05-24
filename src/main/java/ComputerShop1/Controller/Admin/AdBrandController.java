@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.Entity.Brands;
@@ -41,5 +42,17 @@ public class AdBrandController extends AdBaseController{
 	public String DeleteBrand(@PathVariable("id") long id) {
 		_brandService.DeleteBrand(id);
 		return "redirect:/quan-tri/hang";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchProduct(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("brands", _brandService.SearchBrand(keyword));
+		}
+		else {
+			_mvShare.addObject("brands", _brandService.GetDataBrands());
+		}
+		_mvShare.setViewName("admin/brand/brand");
+		return _mvShare;
 	}
 }

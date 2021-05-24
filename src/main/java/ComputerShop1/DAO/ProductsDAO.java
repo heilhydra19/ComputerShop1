@@ -24,6 +24,13 @@ public class ProductsDAO extends BaseDAO{
 		return sql;
 	}
 	
+	public List<ProductsDTO> SearchProduct(String keyword) {
+		StringBuffer sql = SqlString();
+		sql.append("AND c.id = '"+keyword+"' OR c.name LIKE '%"+keyword+"%' OR d.name LIKE '%"+keyword+"%'"
+				+ " OR e.name LIKE '%"+keyword+"%' OR c.price like '"+keyword+"' GROUP BY c.id DESC");
+		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
+	}
+	
 	public List<ProductsDTO> GetDataNewProducts() {
 		StringBuffer sql = SqlString();
 		sql.append("GROUP BY c.id ");
@@ -40,7 +47,7 @@ public class ProductsDAO extends BaseDAO{
 	
 	public List<ProductsDTO> GetDataProducts() {
 		StringBuffer sql = SqlString();
-		sql.append(" order by c.id DESC");
+		sql.append(" GROUP by c.id DESC");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
 	

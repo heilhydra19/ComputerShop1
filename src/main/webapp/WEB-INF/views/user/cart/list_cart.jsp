@@ -36,6 +36,7 @@
 								<td><img width="100"
 									src="<c:url value="/assets/user/img/${ item.value.product.img }"/>"
 									alt=""></td>
+								<td>${ item.value.product.name }</td>
 								<td><fmt:formatNumber type="number" groupingUsed="true"
 										value="${ item.value.product.price }" /> ₫</td>
 								<td><input type="number" min="0" max="1000" class="span1"
@@ -55,7 +56,7 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="7" class="alignR">Tổng tiền:</td>
+							<td colspan="6" class="alignR">Tổng tiền:</td>
 							<td>${ TotalPriceCart }</td>
 						</tr>
 					</tbody>

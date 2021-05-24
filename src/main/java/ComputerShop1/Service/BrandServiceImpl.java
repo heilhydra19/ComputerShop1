@@ -1,5 +1,6 @@
 package ComputerShop1.Service;
 
+import java.awt.RenderingHints.Key;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class BrandServiceImpl implements IBrandService{
 
 	public int DeleteBrand(long id) {
 		return brandsDAO.DeleteBrand(id);
+	}
+
+	public List<Brands> SearchBrand(String keyword) {
+		return brandsDAO.SearchBrand(keyword);
 	}
 }

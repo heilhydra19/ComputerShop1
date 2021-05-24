@@ -11,12 +11,18 @@ import ComputerShop1.Entity.MapperBrands;
 public class BrandsDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT * FROM brands ");
+		sql.append(" SELECT * FROM brands WHERE 1 ");
 		return sql;
 	}
 	
 	public List<Brands> GetDataBrands(){
 		StringBuffer sql = SqlString();
+		return _jdbcTemplate.query(sql.toString(), new MapperBrands());
+	} 
+	
+	public List<Brands> SearchBrand(String keyword){
+		StringBuffer sql = SqlString();
+		sql.append("AND id = '"+keyword+"' OR name like '%"+keyword+"%'");
 		return _jdbcTemplate.query(sql.toString(), new MapperBrands());
 	} 
 	

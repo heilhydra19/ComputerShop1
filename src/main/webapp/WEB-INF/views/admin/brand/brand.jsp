@@ -15,11 +15,11 @@
 <body>
 	<div class="row">
 		<div class="span12">
-			<form class="aligncenter" action="#" class="navbar-search pull-left">
-				<input type="text" placeholder="Search" class="search-query span2">
+			<form class="aligncenter" action="${pageContext.request.contextPath}/quan-tri/hang/search" class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2" name="keyword">
 			</form>
 			<div class="well well-small">
-				<form:form action="hang/addorupdate" method="POST"
+				<form:form action="${pageContext.request.contextPath}/quan-tri/hang/addorupdate" method="POST"
 					modelAttribute="brand">
 					<table class="table table-bordered table-condensed">
 						<thead>
@@ -69,7 +69,7 @@
 								<td>${ item.name }</td>
 								<td><input style="max-width: 300px" size="16" type="text"
 									value="${ item.description }"></td>
-								<td><a href="<c:url value="hang/delete/${ item.id }"/>"
+								<td><a href="<c:url value="${pageContext.request.contextPath}/quan-tri/hang/delete/${ item.id }"/>"
 									class="btn btn-mini btn-danger" type="button"> <span
 										class="icon-remove"></span>
 								</a></td>

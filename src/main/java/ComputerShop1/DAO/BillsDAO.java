@@ -21,6 +21,12 @@ public class BillsDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new BillsDTOMapper());
 	}
 	
+	public long GetIDLastBills() {
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT MAX(id) FROM bills");
+		return _jdbcTemplate.queryForObject(sql.toString(), new Object[] {}, Long.class);
+	}
+	
 	public int AddBill(BillsDTO bill) {
 		String sql = "INSERT INTO `bills`(`id_user`, `address`) VALUES ('"+bill.getId_user()+"','"+bill.getAddress()+"')";
 		return _jdbcTemplate.update(sql);

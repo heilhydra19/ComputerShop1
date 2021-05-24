@@ -36,4 +36,8 @@ public class ProductServiceImpl implements IProductService{
 	public int DeleteProduct(long id) {
 		return productsDAO.DeleteProduct(id);
 	}
+
+	public List<ProductsDTO> SearchProduct(String keyword) {
+		return productsDAO.SearchProduct(keyword);
+	}
 }

@@ -18,7 +18,6 @@ public class UserServiceImpl implements IUserService{
 	@Autowired
 	private RolesDAO rolesDAO;
 	public UsersDTO CheckAccount(UsersDTO account) {
-//		return usersDAO.CheckAccount(account);
 		String pass = account.getPassword();
 		account = usersDAO.CheckAccount(account);
 		if(account != null) {
@@ -55,5 +54,9 @@ public class UserServiceImpl implements IUserService{
 	}
 	public int DeleteAccount(long id) {
 		return usersDAO.DeleteAccount(id);
+	}
+	public int AddCustomer(UsersDTO user) {
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+		return usersDAO.AddCustomer(user);
 	}
 }

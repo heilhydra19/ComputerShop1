@@ -9,6 +9,7 @@ import ComputerShop1.Entity.Brands;
 @Service
 public interface IBrandService {
 	public List<Brands> GetDataBrands();
+	public List<Brands> SearchBrand(String keyword);
 	public int AddBrand(Brands brand);
 	public int UpdateBrand(Brands brand);
 	public int DeleteBrand(long id);
