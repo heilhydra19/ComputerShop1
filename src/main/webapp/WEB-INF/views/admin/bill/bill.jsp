@@ -11,8 +11,15 @@
 <body>
 	<div class="row">
 		<div class="span12">
+			<form class="aligncenter"
+				action="${pageContext.request.contextPath}/quan-tri/hoa-don/search"
+				class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2"
+					name="keyword">
+			</form>
 			<div class="well well-small">
-				<form:form action="hoa-don/addorupdate" method="POST" modelAttribute="bill">
+				<form:form action="${pageContext.request.contextPath}/quan-tri/hoa-don/addorupdate" method="POST"
+					modelAttribute="bill">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -73,7 +80,7 @@
 								href="<c:url value="hoa-don/${ item.id }"/>">Xem thêm <span
 									class="icon-plus"></span>
 							</a></td>
-							<td><a href="<c:url value="hoa-don/delete/${ item.id }"/>"
+							<td><a href="<c:url value="/quan-tri/hoa-don/delete/${ item.id }"/>"
 								class="btn btn-mini btn-danger" type="button"> <span
 									class="icon-remove"></span>
 							</a></td>

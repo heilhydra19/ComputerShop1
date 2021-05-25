@@ -35,19 +35,19 @@ public class AdProductController extends AdBaseController {
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "/addorupdate", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.AddProduct(product);
 		return "redirect:/quan-tri/san-pham";
 	}
 
-	@RequestMapping(value = "/addorupdate", method = RequestMethod.POST, params = "update")
+	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateProduct(@ModelAttribute("product") ProductsDTO product) {
 		_productService.UpdateProduct(product);
 		return "redirect:/quan-tri/san-pham";
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String DeleteProduct(@PathVariable("id") long id) {
 		_productService.DeleteProduct(id);
 		return "redirect:/quan-tri/san-pham";

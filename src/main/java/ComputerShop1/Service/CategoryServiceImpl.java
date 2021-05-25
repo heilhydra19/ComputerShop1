@@ -40,4 +40,8 @@ public class CategoryServiceImpl implements ICategoryService {
 	public int DeleteCategory(long id) {
 		return categoriesDAO.DeleteCategory(id);
 	}
+
+	public List<Categories> SearchCategory(String keyword) {
+		return categoriesDAO.SearchCategory(keyword);
+	}
 }

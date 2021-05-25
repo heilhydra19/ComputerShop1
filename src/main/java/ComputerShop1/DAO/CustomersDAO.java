@@ -11,7 +11,7 @@ import ComputerShop1.DTO.CustomersDTOMapper;
 public class CustomersDAO extends BaseDAO{
 	private StringBuffer SqlString() {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT * FROM `users` WHERE `id_role` = '3' ");
+		sql.append(" SELECT * FROM `users` WHERE `id_role` = '3' where 1 ");
 		return sql;
 	}
 	
@@ -20,14 +20,20 @@ public class CustomersDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new CustomersDTOMapper());
 	}
 	
+	public List<CustomersDTO> SearchCustomer(String keyword) {
+		StringBuffer sql = SqlString();
+		sql.append("and id like '%"+keyword+"%' or name like '%"+keyword+"%' or phone like '%"+keyword+"%' or email like '%"+keyword+"%' ");
+		return _jdbcTemplate.query(sql.toString(), new CustomersDTOMapper());
+	}
+	
 	public int AddCustomer(CustomersDTO customer) {
 		String sql = "INSERT INTO `users`(`name`, `img`, `phone`, `email`, `id_role`) "
-				+ "VALUES ('"+customer.getName()+"','"+customer.getImg()+"','"+customer.getPhone()+"','"+customer.getEmail()+"','3')";
+				+ "VALUES (N'"+customer.getName()+"','"+customer.getImg()+"','"+customer.getPhone()+"','"+customer.getEmail()+"','3')";
 		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateCustomer(CustomersDTO customer) {
-		String sql = "UPDATE `users` SET `name`=CASE WHEN '"+customer.getName()+"' = '' THEN `name` ELSE '"+customer.getName()+"' END,\r\n"
+		String sql = "UPDATE `users` SET `name`=CASE WHEN '"+customer.getName()+"' = '' THEN `name` ELSE N'"+customer.getName()+"' END,\r\n"
 				+ "		`img`=CASE WHEN '"+customer.getImg()+"' = '' THEN `img` ELSE '"+customer.getImg()+"' END,\r\n"
 				+ "		`phone`=CASE WHEN '"+customer.getPhone()+"' = '' THEN `phone` ELSE '"+customer.getPhone()+"' END,\r\n"
 				+ "        `email`=CASE WHEN '"+customer.getEmail()+"' = '' THEN `email` ELSE '"+customer.getEmail()+"' END \r\n"

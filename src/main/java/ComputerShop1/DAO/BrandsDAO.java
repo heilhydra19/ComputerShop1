@@ -22,19 +22,19 @@ public class BrandsDAO extends BaseDAO{
 	
 	public List<Brands> SearchBrand(String keyword){
 		StringBuffer sql = SqlString();
-		sql.append("AND id = '"+keyword+"' OR name like '%"+keyword+"%'");
+		sql.append("AND id like '%"+keyword+"%' OR name like '%"+keyword+"%'");
 		return _jdbcTemplate.query(sql.toString(), new MapperBrands());
 	} 
 	
 	public int AddBrand(Brands brand) {
 		String sql = "INSERT INTO `brands`(`name`, `description`) "
-				+ "VALUES ('"+brand.getName()+"','"+brand.getDescription()+"')";
+				+ "VALUES (N'"+brand.getName()+"',N'"+brand.getDescription()+"')";
 		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateBrand(Brands brand) {
-		String sql = "UPDATE `brands` SET `name`= CASE WHEN '"+brand.getName()+"' = '' THEN `name` ELSE '"+brand.getName()+"' END,\r\n"
-				+ "        `description`=CASE WHEN '"+brand.getDescription()+"' = '' THEN `description` ELSE '"+brand.getDescription()+"' END \r\n"
+		String sql = "UPDATE `brands` SET `name`= CASE WHEN '"+brand.getName()+"' = '' THEN `name` ELSE N'"+brand.getName()+"' END,\r\n"
+				+ "        `description`=CASE WHEN '"+brand.getDescription()+"' = '' THEN `description` ELSE N'"+brand.getDescription()+"' END \r\n"
 				+ "        WHERE `id`='"+brand.getId()+"'";
 		return _jdbcTemplate.update(sql);
 	}

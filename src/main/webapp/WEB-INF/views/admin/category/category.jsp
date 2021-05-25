@@ -15,11 +15,11 @@
 <body>
 	<div class="row">
 		<div class="span12">
-			<form class="aligncenter" action="#" class="navbar-search pull-left">
-				<input type="text" placeholder="Search" class="search-query span2">
+			<form class="aligncenter" action="${pageContext.request.contextPath}/quan-tri/loai/search" class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2" name="keyword">
 			</form>
 			<div class="well well-small">
-				<form:form action="loai/addorupdate" method="POST" modelAttribute="category">
+				<form:form action="${pageContext.request.contextPath}/quan-tri/loai/addorupdate" method="POST" modelAttribute="category">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -68,7 +68,7 @@
 								<td>${ item.name }</td>
 								<td><input style="max-width: 300px" size="16" type="text"
 									value="${ item.description }"></td>
-								<td><a href="<c:url value="loai/delete/${ item.id }"/>"
+								<td><a href="<c:url value="/quan-tri/loai/delete/${ item.id }"/>"
 									class="btn btn-mini btn-danger" type="button"> <span
 										class="icon-remove"></span>
 								</a></td>

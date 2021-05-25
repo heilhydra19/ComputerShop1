@@ -15,6 +15,7 @@ public interface IBillService {
 	@Autowired
 	public List<BillsDTO> GetDataBills();
 	public double GetTotalPrice(long id);
+	public List<BillsDTO> SearchBill(String keyword);
 	public int AddBill(BillsDTO bill);
 	public int UpdateBill(BillsDTO bill);
 	public int DeleteBill(long id);

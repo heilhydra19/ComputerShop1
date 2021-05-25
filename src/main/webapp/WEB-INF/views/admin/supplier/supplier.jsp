@@ -15,11 +15,11 @@
 <body>
 	<div class="row">
 		<div class="span12">
-			<form class="aligncenter" action="#" class="navbar-search pull-left">
-				<input type="text" placeholder="Search" class="search-query span2">
+			<form class="aligncenter" action="${pageContext.request.contextPath}/quan-tri/nha-cung-cap/search" class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2" name="keyword">
 			</form>
 			<div class="well well-small">
-				<form:form action="nha-cung-cap/addorupdate" method="POST"
+				<form:form action="${pageContext.request.contextPath}/quan-tri/nha-cung-cap/addorupdate" method="POST"
 					modelAttribute="supplier">
 					<table class="table table-bordered table-condensed">
 						<thead>
@@ -80,7 +80,7 @@
 								<td>${ item.phone }</td>
 								<td>${ item.email }</td>
 								<td><a
-									href="<c:url value="nha-cung-cap/delete/${ item.id }"/>"
+									href="<c:url value="/quan-tri/nha-cung-cap/delete/${ item.id }"/>"
 									class="btn btn-mini btn-danger" type="button"> <span
 										class="icon-remove"></span>
 								</a></td>

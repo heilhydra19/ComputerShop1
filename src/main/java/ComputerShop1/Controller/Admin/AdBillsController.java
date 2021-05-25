@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.BillsDTO;
@@ -44,5 +45,18 @@ public class AdBillsController extends AdBaseController {
 	public String DeleteBill(@PathVariable("id") long id) {
 		_billService.DeleteBill(id);
 		return "redirect:/quan-tri/hoa-don";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchBill(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("bills", _billService.SearchBill(keyword));
+		}
+		else {
+			_mvShare.addObject("bills", _billService.GetDataBills());
+		}
+		_mvShare.addObject("users", _userService.GetDataUsers());
+		_mvShare.setViewName("admin/bill/bill");
+		return _mvShare;
 	}
 }

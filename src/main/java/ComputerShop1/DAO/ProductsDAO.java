@@ -26,7 +26,7 @@ public class ProductsDAO extends BaseDAO{
 	
 	public List<ProductsDTO> SearchProduct(String keyword) {
 		StringBuffer sql = SqlString();
-		sql.append("AND c.id = '"+keyword+"' OR c.name LIKE '%"+keyword+"%' OR d.name LIKE '%"+keyword+"%'"
+		sql.append("AND c.id like '%"+keyword+"%' OR c.name LIKE '%"+keyword+"%' OR d.name LIKE '%"+keyword+"%'"
 				+ " OR e.name LIKE '%"+keyword+"%' OR c.price like '"+keyword+"' GROUP BY c.id DESC");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
@@ -94,17 +94,17 @@ public class ProductsDAO extends BaseDAO{
 	
 	public int AddProduct(ProductsDTO product) {
 		String sql = "INSERT INTO `products`(`id_category`, `id_brand`, `img`, `name`, `price`, `detail`) "
-				+ "VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"','"+product.getName()+"','"+product.getPrice()+"','"+product.getDetail()+"')";
+				+ "VALUES ('"+product.getId_category()+"','"+product.getId_brand()+"','"+product.getImg()+"',N'"+product.getName()+"','"+product.getPrice()+"',N'"+product.getDetail()+"')";
 		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateProduct(ProductsDTO product) {
 		String sql = "UPDATE `products` SET `id_category`=CASE WHEN '"+product.getId_category()+"' = '' THEN `id_category` ELSE '"+product.getId_category()+"' END,\r\n"
 				+ "		`id_brand`=CASE WHEN '"+product.getId_brand()+"' = '' THEN `id_brand` ELSE '"+product.getId_brand()+"' END,\r\n"
-				+ "        `name`=CASE WHEN '"+product.getName()+"' = '' THEN `name` ELSE '"+product.getName()+"' END,\r\n"
+				+ "        `name`=CASE WHEN '"+product.getName()+"' = '' THEN `name` ELSE N'"+product.getName()+"' END,\r\n"
 				+ "        `img`=CASE WHEN '"+product.getImg()+"' = '' THEN `img` ELSE '"+product.getImg()+"' END,\r\n"
 				+ "        `price`=CASE WHEN '"+product.getPrice()+"' = '' THEN `price` ELSE '"+product.getPrice()+"' END,\r\n"
-				+ "        `detail`=CASE WHEN '"+product.getDetail()+"' = '' THEN `detail` ELSE '"+product.getDetail()+"' END,\r\n"
+				+ "        `detail`=CASE WHEN '"+product.getDetail()+"' = '' THEN `detail` ELSE N'"+product.getDetail()+"' END,\r\n"
 				+ "        `created_at`=created_at,`updated_at`=CURRENT_TIMESTAMP \r\n"
 				+ "        WHERE `id`='"+product.getId()+"'";
 		return _jdbcTemplate.update(sql);

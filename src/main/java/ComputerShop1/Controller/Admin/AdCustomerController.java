@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.CustomersDTO;
@@ -41,5 +42,17 @@ public class AdCustomerController extends AdBaseController{
 	public String DeleteBrand(@PathVariable("id") long id) {
 		_customerService.DeleteCustomer(id);
 		return "redirect:/quan-tri/khach-hang";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchCustomer(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("customers", _customerService.SearchCustomer(keyword));
+		}
+		else {
+			_mvShare.addObject("customers", _customerService.GetDataCustomers());
+		}
+		_mvShare.setViewName("admin/customer/customer");
+		return _mvShare;
 	}
 }

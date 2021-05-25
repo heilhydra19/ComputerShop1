@@ -11,6 +11,7 @@ import ComputerShop1.Entity.Roles;
 public interface IUserService {
 	public List<Roles> GetDataRoles();
 	public List<UsersDTO> GetDataUsers();
+	public List<UsersDTO> SearchUser(String keyword);
 	public UsersDTO CheckAccount(UsersDTO account);
 	public int AddUser(UsersDTO user);
 	public int UpdateUser(UsersDTO user);

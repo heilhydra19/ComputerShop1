@@ -21,6 +21,12 @@ public class BillsDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new BillsDTOMapper());
 	}
 	
+	public List<BillsDTO> SearchBill(String keyword){
+		StringBuffer sql = SqlString();
+		sql.append("and a.id like '%"+keyword+"%' or b.name like '%"+keyword+"%' or a.address like '%"+keyword+"%' ORDER BY a.id DESC ");
+		return _jdbcTemplate.query(sql.toString(), new BillsDTOMapper());
+	}
+	
 	public long GetIDLastBills() {
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT MAX(id) FROM bills");
@@ -28,13 +34,13 @@ public class BillsDAO extends BaseDAO{
 	}
 	
 	public int AddBill(BillsDTO bill) {
-		String sql = "INSERT INTO `bills`(`id_user`, `address`) VALUES ('"+bill.getId_user()+"','"+bill.getAddress()+"')";
+		String sql = "INSERT INTO `bills`(`id_user`, `address`) VALUES ('"+bill.getId_user()+"',N'"+bill.getAddress()+"')";
 		return _jdbcTemplate.update(sql);
 	}
 	
 	public int UpdateBill(BillsDTO bill) {
 		String sql = "UPDATE `bills` SET `id_user`='"+bill.getId_user()+"',"
-				+ "`address`= CASE WHEN '"+bill.getAddress()+"' = '' THEN `address` ELSE '"+bill.getAddress()+"' END WHERE `id`='"+bill.getId()+"'";
+				+ "`address`= CASE WHEN '"+bill.getAddress()+"' = '' THEN `address` ELSE N'"+bill.getAddress()+"' END WHERE `id`='"+bill.getId()+"'";
 		return _jdbcTemplate.update(sql);
 	}
 	

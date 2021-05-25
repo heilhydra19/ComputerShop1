@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.Entity.Categories;
@@ -41,5 +42,17 @@ public class AdCategoryController extends AdBaseController{
 	public String DeleteCategory(@PathVariable("id") long id) {
 		_categoryService.DeleteCategory(id);
 		return "redirect:/quan-tri/loai";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchCategory(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("categories", _categoryService.SearchCategory(keyword));
+		}
+		else {
+			_mvShare.addObject("categories", _categoryService.GetDataCategories());
+		}
+		_mvShare.setViewName("admin/category/category");
+		return _mvShare;
 	}
 }

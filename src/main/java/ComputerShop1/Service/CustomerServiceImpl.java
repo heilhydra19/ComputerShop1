@@ -29,4 +29,8 @@ public class CustomerServiceImpl implements ICustomerService{
 		return customersDAO.DeleteCustomer(id);
 	}
 
+	public List<CustomersDTO> SearchCustomer(String keyword) {
+		return customersDAO.SearchCustomer(keyword);
+	}
+
 }

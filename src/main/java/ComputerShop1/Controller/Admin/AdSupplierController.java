@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.Entity.Suppliers;
@@ -41,5 +42,17 @@ public class AdSupplierController extends AdBaseController{
 	public String DeleteSupplier(@PathVariable("id") long id) {
 		_supplierService.DeleteSupplier(id);
 		return "redirect:/quan-tri/nha-cung-cap";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchSupplier(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("suppliers", _supplierService.SearchSupplier(keyword));
+		}
+		else {
+			_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
+		}
+		_mvShare.setViewName("admin/supplier/supplier");
+		return _mvShare;
 	}
 }

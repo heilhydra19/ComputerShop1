@@ -45,7 +45,7 @@ public class AdBrandController extends AdBaseController{
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public ModelAndView SearchProduct(@RequestParam("keyword") String keyword) {
+	public ModelAndView SearchBrand(@RequestParam("keyword") String keyword) {
 		if(keyword != null) {
 			_mvShare.addObject("brands", _brandService.SearchBrand(keyword));
 		}

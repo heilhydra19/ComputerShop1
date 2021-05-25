@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.ImportsDTO;
@@ -44,5 +45,18 @@ public class AdImportsController extends AdBaseController {
 	public String DeleteBill(@PathVariable("id") long id) {
 		_importService.DeleteImport(id);
 		return "redirect:/quan-tri/nhap-hang";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchImport(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("imports", _importService.SearchImport(keyword));
+		}
+		else {
+			_mvShare.addObject("imports", _importService.GetDataImports());
+		}
+		_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
+		_mvShare.setViewName("admin/import/import");
+		return _mvShare;
 	}
 }

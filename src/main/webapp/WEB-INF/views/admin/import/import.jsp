@@ -11,8 +11,15 @@
 <body>
 	<div class="row">
 		<div class="span12">
+			<form class="aligncenter"
+				action="${pageContext.request.contextPath}/quan-tri/nhap-hang/search"
+				class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2"
+					name="keyword">
+			</form>
 			<div class="well well-small">
-				<form:form action="nhap-hang/addorupdate" method="POST" modelAttribute="import">
+				<form:form action="${pageContext.request.contextPath}/quan-tri/nhap-hang/addorupdate" method="POST"
+					modelAttribute="import">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -32,7 +39,8 @@
 					</table>
 					<div class="controls">
 						&emsp;&emsp;
-						<button type="submit" name="add" class="shopBtn">Thêm Phiếu Nhập</button>
+						<button type="submit" name="add" class="shopBtn">Thêm
+							Phiếu Nhập</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Số Phiếu Cần Sửa&emsp;
 						<form:select name="id" path="id" style="max-width: 170px">
 							<c:forEach var="item" items="${ imports }">
@@ -67,7 +75,7 @@
 								href="<c:url value="nhap-hang/${ item.id }"/>">Xem thêm <span
 									class="icon-plus"></span>
 							</a></td>
-							<td><a href="<c:url value="nhap-hang/delete/${ item.id }"/>"
+							<td><a href="<c:url value="/quan-tri/nhap-hang/delete/${ item.id }"/>"
 								class="btn btn-mini btn-danger" type="button"> <span
 									class="icon-remove"></span>
 							</a></td>

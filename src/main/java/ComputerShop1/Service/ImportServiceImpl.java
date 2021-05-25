@@ -20,6 +20,10 @@ public class ImportServiceImpl implements IImportService{
 	public List<ImportsDTO> GetDataImports() {
 		return importsDAO.GetDataImports();
 	}
+	
+	public List<ImportsDTO> SearchImport(String keyword){
+		return importsDAO.SearchImport(keyword);
+	}
 
 	public int AddImport(ImportsDTO imports) {
 		return importsDAO.AddImport(imports);

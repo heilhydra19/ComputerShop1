@@ -23,6 +23,13 @@ public class UsersDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new UsersDTOMapper());
 	}
 	
+	public List<UsersDTO> SearchUser(String keyword) {
+		StringBuffer sql = SqlString();
+		sql.append("and id like '%"+keyword+"%' or name like '%"+keyword+"%' or username like '%"+keyword+"%' or phone like '%"+keyword+"%'"
+				+ "or email like '%"+keyword+"%' or id_user like '%"+keyword+"%' GROUP BY a.id DESC ");
+		return _jdbcTemplate.query(sql.toString(), new UsersDTOMapper());
+	}
+	
 	public UsersDTO CheckAccount(UsersDTO account) {
 		StringBuffer sql = SqlString();
 		sql.append("AND BINARY a.username = BINARY '"+account.getUsername()+"' ");
@@ -36,7 +43,7 @@ public class UsersDAO extends BaseDAO{
 	}
 
 	public int UpdateUser(UsersDTO user) {
-		String sqlUser = "UPDATE `users` SET `name`=CASE WHEN '"+user.getName()+"'= '' THEN `name` ELSE '"+user.getName()+"' END,\r\n"
+		String sqlUser = "UPDATE `users` SET `name`=CASE WHEN '"+user.getName()+"'= '' THEN `name` ELSE N'"+user.getName()+"' END,\r\n"
 				+ "				   `img`=CASE WHEN '"+user.getImg()+"'= '' THEN `img` ELSE '"+user.getImg()+"' END,\r\n"
 				+ "                   `phone`=CASE WHEN '"+user.getPhone()+"'= '' THEN `phone` ELSE '"+user.getPhone()+"' END,\r\n"
 				+ "                   `email`=CASE WHEN '"+user.getEmail()+"'= '' THEN `email` ELSE '"+user.getEmail()+"' END,\r\n"

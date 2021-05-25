@@ -100,7 +100,7 @@
 								<td>${ item.price }</td>
 								<td><input style="max-width: 100px" size="16" type="text"
 									value="${ item.detail }"></td>
-								<td><a href="<c:url value="${pageContext.request.contextPath}/quan-tri/san-pham/delete/${ item.id }"/>"
+								<td><a href="<c:url value="/quan-tri/san-pham/delete/${ item.id }"/>"
 									class="btn btn-mini btn-danger" type="button"> <span
 										class="icon-remove"></span>
 								</a></td>

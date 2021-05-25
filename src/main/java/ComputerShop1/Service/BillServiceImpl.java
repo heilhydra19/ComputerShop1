@@ -24,6 +24,10 @@ public class BillServiceImpl implements IBillService {
 		return billsDAO.GetDataBills();
 	}
 
+	public List<BillsDTO> SearchBill(String keyword){
+		return billsDAO.SearchBill(keyword);
+	}
+	
 	public double GetTotalPrice(long id) {
 		return billDetailsDAO.GetTotalPrice(id);
 	}

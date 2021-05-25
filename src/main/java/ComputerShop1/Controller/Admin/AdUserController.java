@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.UsersDTO;
@@ -45,5 +46,18 @@ public class AdUserController extends AdBaseController{
 	public String DeleteAccount(@PathVariable("id") long id) {
 		_userService.DeleteAccount(id);
 		return "redirect:/quan-tri/nguoi-dung";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchUser(@RequestParam("keyword") String keyword) {
+		if(keyword != null) {
+			_mvShare.addObject("users", _userService.SearchUser(keyword));
+		}
+		else {
+			_mvShare.addObject("users", _userService.GetDataUsers());
+		}
+		_mvShare.addObject("roles", _userService.GetDataRoles());
+		_mvShare.setViewName("admin/user/user");
+		return _mvShare;
 	}
 }

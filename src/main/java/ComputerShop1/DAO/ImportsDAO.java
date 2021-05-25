@@ -21,6 +21,12 @@ public class ImportsDAO extends BaseDAO{
 		return _jdbcTemplate.query(sql.toString(), new ImportsDTOMapper());
 	}
 	
+	public List<ImportsDTO> SearchImport(String keyword){
+		StringBuffer sql = SqlString();
+		sql.append("and a.id like '%"+keyword+"%' or b.name like '%"+keyword+"%' ORDER BY a.id DESC ");
+		return _jdbcTemplate.query(sql.toString(), new ImportsDTOMapper());
+	}
+	
 	public int AddImport(ImportsDTO imports) {
 		String sql = "INSERT INTO `imports`(`id_supplier`) VALUES ('"+imports.getId_supplier()+"')";
 		return _jdbcTemplate.update(sql);
