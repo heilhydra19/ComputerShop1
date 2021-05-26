@@ -31,6 +31,10 @@ public class UserServiceImpl implements IUserService {
 		return null;
 	}
 
+	public List<UsersDTO> GetDataUsersPaginate(String keyword, int start, int totalPage){
+		return usersDAO.GetDataUsersPaginate(keyword, start, totalPage);
+	}
+	
 	public List<Roles> GetDataRoles() {
 		return rolesDAO.GetDataRoles();
 	}

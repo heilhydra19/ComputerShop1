@@ -9,50 +9,93 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ComputerShop1.DTO.PaginatesDTO;
 import ComputerShop1.Entity.Brands;
 import ComputerShop1.Service.BrandServiceImpl;
+import ComputerShop1.Service.PaginateServiceImpl;
 
 @Controller
-@RequestMapping(value = "quan-tri/hang")
-public class AdBrandController extends AdBaseController{
+public class AdBrandController extends AdBaseController {
 	@Autowired
 	private BrandServiceImpl _brandService;
-	
-	@RequestMapping(method = RequestMethod.GET)
+	@Autowired
+	private PaginateServiceImpl paginateService;
+
+	private int totalBrandsPage = 30;
+
+	@RequestMapping(value = "quan-tri/hang", method = RequestMethod.GET)
 	public ModelAndView Brand() {
-		_mvShare.addObject("brands", _brandService.GetDataBrands());
 		_mvShare.setViewName("admin/brand/brand");
+		int totalData = _brandService.GetDataBrands().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBrandsPage, 1);
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("brandsPaginate",
+				_brandService.GetDataBrandsPaginate(null, paginateInfo.getStart(), totalBrandsPage));
+		_mvShare.addObject("brands", _brandService.GetDataBrands());
 		_mvShare.addObject("brand", new Brands());
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "quan-tri/hang/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView Brand(@PathVariable String currentPage) {
+		_mvShare.setViewName("admin/brand/brand");
+		int totalData = _brandService.GetDataBrands().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBrandsPage,
+				Integer.parseInt(currentPage));
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("brandsPaginate",
+				_brandService.GetDataBrandsPaginate(null, paginateInfo.getStart(), totalBrandsPage));
+		_mvShare.addObject("brands", _brandService.GetDataBrands());
+		_mvShare.addObject("brand", new Brands());
+		return _mvShare;
+	}
+
+	@RequestMapping(value = "/quan-tri/hang/addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddBrand(@ModelAttribute("brand") Brands brand) {
 		_brandService.AddBrand(brand);
 		return "redirect:/quan-tri/hang";
 	}
-	
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
+
+	@RequestMapping(value = "/quan-tri/hang/addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateBrand(@ModelAttribute("brand") Brands brand) {
 		_brandService.UpdateBrand(brand);
 		return "redirect:/quan-tri/hang";
 	}
-	
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/quan-tri/hang/delete/{id}", method = RequestMethod.GET)
 	public String DeleteBrand(@PathVariable("id") long id) {
 		_brandService.DeleteBrand(id);
 		return "redirect:/quan-tri/hang";
 	}
-	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/quan-tri/hang/search", method = RequestMethod.POST)
 	public ModelAndView SearchBrand(@RequestParam("keyword") String keyword) {
-		if(keyword != null) {
-			_mvShare.addObject("brands", _brandService.SearchBrand(keyword));
-		}
-		else {
-			_mvShare.addObject("brands", _brandService.GetDataBrands());
-		}
 		_mvShare.setViewName("admin/brand/brand");
+		if (keyword != null) {
+			int totalData = _brandService.GetDataBrands().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBrandsPage, 1);
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("brandsPaginate",
+					_brandService.GetDataBrandsPaginate(keyword, paginateInfo.getStart(), totalBrandsPage));
+			_mvShare.addObject("brands", _brandService.GetDataBrands());
+			_mvShare.addObject("brand", new Brands());
+		}
+		return _mvShare;
+	}
+
+	@RequestMapping(value = "/quan-tri/hang/search/{currentPage}", method = RequestMethod.POST)
+	public ModelAndView SearchBrand(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
+		_mvShare.setViewName("admin/brand/brand");
+		if (keyword != null) {
+			int totalData = _brandService.GetDataBrands().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBrandsPage,
+					Integer.parseInt(currentPage));
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("brandsPaginate",
+					_brandService.GetDataBrandsPaginate(keyword, paginateInfo.getStart(), totalBrandsPage));
+			_mvShare.addObject("brands", _brandService.GetDataBrands());
+			_mvShare.addObject("brand", new Brands());
+		}
 		return _mvShare;
 	}
 }

@@ -10,49 +10,92 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.CustomersDTO;
+import ComputerShop1.DTO.PaginatesDTO;
 import ComputerShop1.Service.CustomerServiceImpl;
+import ComputerShop1.Service.PaginateServiceImpl;
 
 @Controller
-@RequestMapping(value = "quan-tri/khach-hang")
-public class AdCustomerController extends AdBaseController{
+public class AdCustomerController extends AdBaseController {
 	@Autowired
 	private CustomerServiceImpl _customerService;
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView Brand() {
-		_mvShare.addObject("customers", _customerService.GetDataCustomers());
+	@Autowired
+	private PaginateServiceImpl paginateService;
+
+	private int totalCustomersPage = 30;
+
+	@RequestMapping(value = "quan-tri/khach-hang", method = RequestMethod.GET)
+	public ModelAndView Customer() {
 		_mvShare.setViewName("admin/customer/customer");
+		int totalData = _customerService.GetDataCustomers().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage, 1);
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("customersPaginate",
+				_customerService.GetDataCustomersPaginate(null, paginateInfo.getStart(), totalCustomersPage));
+		_mvShare.addObject("customers", _customerService.GetDataCustomers());
 		_mvShare.addObject("customer", new CustomersDTO());
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "quan-tri/khach-hang/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView Customer(@PathVariable String currentPage) {
+		_mvShare.setViewName("admin/customer/customer");
+		int totalData = _customerService.GetDataCustomers().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage,
+				Integer.parseInt(currentPage));
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("customersPaginate",
+				_customerService.GetDataCustomersPaginate(null, paginateInfo.getStart(), totalCustomersPage));
+		_mvShare.addObject("customers", _customerService.GetDataCustomers());
+		_mvShare.addObject("customer", new CustomersDTO());
+		return _mvShare;
+	}
+
+	@RequestMapping(value = "/quan-tri/khach-hang/addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddBrand(@ModelAttribute("customer") CustomersDTO customer) {
 		_customerService.AddCustomer(customer);
 		return "redirect:/quan-tri/khach-hang";
 	}
-	
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
+
+	@RequestMapping(value = "/quan-tri/khach-hang/addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateBrand(@ModelAttribute("customer") CustomersDTO customer) {
 		_customerService.UpdateCustomer(customer);
 		return "redirect:/quan-tri/khach-hang";
 	}
-	
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/quan-tri/khach-hang/delete/{id}", method = RequestMethod.GET)
 	public String DeleteBrand(@PathVariable("id") long id) {
 		_customerService.DeleteCustomer(id);
 		return "redirect:/quan-tri/khach-hang";
 	}
 
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/quan-tri/khach-hang/search", method = RequestMethod.POST)
 	public ModelAndView SearchCustomer(@RequestParam("keyword") String keyword) {
-		if(keyword != null) {
-			_mvShare.addObject("customers", _customerService.SearchCustomer(keyword));
-		}
-		else {
-			_mvShare.addObject("customers", _customerService.GetDataCustomers());
-		}
 		_mvShare.setViewName("admin/customer/customer");
+		if (keyword != null) {
+			int totalData = _customerService.GetDataCustomers().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage, 1);
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("customersPaginate",
+					_customerService.GetDataCustomersPaginate(keyword, paginateInfo.getStart(), totalCustomersPage));
+			_mvShare.addObject("customers", _customerService.GetDataCustomers());
+			_mvShare.addObject("customer", new CustomersDTO());
+		}
+		return _mvShare;
+	}
+
+	@RequestMapping(value = "/quan-tri/khach-hang/search/{currentPage}", method = RequestMethod.POST)
+	public ModelAndView SearchCustomer(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
+		_mvShare.setViewName("admin/customer/customer");
+		if (keyword != null) {
+			int totalData = _customerService.GetDataCustomers().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage,
+					Integer.parseInt(currentPage));
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("customersPaginate",
+					_customerService.GetDataCustomersPaginate(keyword, paginateInfo.getStart(), totalCustomersPage));
+			_mvShare.addObject("customers", _customerService.GetDataCustomers());
+			_mvShare.addObject("customer", new CustomersDTO());
+		}
 		return _mvShare;
 	}
 }

@@ -16,6 +16,10 @@ public class BrandServiceImpl implements IBrandService{
 	public List<Brands> GetDataBrands() {
 		return brandsDAO.GetDataBrands();
 	}
+	
+	public List<Brands> GetDataBrandsPaginate(String keyword, int start, int totalPage){
+		return brandsDAO.GetDataBrandsPaginate(keyword, start, totalPage);
+	}
 
 	public int AddBrand(Brands brand) {
 		return brandsDAO.AddBrand(brand);

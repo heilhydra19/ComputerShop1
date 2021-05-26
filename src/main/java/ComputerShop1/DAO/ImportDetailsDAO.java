@@ -1,5 +1,6 @@
 package ComputerShop1.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -15,10 +16,32 @@ public class ImportDetailsDAO extends BaseDAO{
 		return sql;
 	}
 	
-	public List<ImportDetailsDTO> GetDataImportDetailById(long id) {
+	private StringBuffer SqlImportDetailById(long id) {
 		StringBuffer sql = SqlString();
 		sql.append("AND a.id_import = "+id+" ");
+		return sql;
+	}
+	
+	public List<ImportDetailsDTO> GetDataImportDetailById(long id) {
+		StringBuffer sql = SqlImportDetailById(id);
 		return _jdbcTemplate.query(sql.toString(), new ImportDetailsDTOMapper());
+	}
+	
+	private String SqlImportDetailsPaginate(long id, int start, int totalPage) {
+		StringBuffer sql = SqlImportDetailById(id);
+		sql.append(" LIMIT " + (start-1) + ", " + totalPage);
+		return sql.toString();
+	}
+
+	public List<ImportDetailsDTO> GetDataImportDetailsPaginate(long id, int start, int totalPage) {
+		StringBuffer sqlGetData = SqlImportDetailById(id);
+		List<ImportDetailsDTO> listImportDetails = _jdbcTemplate.query(sqlGetData.toString(), new ImportDetailsDTOMapper());
+		List<ImportDetailsDTO> listImportDetailsPaginate = new ArrayList<ImportDetailsDTO>();
+		if (listImportDetails.size() > 0) {
+			String sql = SqlImportDetailsPaginate(id, start, totalPage);
+			listImportDetailsPaginate = _jdbcTemplate.query(sql, new ImportDetailsDTOMapper());
+		}
+		return listImportDetailsPaginate;
 	}
 	
 	public double GetTotalPrice(long id) {

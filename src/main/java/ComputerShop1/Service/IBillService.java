@@ -16,10 +16,12 @@ public interface IBillService {
 	public List<BillsDTO> GetDataBills();
 	public double GetTotalPrice(long id);
 	public List<BillsDTO> SearchBill(String keyword);
+	public List<BillsDTO> GetDataBillsPaginate(String keyword, int start, int totalPage);
 	public int AddBill(BillsDTO bill);
 	public int UpdateBill(BillsDTO bill);
 	public int DeleteBill(long id);
 	public List<BillDetailsDTO> GetDataBillDetailById(long id);
+	public List<BillDetailsDTO> GetDataBillDetailsPaginate(long id, int start, int totalPage);
 	public int AddBillDetail(BillDetailsDTO billDetail);
 	public int UpdateBillDetail(BillDetailsDTO billDetail);
 	public int DeleteBillDetail(long id_bill, long id);

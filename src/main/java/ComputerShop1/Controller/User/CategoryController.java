@@ -28,7 +28,7 @@ public class CategoryController extends BaseController{
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, 1);
 		_mvShare.addObject("idCategory", id);
 		_mvShare.addObject("paginateInfo", paginateInfo);
-		_mvShare.addObject("productsPaginate", categoryService.GetDataProductsPaginate(Long.parseLong(id), paginateInfo.getStart(), totalProductsPage));
+		_mvShare.addObject("productsPaginate", categoryService.GetDataProductsPaginateByIdCategory(Long.parseLong(id), paginateInfo.getStart(), totalProductsPage));
 		return _mvShare;
 	}
 	
@@ -39,7 +39,7 @@ public class CategoryController extends BaseController{
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, Integer.parseInt(currentPage));
 		_mvShare.addObject("idCategory", id);
 		_mvShare.addObject("paginateInfo", paginateInfo);
-		_mvShare.addObject("productsPaginate", categoryService.GetDataProductsPaginate(Long.parseLong(id) ,paginateInfo.getStart(), totalProductsPage));
+		_mvShare.addObject("productsPaginate", categoryService.GetDataProductsPaginateByIdCategory(Long.parseLong(id) ,paginateInfo.getStart(), totalProductsPage));
 		return _mvShare;
 	}
 	

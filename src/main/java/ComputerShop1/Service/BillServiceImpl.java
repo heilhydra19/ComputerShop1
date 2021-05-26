@@ -23,6 +23,10 @@ public class BillServiceImpl implements IBillService {
 	public List<BillsDTO> GetDataBills() {
 		return billsDAO.GetDataBills();
 	}
+	
+	public List<BillsDTO> GetDataBillsPaginate(String keyword, int start, int totalPage){
+		return billsDAO.GetDataBillsPaginate(keyword, start, totalPage);
+	}
 
 	public List<BillsDTO> SearchBill(String keyword){
 		return billsDAO.SearchBill(keyword);
@@ -46,6 +50,10 @@ public class BillServiceImpl implements IBillService {
 
 	public List<BillDetailsDTO> GetDataBillDetailById(long id) {
 		return billDetailsDAO.GetDataBillDetailById(id);
+	}
+	
+	public List<BillDetailsDTO> GetDataBillDetailsPaginate(long id, int start, int totalPage){
+		return billDetailsDAO.GetDataBillDetailsPaginate(id, start, totalPage);
 	}
 
 	public int AddBillDetail(BillDetailsDTO billDetail) {

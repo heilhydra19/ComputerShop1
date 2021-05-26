@@ -10,20 +10,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ComputerShop1.DTO.BillsDTO;
+import ComputerShop1.DTO.PaginatesDTO;
 import ComputerShop1.Service.BillServiceImpl;
+import ComputerShop1.Service.PaginateServiceImpl;
 import ComputerShop1.Service.UserServiceImpl;
 
 @Controller
-@RequestMapping(value = "quan-tri/hoa-don")
+
 public class AdBillsController extends AdBaseController {
 	@Autowired
 	private BillServiceImpl _billService;
-
 	@Autowired
 	private UserServiceImpl _userService;
+	@Autowired
+	private PaginateServiceImpl paginateService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	private int totalBillsPage = 30;
+
+	@RequestMapping(value = "quan-tri/hoa-don", method = RequestMethod.GET)
 	public ModelAndView Bill() {
+		int totalData = _billService.GetDataBills().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBillsPage, 1);
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("billsPaginate",
+				_billService.GetDataBillsPaginate(null, paginateInfo.getStart(), totalBillsPage));
 		_mvShare.addObject("bills", _billService.GetDataBills());
 		_mvShare.addObject("users", _userService.GetDataUsers());
 		_mvShare.setViewName("admin/bill/bill");
@@ -31,32 +41,69 @@ public class AdBillsController extends AdBaseController {
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "add")
+	@RequestMapping(value = "quan-tri/hoa-don/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView Bill(@PathVariable String currentPage) {
+		int totalData = _billService.GetDataBills().size();
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBillsPage,
+				Integer.parseInt(currentPage));
+		_mvShare.addObject("paginateInfo", paginateInfo);
+		_mvShare.addObject("billsPaginate",
+				_billService.GetDataBillsPaginate(null, paginateInfo.getStart(), totalBillsPage));
+		_mvShare.addObject("bills", _billService.GetDataBills());
+		_mvShare.addObject("users", _userService.GetDataUsers());
+		_mvShare.setViewName("admin/bill/bill");
+		_mvShare.addObject("bill", new BillsDTO());
+		return _mvShare;
+	}
+
+	@RequestMapping(value = "/quan-tri/hoa-don/addorupdate", method = RequestMethod.POST, params = "add")
 	public String AddBill(@ModelAttribute("bill") BillsDTO bill) {
 		_billService.AddBill(bill);
 		return "redirect:/quan-tri/hoa-don";
 	}
-	@RequestMapping(value = "addorupdate", method = RequestMethod.POST, params = "update")
+
+	@RequestMapping(value = "/quan-tri/hoa-don/addorupdate", method = RequestMethod.POST, params = "update")
 	public String UpdateBill(@ModelAttribute("bill") BillsDTO bill) {
 		_billService.UpdateBill(bill);
 		return "redirect:/quan-tri/hoa-don";
 	}
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/quan-tri/hoa-don/delete/{id}", method = RequestMethod.GET)
 	public String DeleteBill(@PathVariable("id") long id) {
 		_billService.DeleteBill(id);
 		return "redirect:/quan-tri/hoa-don";
 	}
-	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public ModelAndView SearchBill(@RequestParam("keyword") String keyword) {
-		if(keyword != null) {
-			_mvShare.addObject("bills", _billService.SearchBill(keyword));
-		}
-		else {
+
+	@RequestMapping(value = "/quan-tri/hoa-don/search", method = RequestMethod.POST)
+	public ModelAndView SearchCategory(@RequestParam("keyword") String keyword) {
+		if (keyword != null) {
+			int totalData = _billService.GetDataBills().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBillsPage, 1);
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("billsPaginate",
+					_billService.GetDataBillsPaginate(keyword, paginateInfo.getStart(), totalBillsPage));
 			_mvShare.addObject("bills", _billService.GetDataBills());
+			_mvShare.addObject("users", _userService.GetDataUsers());
+			_mvShare.setViewName("admin/bill/bill");
+			_mvShare.addObject("bill", new BillsDTO());
 		}
-		_mvShare.addObject("users", _userService.GetDataUsers());
-		_mvShare.setViewName("admin/bill/bill");
+		return _mvShare;
+	}
+	
+	@RequestMapping(value = "/quan-tri/hoa-don/search/{currentPage}", method = RequestMethod.POST)
+	public ModelAndView SearchCategory(@RequestParam("keyword")String keyword, @PathVariable String currentPage) {
+		if (keyword != null) {
+			int totalData = _billService.GetDataBills().size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalBillsPage,
+					Integer.parseInt(currentPage));
+			_mvShare.addObject("paginateInfo", paginateInfo);
+			_mvShare.addObject("billsPaginate",
+					_billService.GetDataBillsPaginate(keyword, paginateInfo.getStart(), totalBillsPage));
+			_mvShare.addObject("bills", _billService.GetDataBills());
+			_mvShare.addObject("users", _userService.GetDataUsers());
+			_mvShare.setViewName("admin/bill/bill");
+			_mvShare.addObject("bill", new BillsDTO());
+		}
 		return _mvShare;
 	}
 }

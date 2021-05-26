@@ -16,6 +16,10 @@ public class ProductServiceImpl implements IProductService{
 	public ProductsDTO GetProductByID(long id) {
 		return productsDAO.GetProductByID(id);
 	}
+	
+	public List<ProductsDTO> GetDataProductsPaginate(String keyword, int start, int totalPage){
+		return productsDAO.GetDataProductsPaginate(keyword, start, totalPage);
+	}
 
 	public List<ProductsDTO> GetProductByIDCategory(long id) {
 		return productsDAO.GetProductByIDCategory(id);

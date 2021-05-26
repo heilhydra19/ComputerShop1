@@ -15,12 +15,16 @@
 <body>
 	<div class="row">
 		<div class="span12">
-			<form class="aligncenter" action="${pageContext.request.contextPath}/quan-tri/khach-hang/search" class="navbar-search pull-left" method="POST">
-				<input type="text" placeholder="Search" class="search-query span2" name="keyword">
+			<form class="aligncenter"
+				action="${pageContext.request.contextPath}/quan-tri/khach-hang/search"
+				class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2"
+					name="keyword">
 			</form>
 			<div class="well well-small">
-				<form:form action="${pageContext.request.contextPath}/quan-tri/khach-hang/addorupdate" method="POST"
-					modelAttribute="customer">
+				<form:form
+					action="${pageContext.request.contextPath}/quan-tri/khach-hang/addorupdate"
+					method="POST" modelAttribute="customer">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -49,7 +53,7 @@
 							Khách Hàng</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
 						<form:select name="id" path="id" style="max-width: 100px">
-							<c:forEach var="item" items="${ customers }">
+							<c:forEach var="item" items="${ customersPaginate }">
 								<form:option value="${ item.id }">${ item.name }</form:option>
 							</c:forEach>
 						</form:select>
@@ -71,23 +75,43 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${ customers }">
-							<tr>
-								<td>${ item.id }</td>
-								<td>${ item.name }</td>
-								<td><img width="60" src="<c:url value="${ item.img }"/>"
-									alt=""></td>
-								<td>${ item.phone }</td>
-								<td>${ item.email }</td>
-								<td><a href="<c:url value="/quan-tri/khach-hang/delete/${ item.id }"/>"
-									class="btn btn-mini btn-danger" type="button"> <span
-										class="icon-remove"></span>
-								</a></td>
-							</tr>
+						<c:if test="${ customersPaginate.size() > 0 }">
+							<c:forEach var="item" items="${ customersPaginate }">
+								<tr>
+									<td>${ item.id }</td>
+									<td>${ item.name }</td>
+									<td><img width="60" src="<c:url value="${ item.img }"/>"
+										alt=""></td>
+									<td>${ item.phone }</td>
+									<td>${ item.email }</td>
+									<td><a
+										href="<c:url value="/quan-tri/khach-hang/delete/${ item.id }"/>"
+										class="btn btn-mini btn-danger" type="button"> <span
+											class="icon-remove"></span>
+									</a></td>
+									<c:if
+										test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == customersPaginate.size() }">
+								</tr>
+								<c:if test="${ (loop.index + 1) < customersPaginate.size() }">
+								</c:if>
+						</c:if>
 						</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
 		</div>
+	</div>
+	<div class="pagination">
+		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+			varStatus="loop">
+			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+				<a href="<c:url value="/quan-tri/khach-hang/${ loop.index }"/>"
+					class="active">${ loop.index }</a>
+			</c:if>
+			<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+				<a href="<c:url value="/quan-tri/khach-hang/${ loop.index }"/>">${ loop.index }</a>
+			</c:if>
+		</c:forEach>
 	</div>
 </body>

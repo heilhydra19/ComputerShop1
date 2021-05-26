@@ -1,5 +1,6 @@
 package ComputerShop1.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -15,10 +16,32 @@ public class BillDetailsDAO extends BaseDAO{
 		return sql;
 	}
 	
-	public List<BillDetailsDTO> GetDataBillDetailById(long id) {
+	private StringBuffer SqlBillDetailById(long id) {
 		StringBuffer sql = SqlString();
 		sql.append("AND a.id_bill = "+id+" ");
+		return sql;
+	}
+	
+	public List<BillDetailsDTO> GetDataBillDetailById(long id) {
+		StringBuffer sql = SqlBillDetailById(id);
 		return _jdbcTemplate.query(sql.toString(), new BillDetailsDTOMapper());
+	}
+	
+	private String SqlBillDetailsPaginate(long id, int start, int totalPage) {
+		StringBuffer sql = SqlBillDetailById(id);
+		sql.append(" LIMIT " + (start-1) + ", " + totalPage);
+		return sql.toString();
+	}
+
+	public List<BillDetailsDTO> GetDataBillDetailsPaginate(long id, int start, int totalPage) {
+		StringBuffer sqlGetData = SqlBillDetailById(id);
+		List<BillDetailsDTO> listBillDetails = _jdbcTemplate.query(sqlGetData.toString(), new BillDetailsDTOMapper());
+		List<BillDetailsDTO> listBillDetailsPaginate = new ArrayList<BillDetailsDTO>();
+		if (listBillDetails.size() > 0) {
+			String sql = SqlBillDetailsPaginate(id, start, totalPage);
+			listBillDetailsPaginate = _jdbcTemplate.query(sql, new BillDetailsDTOMapper());
+		}
+		return listBillDetailsPaginate;
 	}
 	
 	public double GetDefaultPrice(long id) {

@@ -9,6 +9,7 @@ import ComputerShop1.Entity.Suppliers;
 @Service
 public interface ISupplierService {
 	public List<Suppliers> GetDataSuppliers();
+	public List<Suppliers> GetDataSuppliersPaginate(String keyword, int start, int totalPage);
 	public List<Suppliers> SearchSupplier(String keyword);
 	public int AddSupplier(Suppliers supplier);
 	public int UpdateSupplier(Suppliers supplier);
