@@ -35,12 +35,19 @@ public class ProductsDAO extends BaseDAO {
 
 	public List<ProductsDTO> GetDataNewProducts() {
 		StringBuffer sql = SqlString();
-		sql.append("GROUP BY c.id ");
+		sql.append("GROUP BY c.id DESC ");
 		sql.append(" LIMIT 12");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
-
-	public List<ProductsDTO> GetDataHomeProducts() {
+	
+	public List<ProductsDTO> GetDataUpcomingProducts() {
+		StringBuffer sql = SqlString();
+		sql.append("GROUP BY c.id DESC ");
+		sql.append(" LIMIT 3");
+		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
+	}
+	
+	public List<ProductsDTO> GetDataFeatureProducts() {
 		StringBuffer sql = SqlString();
 		sql.append("GROUP BY c.id ");
 		sql.append(" LIMIT 12");

@@ -44,9 +44,9 @@ Navigation Bar Section
 			</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<c:forEach var="item" items="${ menu }">
-						<li class="active"><a href="index.html">${ item.name } </a></li>
-					</c:forEach>
+					<li class="active"><a href="index.html">Trang Chủ </a></li>
+					<li class=""><a href="index.html">Sản Phẩm </a></li>
+					<li class=""><a href="index.html">Liên Hệ </a></li>
 				</ul>
 				<form action="#" class="navbar-search pull-left">
 					<input type="text" placeholder="Search" class="search-query span2">
@@ -75,7 +75,7 @@ Navigation Bar Section
 							</form>
 						</div></li>
 				</ul>
-				
+
 			</div>
 		</div>
 	</div>
