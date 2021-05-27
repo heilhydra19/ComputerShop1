@@ -124,9 +124,9 @@ New Products
 							<c:forEach var="item" items="${ products }" varStatus="loop">
 								<li class="span3">
 									<div class="thumbnail">
-										<a class="zoomTool" href="product_details.html"
+										<a class="zoomTool" href="chi-tiet-san-pham/${ item.id }"
 											title="add to cart"><span class="icon-search"></span>
-											QUICK VIEW</a> <a href="product_details.html"><img
+											QUICK VIEW</a> <a href="chi-tiet-san-pham/${ item.id }"><img
 											src="<c:url value="/assets/user/img/${ item.img }"/>" alt=""></a>
 									</div>
 								</li>
@@ -167,7 +167,7 @@ New Products
 					<c:forEach var="item" items="${ products }" varStatus="loop">
 						<li class="span4">
 							<div class="thumbnail">
-								<a class="zoomTool" href="#"
+								<a class="zoomTool" href="chi-tiet-san-pham/${ item.id }"
 									title="add to cart"><span class="icon-search"></span> QUICK
 									VIEW</a> <a href="chi-tiet-san-pham/${ item.id }"><img
 									src="<c:url value="/assets/user/img/${ item.img }"/>"

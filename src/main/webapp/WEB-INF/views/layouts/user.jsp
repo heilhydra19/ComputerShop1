@@ -51,7 +51,7 @@
 					</c:if>
 					<c:if test="${ empty LoginInfo }">
 						<a href="<c:url value="/dang-ky"/>"><span class="icon-edit"></span>
-							Đăng Ký</a>
+							Đăng Nhập/Đăng Ký</a>
 					</c:if>
 					<a href="contact.html"><span class="icon-envelope"></span>
 						Contact us</a> <a href="<c:url value="/gio-hang"/>"><span

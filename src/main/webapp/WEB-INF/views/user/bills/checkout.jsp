@@ -4,6 +4,9 @@
 <head>
 <title>Thanh Toán</title>
 </head>
+<c:if test="${ empty LoginInfo}">
+	<c:redirect url="/dang-ky"></c:redirect>
+</c:if>
 <body>
 	<div class="row">
 		<div id="sidebar" class="span3">

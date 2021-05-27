@@ -13,7 +13,7 @@ public class ProductController extends BaseController{
 	@Autowired
 	private ProductServiceImpl _productServiceImpl;
 	
-	@RequestMapping(value = {"chi-tiet-san-pham/{id}"})
+	@RequestMapping(value = {"/chi-tiet-san-pham/{id}"})
 	public ModelAndView Index(@PathVariable long id) {
 		_mvShare.setViewName("user/product/product");
 		_mvShare.addObject("product", _productServiceImpl.GetProductByID(id));
