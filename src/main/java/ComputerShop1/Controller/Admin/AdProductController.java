@@ -32,6 +32,7 @@ public class AdProductController extends AdBaseController {
 
 	@RequestMapping(value = "quan-tri/san-pham", method = RequestMethod.GET)
 	public ModelAndView Product() {
+		_mvShare.clear();
 		int totalData = _productService.GetDataProducts().size();
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, 1);
 		_mvShare.addObject("paginateInfo", paginateInfo);
@@ -43,18 +44,16 @@ public class AdProductController extends AdBaseController {
 		_mvShare.addObject("product", new ProductsDTO());
 		return _mvShare;
 	}
-	
+
 	@RequestMapping(value = "quan-tri/san-pham/{currentPage}", method = RequestMethod.GET)
 	public ModelAndView Product(@PathVariable String currentPage) {
 		int totalData = _productService.GetDataProducts().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, Integer.parseInt(currentPage));
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage,
+				Integer.parseInt(currentPage));
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("productsPaginate",
 				_productService.GetDataProductsPaginate(null, paginateInfo.getStart(), totalProductsPage));
-		_mvShare.addObject("categories", _categoryService.GetDataCategories());
-		_mvShare.addObject("brands", _brandService.GetDataBrands());
 		_mvShare.setViewName("admin/product/product");
-		_mvShare.addObject("product", new ProductsDTO());
 		return _mvShare;
 	}
 
@@ -77,9 +76,15 @@ public class AdProductController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/san-pham/search", method = RequestMethod.POST)
-	public ModelAndView SearchProduct(@RequestParam("keyword") String keyword) {
+	public String SearchProduct(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/san-pham/search/" + keyword;
+	}
+
+	@RequestMapping(value = "/quan-tri/san-pham/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchProduct1(@PathVariable("keyword") String keyword) {
 		if (keyword != null) {
-			int totalData = _productService.GetDataProducts().size();
+			int totalData = _productService.SearchProduct(keyword).size();
 			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("productsPaginate",
@@ -88,22 +93,21 @@ public class AdProductController extends AdBaseController {
 			_mvShare.addObject("brands", _brandService.GetDataBrands());
 			_mvShare.setViewName("admin/product/product");
 			_mvShare.addObject("product", new ProductsDTO());
+			_mvShare.addObject("keyword", keyword);
 		}
 		return _mvShare;
 	}
-	
-	@RequestMapping(value = "/quan-tri/san-pham/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchProduct(@RequestParam("keyword")String keyword, @PathVariable String currentPage) {
+
+	@RequestMapping(value = "/quan-tri/san-pham/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchProduct(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		if (keyword != null) {
-			int totalData = _productService.GetDataProducts().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage, Integer.parseInt(currentPage));
+			int totalData = _productService.SearchProduct(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalProductsPage,
+					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("productsPaginate",
 					_productService.GetDataProductsPaginate(keyword, paginateInfo.getStart(), totalProductsPage));
-			_mvShare.addObject("categories", _categoryService.GetDataCategories());
-			_mvShare.addObject("brands", _brandService.GetDataBrands());
 			_mvShare.setViewName("admin/product/product");
-			_mvShare.addObject("product", new ProductsDTO());
 		}
 		return _mvShare;
 	}

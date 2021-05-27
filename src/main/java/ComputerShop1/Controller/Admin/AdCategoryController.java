@@ -25,6 +25,7 @@ public class AdCategoryController extends AdBaseController {
 
 	@RequestMapping(value = "quan-tri/loai", method = RequestMethod.GET)
 	public ModelAndView Category() {
+		_mvShare.clear();
 		_mvShare.setViewName("admin/category/category");
 		int totalData = _categoryService.GetDataCategories().size();
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
@@ -42,11 +43,9 @@ public class AdCategoryController extends AdBaseController {
 		int totalData = _categoryService.GetDataCategories().size();
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
 				Integer.parseInt(currentPage));
-		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("categoriesPaginate",
 				_categoryService.GetDataCategoriesPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
-		_mvShare.addObject("categories", _categoryService.GetDataCategories());
-		_mvShare.addObject("category", new Categories());
+		_mvShare.addObject("paginateInfo", paginateInfo);
 		return _mvShare;
 	}
 
@@ -69,9 +68,15 @@ public class AdCategoryController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/loai/search", method = RequestMethod.POST)
-	public ModelAndView SearchCategory(@RequestParam("keyword") String keyword) {
-		_mvShare.setViewName("admin/category/category");
+	public String SearchCategory(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/loai/search/" + keyword;
+	}
+
+	@RequestMapping(value = "/quan-tri/loai/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchCategory1(@PathVariable("keyword") String keyword) {
 		if (keyword != null) {
+			_mvShare.setViewName("admin/category/category");
 			int totalData = _categoryService.SearchCategory(keyword).size();
 			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
@@ -79,20 +84,21 @@ public class AdCategoryController extends AdBaseController {
 					_categoryService.GetDataCategoriesPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
 			_mvShare.addObject("categories", _categoryService.SearchCategory(keyword));
 			_mvShare.addObject("category", new Categories());
+			_mvShare.addObject("keyword", keyword);
 		}
 		return _mvShare;
 	}
-	
-	@RequestMapping(value = "/quan-tri/loai/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchCategory(@RequestParam("keyword")String keyword, @PathVariable String currentPage) {
-		_mvShare.setViewName("admin/category/category");
+
+	@RequestMapping(value = "/quan-tri/loai/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchCategory(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		if (keyword != null) {
+			_mvShare.setViewName("admin/category/category");
 			int totalData = _categoryService.SearchCategory(keyword).size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, Integer.parseInt(currentPage));
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("categoriesPaginate",
 					_categoryService.GetDataCategoriesPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("categories", _categoryService.SearchCategory(keyword));
 		}
 		return _mvShare;
 	}

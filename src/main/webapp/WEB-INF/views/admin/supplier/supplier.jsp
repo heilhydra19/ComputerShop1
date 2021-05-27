@@ -103,16 +103,34 @@
 			</div>
 		</div>
 	</div>
-	<div class="pagination">
-		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
-			varStatus="loop">
-			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
-				<a href="<c:url value="/quan-tri/nha-cung-cap/${ loop.index }"/>"
-					class="active">${ loop.index }</a>
-			</c:if>
-			<c:if test="${ (loop.index) != paginateInfo.currentPage }">
-				<a href="<c:url value="/quan-tri/nha-cung-cap/${ loop.index }"/>">${ loop.index }</a>
-			</c:if>
-		</c:forEach>
-	</div>
+	<c:if test="${ not empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/nha-cung-cap/search/${ keyword }/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/nha-cung-cap/search/${ keyword }/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
+	<c:if test="${ empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/nha-cung-cap/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/nha-cung-cap/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
 </body>

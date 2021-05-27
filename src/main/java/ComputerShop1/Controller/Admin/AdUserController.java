@@ -22,18 +22,19 @@ public class AdUserController extends AdBaseController {
 	@Autowired
 	private PaginateServiceImpl paginateService;
 
-	private int totalCategoriesPage = 30;
+	private int totalUsersPage = 30;
 
 	@RequestMapping(value = "quan-tri/nguoi-dung", method = RequestMethod.GET)
 	public ModelAndView User() {
+		_mvShare.clear();
 		_mvShare.addObject("users", _userService.GetDataUsers());
 		_mvShare.addObject("roles", _userService.GetDataRoles());
 		_mvShare.setViewName("admin/user/user");
 		int totalData = _userService.GetDataUsers().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalUsersPage, 1);
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("usersPaginate",
-				_userService.GetDataUsersPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
+				_userService.GetDataUsersPaginate(null, paginateInfo.getStart(), totalUsersPage));
 		_mvShare.addObject("user", new UsersDTO());
 		_mvShare.addObject("account", new UsersDTO());
 		return _mvShare;
@@ -41,17 +42,13 @@ public class AdUserController extends AdBaseController {
 
 	@RequestMapping(value = "quan-tri/nguoi-dung/{currentPage}", method = RequestMethod.GET)
 	public ModelAndView User(@PathVariable String currentPage) {
-		_mvShare.addObject("users", _userService.GetDataUsers());
-		_mvShare.addObject("roles", _userService.GetDataRoles());
 		_mvShare.setViewName("admin/user/user");
 		int totalData = _userService.GetDataUsers().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalUsersPage,
 				Integer.parseInt(currentPage));
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("usersPaginate",
-				_userService.GetDataUsersPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
-		_mvShare.addObject("user", new UsersDTO());
-		_mvShare.addObject("account", new UsersDTO());
+				_userService.GetDataUsersPaginate(null, paginateInfo.getStart(), totalUsersPage));
 		return _mvShare;
 	}
 
@@ -76,36 +73,39 @@ public class AdUserController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/nguoi-dung/search", method = RequestMethod.POST)
-	public ModelAndView SearchUser(@RequestParam("keyword") String keyword) {
+	public String SearchUser(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/nguoi-dung/search/" + keyword;
+	}
+	
+	@RequestMapping(value = "/quan-tri/nguoi-dung/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchUser1(@PathVariable("keyword") String keyword) {
 		if (keyword != null) {
 			_mvShare.addObject("users", _userService.GetDataUsers());
 			_mvShare.addObject("roles", _userService.GetDataRoles());
 			_mvShare.setViewName("admin/user/user");
-			int totalData = _userService.GetDataUsers().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+			int totalData = _userService.SearchUser(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalUsersPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("usersPaginate",
-					_userService.GetDataUsersPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
+					_userService.GetDataUsersPaginate(keyword, paginateInfo.getStart(), totalUsersPage));
 			_mvShare.addObject("user", new UsersDTO());
 			_mvShare.addObject("account", new UsersDTO());
+			_mvShare.addObject("keyword",keyword);
 		}
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "/quan-tri/nguoi-dung/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchUser(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
+	@RequestMapping(value = "/quan-tri/nguoi-dung/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchUser(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		if (keyword != null) {
-			_mvShare.addObject("users", _userService.GetDataUsers());
-			_mvShare.addObject("roles", _userService.GetDataRoles());
 			_mvShare.setViewName("admin/user/user");
-			int totalData = _userService.GetDataUsers().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+			int totalData = _userService.SearchUser(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalUsersPage,
 					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("usersPaginate",
-					_userService.GetDataUsersPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("user", new UsersDTO());
-			_mvShare.addObject("account", new UsersDTO());
+					_userService.GetDataUsersPaginate(keyword, paginateInfo.getStart(), totalUsersPage));
 		}
 		return _mvShare;
 	}

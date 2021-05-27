@@ -25,6 +25,7 @@ public class AdCustomerController extends AdBaseController {
 
 	@RequestMapping(value = "quan-tri/khach-hang", method = RequestMethod.GET)
 	public ModelAndView Customer() {
+		_mvShare.clear();
 		_mvShare.setViewName("admin/customer/customer");
 		int totalData = _customerService.GetDataCustomers().size();
 		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage, 1);
@@ -45,8 +46,6 @@ public class AdCustomerController extends AdBaseController {
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("customersPaginate",
 				_customerService.GetDataCustomersPaginate(null, paginateInfo.getStart(), totalCustomersPage));
-		_mvShare.addObject("customers", _customerService.GetDataCustomers());
-		_mvShare.addObject("customer", new CustomersDTO());
 		return _mvShare;
 	}
 
@@ -69,32 +68,37 @@ public class AdCustomerController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/khach-hang/search", method = RequestMethod.POST)
-	public ModelAndView SearchCustomer(@RequestParam("keyword") String keyword) {
+	public String SearchCustomer(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/khach-hang/search/" + keyword;
+	}
+
+	@RequestMapping(value = "/quan-tri/khach-hang/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchCustomer1(@PathVariable("keyword") String keyword) {
 		_mvShare.setViewName("admin/customer/customer");
 		if (keyword != null) {
-			int totalData = _customerService.GetDataCustomers().size();
+			int totalData = _customerService.SearchCustomer(keyword).size();
 			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("customersPaginate",
 					_customerService.GetDataCustomersPaginate(keyword, paginateInfo.getStart(), totalCustomersPage));
-			_mvShare.addObject("customers", _customerService.GetDataCustomers());
+			_mvShare.addObject("customers", _customerService.SearchCustomer(keyword));
 			_mvShare.addObject("customer", new CustomersDTO());
+			_mvShare.addObject("keyword",keyword);
 		}
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "/quan-tri/khach-hang/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchCustomer(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
+	@RequestMapping(value = "/quan-tri/khach-hang/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchCustomer(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		_mvShare.setViewName("admin/customer/customer");
 		if (keyword != null) {
-			int totalData = _customerService.GetDataCustomers().size();
+			int totalData = _customerService.SearchCustomer(keyword).size();
 			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCustomersPage,
 					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("customersPaginate",
 					_customerService.GetDataCustomersPaginate(keyword, paginateInfo.getStart(), totalCustomersPage));
-			_mvShare.addObject("customers", _customerService.GetDataCustomers());
-			_mvShare.addObject("customer", new CustomersDTO());
 		}
 		return _mvShare;
 	}

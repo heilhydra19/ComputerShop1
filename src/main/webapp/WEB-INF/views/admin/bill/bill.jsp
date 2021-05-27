@@ -79,8 +79,8 @@
 								<td>${ item.address }</td>
 								<td>${ item.created_at }</td>
 								<td><a class="btn btn-mini pull-right"
-									href="<c:url value="/quan-tri/hoa-don/bill${ item.id }"/>">Xem thêm <span
-										class="icon-plus"></span>
+									href="<c:url value="/quan-tri/hoa-don/bill${ item.id }"/>">Xem
+										thêm <span class="icon-plus"></span>
 								</a></td>
 								<td><a
 									href="<c:url value="/quan-tri/hoa-don/delete/${ item.id }"/>"
@@ -100,17 +100,34 @@
 			</table>
 		</div>
 	</div>
-
-	<div class="pagination">
-		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
-			varStatus="loop">
-			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
-				<a href="<c:url value="/quan-tri/hoa-don/${ loop.index }"/>"
-					class="active">${ loop.index }</a>
-			</c:if>
-			<c:if test="${ (loop.index) != paginateInfo.currentPage }">
-				<a href="<c:url value="/quan-tri/hoa-don/${ loop.index }"/>">${ loop.index }</a>
-			</c:if>
-		</c:forEach>
-	</div>
+	<c:if test="${ not empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/hoa-don/search/${ keyword }/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/hoa-don/search/${ keyword }/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
+	<c:if test="${ empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/hoa-don/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/hoa-don/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
 </body>

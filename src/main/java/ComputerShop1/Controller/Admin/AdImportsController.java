@@ -24,15 +24,16 @@ public class AdImportsController extends AdBaseController {
 	@Autowired
 	private PaginateServiceImpl paginateService;
 
-	private int totalCategoriesPage = 30;
+	private int totalImportsPage = 30;
 
 	@RequestMapping(value = "quan-tri/nhap-hang", method = RequestMethod.GET)
 	public ModelAndView Import() {
+		_mvShare.clear();
 		int totalData = _importService.GetDataImports().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalImportsPage, 1);
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("importsPaginate",
-				_importService.GetDataImportsPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
+				_importService.GetDataImportsPaginate(null, paginateInfo.getStart(), totalImportsPage));
 		_mvShare.addObject("imports", _importService.GetDataImports());
 		_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
 		_mvShare.setViewName("admin/import/import");
@@ -43,11 +44,11 @@ public class AdImportsController extends AdBaseController {
 	@RequestMapping(value = "quan-tri/nhap-hang/{currentPage}", method = RequestMethod.GET)
 	public ModelAndView Import(@PathVariable String currentPage) {
 		int totalData = _importService.GetDataImports().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalImportsPage,
 				Integer.parseInt(currentPage));
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("importsPaginate",
-				_importService.GetDataImportsPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
+				_importService.GetDataImportsPaginate(null, paginateInfo.getStart(), totalImportsPage));
 		_mvShare.addObject("imports", _importService.GetDataImports());
 		_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
 		_mvShare.setViewName("admin/import/import");
@@ -74,35 +75,38 @@ public class AdImportsController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/nhap-hang/search", method = RequestMethod.POST)
-	public ModelAndView SearchCategory(@RequestParam("keyword") String keyword) {
+	public String SearchImport(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/nhap-hang/search/" + keyword;
+	}
+
+	@RequestMapping(value = "/quan-tri/nhap-hang/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchImport1(@PathVariable("keyword") String keyword) {
 		if (keyword != null) {
-			int totalData = _importService.GetDataImports().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+			int totalData = _importService.SearchImport(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalImportsPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("importsPaginate",
-					_importService.GetDataImportsPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("imports", _importService.GetDataImports());
+					_importService.GetDataImportsPaginate(keyword, paginateInfo.getStart(), totalImportsPage));
+			_mvShare.addObject("imports", _importService.SearchImport(keyword));
 			_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
 			_mvShare.setViewName("admin/import/import");
 			_mvShare.addObject("import", new ImportsDTO());
+			_mvShare.addObject("keyword",keyword);
 		}
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "/quan-tri/nhap-hang/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchCategory(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
-		_mvShare.setViewName("admin/category/category");
+	@RequestMapping(value = "/quan-tri/nhap-hang/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchImport(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		if (keyword != null) {
-			int totalData = _importService.GetDataImports().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+			int totalData = _importService.SearchImport(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalImportsPage,
 					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("importsPaginate",
-					_importService.GetDataImportsPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("imports", _importService.GetDataImports());
-			_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
+					_importService.GetDataImportsPaginate(keyword, paginateInfo.getStart(), totalImportsPage));
 			_mvShare.setViewName("admin/import/import");
-			_mvShare.addObject("import", new ImportsDTO());
 		}
 		return _mvShare;
 	}

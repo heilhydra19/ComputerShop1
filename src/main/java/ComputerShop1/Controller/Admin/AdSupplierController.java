@@ -21,16 +21,17 @@ public class AdSupplierController extends AdBaseController {
 	@Autowired
 	private PaginateServiceImpl paginateService;
 
-	private int totalCategoriesPage = 30;
+	private int totalSuppliersPage = 30;
 
 	@RequestMapping(value = "quan-tri/nha-cung-cap", method = RequestMethod.GET)
 	public ModelAndView Supplier() {
+		_mvShare.clear();
 		_mvShare.setViewName("admin/supplier/supplier");
 		int totalData = _supplierService.GetDataSuppliers().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalSuppliersPage, 1);
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("suppliersPaginate",
-				_supplierService.GetDataSuppliersPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
+				_supplierService.GetDataSuppliersPaginate(null, paginateInfo.getStart(), totalSuppliersPage));
 		_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
 		_mvShare.addObject("supplier", new Suppliers());
 		return _mvShare;
@@ -40,13 +41,11 @@ public class AdSupplierController extends AdBaseController {
 	public ModelAndView Supplier(@PathVariable String currentPage) {
 		_mvShare.setViewName("admin/supplier/supplier");
 		int totalData = _supplierService.GetDataSuppliers().size();
-		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+		PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalSuppliersPage,
 				Integer.parseInt(currentPage));
 		_mvShare.addObject("paginateInfo", paginateInfo);
 		_mvShare.addObject("suppliersPaginate",
-				_supplierService.GetDataSuppliersPaginate(null, paginateInfo.getStart(), totalCategoriesPage));
-		_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
-		_mvShare.addObject("supplier", new Suppliers());
+				_supplierService.GetDataSuppliersPaginate(null, paginateInfo.getStart(), totalSuppliersPage));
 		return _mvShare;
 	}
 
@@ -69,32 +68,37 @@ public class AdSupplierController extends AdBaseController {
 	}
 
 	@RequestMapping(value = "/quan-tri/nha-cung-cap/search", method = RequestMethod.POST)
-	public ModelAndView SearchSupplier(@RequestParam("keyword") String keyword) {
+	public String SearchSupplier(@RequestParam("keyword") String keyword) {
+		_mvShare.clear();
+		return "redirect:/quan-tri/nha-cung-cap/search/" + keyword;
+	}
+	
+	@RequestMapping(value = "/quan-tri/nha-cung-cap/search/{keyword}", method = RequestMethod.GET)
+	public ModelAndView SearchSupplier1(@PathVariable("keyword") String keyword) {
 		_mvShare.setViewName("admin/supplier/supplier");
 		if (keyword != null) {
-			int totalData = _supplierService.GetDataSuppliers().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage, 1);
+			int totalData = _supplierService.SearchSupplier(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalSuppliersPage, 1);
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("suppliersPaginate",
-					_supplierService.GetDataSuppliersPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
+					_supplierService.GetDataSuppliersPaginate(keyword, paginateInfo.getStart(), totalSuppliersPage));
+			_mvShare.addObject("suppliers", _supplierService.SearchSupplier(keyword));
 			_mvShare.addObject("supplier", new Suppliers());
+			_mvShare.addObject("keyword",keyword);
 		}
 		return _mvShare;
 	}
 
-	@RequestMapping(value = "/quan-tri/nha-cung-cap/search/{currentPage}", method = RequestMethod.POST)
-	public ModelAndView SearchSupplier(@RequestParam("keyword") String keyword, @PathVariable String currentPage) {
+	@RequestMapping(value = "/quan-tri/nha-cung-cap/search/{keyword}/{currentPage}", method = RequestMethod.GET)
+	public ModelAndView SearchSupplier(@PathVariable("keyword") String keyword, @PathVariable String currentPage) {
 		_mvShare.setViewName("admin/supplier/supplier");
 		if (keyword != null) {
-			int totalData = _supplierService.GetDataSuppliers().size();
-			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalCategoriesPage,
+			int totalData = _supplierService.SearchSupplier(keyword).size();
+			PaginatesDTO paginateInfo = paginateService.GetInfoPaginates(totalData, totalSuppliersPage,
 					Integer.parseInt(currentPage));
 			_mvShare.addObject("paginateInfo", paginateInfo);
 			_mvShare.addObject("suppliersPaginate",
-					_supplierService.GetDataSuppliersPaginate(keyword, paginateInfo.getStart(), totalCategoriesPage));
-			_mvShare.addObject("suppliers", _supplierService.GetDataSuppliers());
-			_mvShare.addObject("supplier", new Suppliers());
+					_supplierService.GetDataSuppliersPaginate(keyword, paginateInfo.getStart(), totalSuppliersPage));
 		}
 		return _mvShare;
 	}
