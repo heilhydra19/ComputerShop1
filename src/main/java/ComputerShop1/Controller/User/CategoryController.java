@@ -21,7 +21,7 @@ public class CategoryController extends BaseController{
 	
 	private int totalProductsPage = 9;
 	
-	@RequestMapping(value = "/san-pham/{id}")
+	@RequestMapping(value = "/san-pham/loai{id}")
 	public ModelAndView Product(@PathVariable String id) {
 		_mvShare.setViewName("user/product/category");
 		int totalData = categoryService.GetProductByIDCategory(Long.parseLong(id)).size();
@@ -32,7 +32,7 @@ public class CategoryController extends BaseController{
 		return _mvShare;
 	}
 	
-	@RequestMapping(value = "/san-pham/{id}/{currentPage}")
+	@RequestMapping(value = "/san-pham/loai{id}/{currentPage}")
 	public ModelAndView Product(@PathVariable String id, @PathVariable String currentPage) {
 		_mvShare.setViewName("user/product/category");
 		int totalData = categoryService.GetProductByIDCategory(Long.parseLong(id)).size();

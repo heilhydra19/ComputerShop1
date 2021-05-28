@@ -39,14 +39,14 @@ public class ProductsDAO extends BaseDAO {
 		sql.append(" LIMIT 12");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
-	
+
 	public List<ProductsDTO> GetDataUpcomingProducts() {
 		StringBuffer sql = SqlString();
 		sql.append("GROUP BY c.id DESC ");
 		sql.append(" LIMIT 3");
 		return _jdbcTemplate.query(sql.toString(), new ProductsDTOMapper());
 	}
-	
+
 	public List<ProductsDTO> GetDataFeatureProducts() {
 		StringBuffer sql = SqlString();
 		sql.append("GROUP BY c.id ");
@@ -56,9 +56,9 @@ public class ProductsDAO extends BaseDAO {
 
 	private String SqlProductsPaginate(String keyword, int start, int totalPage) {
 		StringBuffer sql = SqlString();
-		if(keyword != null) {
-			sql.append("AND c.id like '%" + keyword + "%' OR c.name LIKE '%" + keyword + "%' OR d.name LIKE '%" + keyword
-					+ "%'" + " OR e.name LIKE '%" + keyword + "%' OR c.price like '" + keyword + "' ");
+		if (keyword != null) {
+			sql.append("AND c.id like '%" + keyword + "%' OR c.name LIKE '%" + keyword + "%' OR d.name LIKE '%"
+					+ keyword + "%'" + " OR e.name LIKE '%" + keyword + "%' OR c.price like '" + keyword + "' ");
 		}
 		sql.append("GROUP BY c.id DESC");
 		sql.append(" LIMIT " + (start - 1) + ", " + totalPage);
@@ -66,7 +66,7 @@ public class ProductsDAO extends BaseDAO {
 	}
 
 	public List<ProductsDTO> GetDataProductsPaginate(String keyword, int start, int totalPage) {
-		StringBuffer sqlGetData = SqlString();
+		String sqlGetData = SqlProductsPaginate(keyword, start, totalPage);
 		List<ProductsDTO> listProducts = _jdbcTemplate.query(sqlGetData.toString(), new ProductsDTOMapper());
 		List<ProductsDTO> listProductsPaginate = new ArrayList<ProductsDTO>();
 		if (listProducts.size() > 0) {
@@ -75,7 +75,7 @@ public class ProductsDAO extends BaseDAO {
 		}
 		return listProductsPaginate;
 	}
-	
+
 	public List<ProductsDTO> GetDataProducts() {
 		StringBuffer sql = SqlString();
 		sql.append(" GROUP by c.id DESC");
@@ -84,7 +84,7 @@ public class ProductsDAO extends BaseDAO {
 
 	public ProductsDTO GetProductByID(long id) {
 		StringBuffer sql = SqlString();
-		sql.append(" and c.id = '" + id +"' group by c.id ");
+		sql.append(" and c.id = '" + id + "' group by c.id ");
 		return _jdbcTemplate.queryForObject(sql.toString(), new ProductsDTOMapper());
 	}
 

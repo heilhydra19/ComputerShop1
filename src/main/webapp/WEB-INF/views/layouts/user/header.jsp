@@ -44,13 +44,9 @@ Navigation Bar Section
 			</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="active"><a href="index.html">Trang Chủ </a></li>
-					<li class=""><a href="index.html">Sản Phẩm </a></li>
-					<li class=""><a href="index.html">Liên Hệ </a></li>
+					<li class="active"><a href="<c:url value=""/>">Trang Chủ </a></li>
+					<li class=""><a href="<c:url value="/san-pham"/>">Sản Phẩm </a></li>
 				</ul>
-				<form action="#" class="navbar-search pull-left">
-					<input type="text" placeholder="Search" class="search-query span2">
-				</form>
 				<ul class="nav pull-right">
 					<li class="dropdown"><a data-toggle="dropdown"
 						class="dropdown-toggle" href=""><span class="icon-lock"></span>
@@ -75,7 +71,9 @@ Navigation Bar Section
 							</form>
 						</div></li>
 				</ul>
-
+				<form action="#" class="navbar-search pull-right">
+					<input type="text" placeholder="Search" class="search-query span2">
+				</form>
 			</div>
 		</div>
 	</div>

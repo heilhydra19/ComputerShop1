@@ -57,11 +57,11 @@
 		<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
 			varStatus="loop">
 			<c:if test="${ (loop.index) == paginateInfo.currentPage }">
-				<a href="<c:url value="/san-pham/loai${ idCategory }/${ loop.index }"/>"
+				<a href="<c:url value="/san-pham/${ loop.index }"/>"
 					class="active">${ loop.index }</a>
 			</c:if>
 			<c:if test="${ (loop.index) != paginateInfo.currentPage }">
-				<a href="<c:url value="/san-pham/loai${ idCategory }/${ loop.index }"/>">${ loop.index }</a>
+				<a href="<c:url value="/san-pham/${ loop.index }"/>">${ loop.index }</a>
 			</c:if>
 		</c:forEach>
 	</div>

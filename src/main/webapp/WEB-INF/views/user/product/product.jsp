@@ -19,7 +19,7 @@ Body Section
 			<div class="well well-small">
 				<ul class="nav nav-list">
 					<c:forEach var="item" items="${ categories }">
-						<li><a href='<c:url value="/san-pham/${ item.id }"/>'><span
+						<li><a href='<c:url value="/san-pham/loai${ item.id }"/>'><span
 								class="icon-circle-blank"></span> ${ item.name }</a></li>
 						<li>
 					</c:forEach>
@@ -32,13 +32,15 @@ Body Section
 				<ul class="nav nav-list promowrapper">
 					<li>
 						<div class="thumbnail">
-							<a class="zoomTool" href="${pageContext.request.contextPath}/chi-tiet-san-pham/${ item.id }"
+							<a class="zoomTool"
+								href="<c:url value="/chi-tiet-san-pham/${ item.id }"/>"
 								title="add to cart"><span class="icon-search"></span> QUICK
 								VIEW</a> <img src="<c:url value="${ item.img }"/>"
 								alt="bootstrap ecommerce templates">
 							<div class="caption">
 								<h4>
-									<a class="defaultBtn" href="${pageContext.request.contextPath}/chi-tiet-san-pham/${ item.id }">VIEW</a>
+									<a class="defaultBtn"
+										href="<c:url value="/chi-tiet-san-pham/${ item.id }"/>">VIEW</a>
 									<span class="pull-right">$22.00</span>
 								</h4>
 							</div>
@@ -51,8 +53,10 @@ Body Section
 		</div>
 		<div class="span9">
 			<ul class="breadcrumb">
-				<li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
-				<li><a href="products.html">Sản phẩm</a> <span class="divider">/</span></li>
+				<li><a href="<c:url value="/"/>">Trang chủ</a> <span
+					class="divider">/</span></li>
+				<li><a href="<c:url value="/san-pham"/>">Danh sách sản phẩm</a>
+					<span class="divider">/</span></li>
 				<li class="active">Chi tiết sản phẩm</li>
 			</ul>
 			<div class="well well-small">
@@ -74,33 +78,18 @@ Body Section
 					<div class="span7">
 						<h3>${ product.name }</h3>
 						<hr class="soft" />
+						<p>Loại Linh Kiện: ${ product.category }</p>
+						<p>Hãng: ${ product.brand }</p>
 
 						<form class="form-horizontal qtyFrm" method="get"
 							action="<c:url value="/AddCart/${ product.id }"/>">
 							<div class="control-group">
 								<label class="control-label"><span><fmt:formatNumber
 											type="number" groupingUsed="true" value="${ product.price }" />₫</span></label>
-								<div class="controls">
-									<input type="number" min="0" value="0" class="span6">
-								</div>
 							</div>
-
-							<div class="control-group">
-								<label class="control-label"><span>Color</span></label>
-								<div class="controls">
-									<select class="span11">
-										<option>Red</option>
-										<option>Purple</option>
-										<option>Pink</option>
-										<option>Red</option>
-									</select>
-								</div>
-							</div>
-							<h4></h4>
-							<p>
-								<button type="submit" class="shopBtn">
-									<span class=" icon-shopping-cart"></span> Thêm giỏ hàng
-								</button>
+							<button type="submit" class="shopBtn">
+								<span class=" icon-shopping-cart"></span> Thêm giỏ hàng
+							</button>
 						</form>
 					</div>
 				</div>

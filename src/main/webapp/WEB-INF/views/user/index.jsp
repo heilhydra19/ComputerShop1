@@ -13,7 +13,7 @@ Body Section
 				<ul class="nav nav-list">
 
 					<c:forEach var="item" items="${ categories }">
-						<li><a href='<c:url value="/san-pham/${ item.id }"/>'><span
+						<li><a href='<c:url value="/san-pham/loai${ item.id }"/>'><span
 								class="icon-circle-blank"></span> ${ item.name }</a></li>
 						<li>
 					</c:forEach>
@@ -26,15 +26,16 @@ Body Section
 				<ul class="nav nav-list promowrapper">
 					<li>
 						<div class="thumbnail">
-							<a class="zoomTool" href="${pageContext.request.contextPath}/chi-tiet-san-pham/${ item.id }"
+							<a class="zoomTool"
+								href="<c:url value="/chi-tiet-san-pham/${ item.id }"/>"
 								title="add to cart"><span class="icon-search"></span> QUICK
-								VIEW</a> <img
-								src="<c:url value="${ item.img }"/>"
+								VIEW</a> <img src="<c:url value="${ item.img }"/>"
 								alt="bootstrap ecommerce templates">
 							<div class="caption">
 								<h4>
-									<a class="defaultBtn" href="${pageContext.request.contextPath}/chi-tiet-san-pham/${ item.id }">VIEW</a> <span
-										class="pull-right">$22.00</span>
+									<a class="defaultBtn"
+										href="<c:url value="/chi-tiet-san-pham/${ item.id }"/>">VIEW</a>
+									<span class="pull-right">$22.00</span>
 								</h4>
 							</div>
 						</div>
@@ -121,7 +122,7 @@ New Products
 	-->
 		<div class="well well-small">
 			<h3>
-				<a class="btn btn-mini pull-right" href="products.html"
+				<a class="btn btn-mini pull-right" href="${pageContext.request.contextPath}/san-pham"
 					title="View more">View More<span class="icon-plus"></span></a> Sản
 				phẩm nổi bật
 			</h3>
@@ -170,7 +171,7 @@ New Products
 		</div>
 		<hr>
 		<div class="well well-small">
-			<a class="btn btn-mini pull-right" href="#">Xem thêm <span
+			<a class="btn btn-mini pull-right" href="${pageContext.request.contextPath}/san-pham">Xem thêm <span
 				class="icon-plus"></span></a> Tất cả sản phẩm
 		</div>
 	</div>

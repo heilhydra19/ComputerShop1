@@ -36,12 +36,14 @@
 			<div class="container">
 				<div class="alignR">
 					<div class="pull-left socialNw">
-						<a href="#"><span class="icon-twitter"></span></a> <a href="#"><span
-							class="icon-facebook"></span></a> <a href="#"><span
-							class="icon-youtube"></span></a> <a href="#"><span
-							class="icon-tumblr"></span></a>
+						<a href="https://twitter.com/Bin00748291"><span
+							class="icon-twitter"></span></a> <a
+							href="https://www.facebook.com/profile.php?id=100029972589553"><span
+							class="icon-facebook"></span></a> <a
+							href="https://www.youtube.com/channel/UCq6Fji5mOmUxVT16zKEnvSg"><span
+							class="icon-youtube"></span></a>
 					</div>
-					<a class="active" href="index.html"> <span class="icon-home"></span>
+					<a class="active" href="<c:url value="/"/>"> <span class="icon-home"></span>
 						Home
 					</a>
 					<c:if test="${ not empty LoginInfo }">
@@ -53,8 +55,7 @@
 						<a href="<c:url value="/dang-ky"/>"><span class="icon-edit"></span>
 							Đăng Nhập/Đăng Ký</a>
 					</c:if>
-					<a href="contact.html"><span class="icon-envelope"></span>
-						Contact us</a> <a href="<c:url value="/gio-hang"/>"><span
+					<a href="<c:url value="/gio-hang"/>"><span
 						class="icon-shopping-cart"></span> ${ TotalQuantyCart } Sản phẩm -
 						<span class="badge badge-warning"><fmt:formatNumber
 								type="number" groupingUsed="true" value="${ TotalPriceCart }" />
