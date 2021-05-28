@@ -5,8 +5,8 @@
 	<div class="row">
 		<div class="span4">
 			<h1>
-				<a class="logo" href="index.html"><span>Twitter Bootstrap
-						ecommerce template</span> <img
+				<a class="logo" href="<c:url value="/"/>"><span>Twitter
+						Bootstrap ecommerce template</span> <img
 					src="<c:url value="/assets/user/img/logo-bootstrap-shoping-cart.png" />"
 					alt="bootstrap sexy shop"> </a>
 			</h1>
@@ -44,35 +44,15 @@ Navigation Bar Section
 			</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="active"><a href="<c:url value=""/>">Trang Chủ </a></li>
-					<li class=""><a href="<c:url value="/san-pham"/>">Sản Phẩm </a></li>
+					<li class="active"><a href="<c:url value="/"/>">Trang Chủ
+					</a></li>
+					<li class=""><a href="<c:url value="/san-pham"/>">Sản Phẩm
+					</a></li>
 				</ul>
-				<ul class="nav pull-right">
-					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href=""><span class="icon-lock"></span>
-							Login <b class="caret"></b></a>
-						<div class="dropdown-menu">
-							<form class="form-horizontal loginFrm">
-								<div class="control-group">
-									<input type="text" class="span2" id="inputEmail"
-										placeholder="Email">
-								</div>
-								<div class="control-group">
-									<input type="password" class="span2" id="inputPassword"
-										placeholder="Password">
-								</div>
-								<div class="control-group">
-									<label class="checkbox"> <input type="checkbox">
-										Remember me
-									</label>
-									<button type="submit" class="shopBtn btn-block">Sign
-										in</button>
-								</div>
-							</form>
-						</div></li>
-				</ul>
-				<form action="#" class="navbar-search pull-right">
-					<input type="text" placeholder="Search" class="search-query span2">
+				<form action="${pageContext.request.contextPath}/san-pham/search"
+					class="navbar-search aligncenter " method="POST">
+					<input type="text" placeholder="Search" class="search-query span2"
+						name="keyword">
 				</form>
 			</div>
 		</div>
