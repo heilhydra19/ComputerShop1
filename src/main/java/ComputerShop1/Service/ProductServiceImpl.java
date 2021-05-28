@@ -16,6 +16,10 @@ public class ProductServiceImpl implements IProductService{
 	public ProductsDTO GetProductByID(long id) {
 		return productsDAO.GetProductByID(id);
 	}
+	
+	public List<ProductsDTO> GetDataProductsPaginate(String keyword, int start, int totalPage){
+		return productsDAO.GetDataProductsPaginate(keyword, start, totalPage);
+	}
 
 	public List<ProductsDTO> GetProductByIDCategory(long id) {
 		return productsDAO.GetProductByIDCategory(id);
@@ -35,5 +39,9 @@ public class ProductServiceImpl implements IProductService{
 
 	public int DeleteProduct(long id) {
 		return productsDAO.DeleteProduct(id);
+	}
+
+	public List<ProductsDTO> SearchProduct(String keyword) {
+		return productsDAO.SearchProduct(keyword);
 	}
 }

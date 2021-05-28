@@ -8,7 +8,8 @@
 	<div class="row">
 		<div class="span12">
 			<ul class="breadcrumb">
-				<li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
+				<li><a href="<c:url value="/"/>">Trang chủ</a> <span
+					class="divider">/</span></li>
 				<li class="active">Giỏ Hàng</li>
 			</ul>
 			<div class="well well-small">
@@ -36,6 +37,7 @@
 								<td><img width="100"
 									src="<c:url value="/assets/user/img/${ item.value.product.img }"/>"
 									alt=""></td>
+								<td>${ item.value.product.name }</td>
 								<td><fmt:formatNumber type="number" groupingUsed="true"
 										value="${ item.value.product.price }" /> ₫</td>
 								<td><input type="number" min="0" max="1000" class="span1"
@@ -55,16 +57,15 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="7" class="alignR">Tổng tiền:</td>
+							<td colspan="6" class="alignR">Tổng tiền:</td>
 							<td>${ TotalPriceCart }</td>
 						</tr>
 					</tbody>
 				</table>
-				<br />
-
-				<a href="products.html" class="shopBtn btn-large"><span
+				<br /> <a href="<c:url value="/san-pham"/>" class="shopBtn btn-large"><span
 					class="icon-arrow-left"></span> Tiếp tục mua sắm </a> <a
-					href="<c:url value="/checkout"/>" class="shopBtn btn-large pull-right">Thanh Toán <span
+					href="<c:url value="/checkout"/>"
+					class="shopBtn btn-large pull-right">Thanh Toán <span
 					class="icon-arrow-right"></span></a>
 
 			</div>

@@ -16,7 +16,15 @@ public class SupplierServiceImpl implements ISupplierService{
 	public List<Suppliers> GetDataSuppliers() {
 		return suppliersDAO.GetDataSuppliers();
 	}
+	
+	public List<Suppliers> GetDataSuppliersPaginate(String keyword, int start, int totalPage){
+		return suppliersDAO.GetDataSuppliersPaginate(keyword, start, totalPage);
+	}
 
+	public List<Suppliers> SearchSupplier(String keyword){
+		return suppliersDAO.SearchSupplier(keyword);
+	}
+	
 	public int AddSupplier(Suppliers supplier) {
 		return suppliersDAO.AddSupplier(supplier);
 	}

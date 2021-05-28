@@ -20,6 +20,14 @@ public class ImportServiceImpl implements IImportService{
 	public List<ImportsDTO> GetDataImports() {
 		return importsDAO.GetDataImports();
 	}
+	
+	public List<ImportsDTO> GetDataImportsPaginate(String keyword, int start, int totalPage){
+		return importsDAO.GetDataImportsPaginate(keyword, start, totalPage);
+	}
+	
+	public List<ImportsDTO> SearchImport(String keyword){
+		return importsDAO.SearchImport(keyword);
+	}
 
 	public int AddImport(ImportsDTO imports) {
 		return importsDAO.AddImport(imports);
@@ -39,6 +47,10 @@ public class ImportServiceImpl implements IImportService{
 
 	public List<ImportDetailsDTO> GetDataImportDetailById(long id) {
 		return importDetailsDAO.GetDataImportDetailById(id);
+	}
+	
+	public List<ImportDetailsDTO> GetDataImportDetailsPaginate(long id, int start, int totalPage){
+		return importDetailsDAO.GetDataImportDetailsPaginate(id, start, totalPage);
 	}
 
 	public int AddImportDetail(ImportDetailsDTO importDetail) {

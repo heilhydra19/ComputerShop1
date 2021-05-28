@@ -12,6 +12,9 @@ public interface IImportService {
 	@Autowired
 	public List<ImportsDTO> GetDataImports();
 	public double GetTotalPrice(long id);
+	public List<ImportsDTO> GetDataImportsPaginate(String keyword, int start, int totalPage);
+	public List<ImportDetailsDTO> GetDataImportDetailsPaginate(long id, int start, int totalPage);
+	public List<ImportsDTO> SearchImport(String keyword);
 	public int AddImport(ImportsDTO imports);
 	public int UpdateImport(ImportsDTO imports);
 	public int DeleteImport(long id);

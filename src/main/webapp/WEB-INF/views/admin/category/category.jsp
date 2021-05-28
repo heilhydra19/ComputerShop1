@@ -13,13 +13,20 @@
 	<c:redirect url="/quan-tri/"></c:redirect>
 </c:if>
 <body>
+	<c:remove var="url" />
 	<div class="row">
 		<div class="span12">
-			<form class="aligncenter" action="#" class="navbar-search pull-left">
-				<input type="text" placeholder="Search" class="search-query span2">
+			<form class="aligncenter"
+				action="${pageContext.request.contextPath}/quan-tri/loai/search"
+				class="navbar-search pull-left" method="POST">
+				<input type="text" placeholder="Search" class="search-query span2"
+					name="keyword">
+				
 			</form>
 			<div class="well well-small">
-				<form:form action="loai/addorupdate" method="POST" modelAttribute="category">
+				<form:form
+					action="${pageContext.request.contextPath}/quan-tri/loai/addorupdate"
+					method="POST" modelAttribute="category">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -42,7 +49,7 @@
 							Loại</button>
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Dòng Cần Sửa&emsp;
 						<form:select name="id" path="id" style="max-width: 130px">
-							<c:forEach var="item" items="${ categories }">
+							<c:forEach var="item" items="${ categoriesPaginate }">
 								<form:option value="${ item.id }">${ item.name }</form:option>
 							</c:forEach>
 						</form:select>
@@ -62,21 +69,60 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${ categories }">
-							<tr>
-								<td>${ item.id }</td>
-								<td>${ item.name }</td>
-								<td><input style="max-width: 300px" size="16" type="text"
-									value="${ item.description }"></td>
-								<td><a href="<c:url value="loai/delete/${ item.id }"/>"
-									class="btn btn-mini btn-danger" type="button"> <span
-										class="icon-remove"></span>
-								</a></td>
-							</tr>
+						<c:if test="${ categoriesPaginate.size() > 0 }">
+							<c:forEach var="item" items="${ categoriesPaginate }">
+								<tr>
+									<td>${ item.id }</td>
+									<td>${ item.name }</td>
+									<td><input style="max-width: 300px" size="16" type="text"
+										value="${ item.description }"></td>
+									<td><a
+										href="<c:url value="/quan-tri/loai/delete/${ item.id }"/>"
+										class="btn btn-mini btn-danger" type="button"> <span
+											class="icon-remove"></span>
+									</a></td>
+									<c:if
+										test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == categoriesPaginate.size() }">
+								</tr>
+								<c:if test="${ (loop.index + 1) < categoriesPaginate.size() }">
+
+								</c:if>
+						</c:if>
 						</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	<c:if test="${ not empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/loai/search/${ keyword }/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a
+						href="<c:url value="/quan-tri/loai/search/${ keyword }/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
+	<c:if test="${ empty keyword }">
+		<div class="pagination">
+			<c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }"
+				varStatus="loop">
+				<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/loai/${ loop.index }"/>"
+						class="active">${ loop.index }</a>
+				</c:if>
+				<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+					<a href="<c:url value="/quan-tri/loai/${ loop.index }"/>">${ loop.index }</a>
+				</c:if>
+			</c:forEach>
+		</div>
+	</c:if>
 </body>

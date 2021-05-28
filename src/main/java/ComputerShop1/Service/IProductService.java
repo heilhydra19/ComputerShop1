@@ -11,6 +11,8 @@ import ComputerShop1.DTO.ProductsDTO;
 public interface IProductService {
 	@Autowired
 	public ProductsDTO GetProductByID(long id);
+	public List<ProductsDTO> GetDataProductsPaginate(String keyword, int start, int totalPage);
+	public List<ProductsDTO> SearchProduct(String keyword);
 	public List<ProductsDTO> GetProductByIDCategory(long id);
 	public List<ProductsDTO> GetDataProducts();
 	public int AddProduct(ProductsDTO product);

@@ -16,6 +16,10 @@ public class BrandServiceImpl implements IBrandService{
 	public List<Brands> GetDataBrands() {
 		return brandsDAO.GetDataBrands();
 	}
+	
+	public List<Brands> GetDataBrandsPaginate(String keyword, int start, int totalPage){
+		return brandsDAO.GetDataBrandsPaginate(keyword, start, totalPage);
+	}
 
 	public int AddBrand(Brands brand) {
 		return brandsDAO.AddBrand(brand);
@@ -27,5 +31,9 @@ public class BrandServiceImpl implements IBrandService{
 
 	public int DeleteBrand(long id) {
 		return brandsDAO.DeleteBrand(id);
+	}
+
+	public List<Brands> SearchBrand(String keyword) {
+		return brandsDAO.SearchBrand(keyword);
 	}
 }

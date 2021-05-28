@@ -21,8 +21,8 @@ public class CategoryServiceImpl implements ICategoryService {
 		return productsDAO.GetProductByIDCategory(id);
 	}
 
-	public List<ProductsDTO> GetDataProductsPaginate(long id, int start, int totalPage) {
-		return productsDAO.GetDataProductsPaginate(id, start, totalPage);
+	public List<ProductsDTO> GetDataProductsPaginateByIdCategory(long id, int start, int totalPage) {
+		return productsDAO.GetDataProductsPaginateByIdCategory(id, start, totalPage);
 	}
 	
 	public List<Categories> GetDataCategories() {
@@ -39,5 +39,13 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	public int DeleteCategory(long id) {
 		return categoriesDAO.DeleteCategory(id);
+	}
+
+	public List<Categories> SearchCategory(String keyword) {
+		return categoriesDAO.SearchCategory(keyword);
+	}
+
+	public List<Categories> GetDataCategoriesPaginate(String keyword, int start, int totalPage) {
+		return categoriesDAO.GetDataCategoriesPaginate(keyword, start, totalPage);
 	}
 }
